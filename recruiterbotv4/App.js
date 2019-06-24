@@ -9,10 +9,10 @@ import AppNavigator from './navigation/AppNavigator';
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
 
+//firebase.initializeApp(ApiKeys.FirebaseConfig)
 
 export default function App(props) {
   //Initialise firebase
-  if (!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig)};
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {

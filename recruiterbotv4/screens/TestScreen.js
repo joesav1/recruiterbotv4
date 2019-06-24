@@ -6,8 +6,7 @@ import { TestComponent } from './../components/AppComponents';
 
 export default function TestScreen() {
   return (
-    <View style={styles.container}>
-      <Text> This is the test screen- JS</Text>
+    <View>
       <TestComponent/>
     </View>
   );
