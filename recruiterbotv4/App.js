@@ -6,8 +6,13 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import ApiKeys from './constants/ApiKeys';
+import * as firebase from 'firebase';
+
 
 export default function App(props) {
+  //Initialise firebase
+  if (!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig)};
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
