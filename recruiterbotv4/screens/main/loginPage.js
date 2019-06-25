@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
-//import ApiKeys from '../../constants/ApiKeys';
+import { CheckBox } from 'react-native-elements';
 
 
+
+//needed?
 import AppNavigator from './../../navigation/AppNavigator';
+
 
 
 export class LoginPage extends Component {
@@ -14,6 +17,7 @@ export class LoginPage extends Component {
         this.state = {
             email: '',
             password: '',
+            isRecruiter: false,
 
             };
         }
@@ -46,6 +50,17 @@ export class LoginPage extends Component {
                 console.log("Couldnt login")
             } 
         }
+
+        setRecruiter() {
+            try {
+                console.log("checking if initialized setrecruiter -js")
+                this.state.isRecruiter = true
+                console.log(this.state.isRecruiter)
+                console.log("Checking if true for setrecruiter")
+            } catch(error) {
+                console.log("Setrecruiter isnt initialised -js")
+            }
+        }
     
     render() {
         //console.log("Checking debugger -JS")
@@ -71,7 +86,13 @@ export class LoginPage extends Component {
                     onPress = {() => this.Signup(this.state.email, this.state.password)}
                     style ={{margin: 10}}
                 />
-
+                < CheckBox
+                    title= "Tick if Recruiter"
+                    checked = {this.state.checked}
+                    checkedIcon='dot-circle-o'
+                    uncheckedIcon='circle-o'
+                    onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
+                />
 
             </View>
         )
