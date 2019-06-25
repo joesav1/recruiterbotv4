@@ -48,9 +48,12 @@ export class TestComponent extends Component {
         return (
             <View>
                 <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
                     onChangeText = {email => this.setState({ email }) }
-                    
+                />
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
+                    onChangeText = {password => this.setState({ password }) }
                 />
 
             </View>
