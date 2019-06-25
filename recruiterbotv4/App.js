@@ -8,6 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
+firebase.initializeApp(ApiKeys.FirebaseConfig)
+
 
 //firebase.initializeApp(ApiKeys.FirebaseConfig)
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
-import * as firebase from 'firebase';
-import ApiKeys from '../../constants/ApiKeys';
-firebase.initializeApp(ApiKeys.FirebaseConfig)
+import firebase from 'firebase';
+//import ApiKeys from '../../constants/ApiKeys';
 
 
 import AppNavigator from './../../navigation/AppNavigator';
