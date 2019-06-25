@@ -44,7 +44,7 @@ export class TestComponent extends Component {
         }
     
     render() {
-        console.log("Checking debugger -JS")
+        //console.log("Checking debugger -JS")
         return (
             <View>
                 <TextInput
@@ -54,6 +54,18 @@ export class TestComponent extends Component {
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
                     onChangeText = {password => this.setState({ password }) }
+                />
+                <Button 
+                    title = "Login"
+                    color = "#841584"
+                    onPress = {() => this.Login(this.state.email, this.state.password)}
+                    style ={{margin: 10}}
+                />
+                <Button 
+                    title = "Sign-up"
+                    color = '#FF5733'
+                    onPress = {() => this.Signup(this.state.email, this.state.password)}
+                    style ={{margin: 10}}
                 />
 
             </View>
