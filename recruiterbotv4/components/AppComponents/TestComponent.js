@@ -22,8 +22,9 @@ export class TestComponent extends Component {
                     .auth()
                     .createUserWithEmailAndPassword(email,password)
                     .then(user => {
-                        console.log(user);
+                        console.log("User created");
                     });
+                //this.props.navigation.navigate('rHomepage')
                 } catch(error) {
                 console.log(error.toString(error))
     
