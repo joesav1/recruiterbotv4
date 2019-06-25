@@ -6,6 +6,9 @@ import ApiKeys from '../../constants/ApiKeys';
 firebase.initializeApp(ApiKeys.FirebaseConfig)
 
 
+import AppNavigator from './../../navigation/AppNavigator';
+
+
 export class TestComponent extends Component {
     constructor(props) {
         super(props);
@@ -66,6 +69,12 @@ export class TestComponent extends Component {
                     title = "Sign-up"
                     color = '#FF5733'
                     onPress = {() => this.Signup(this.state.email, this.state.password)}
+                    style ={{margin: 10}}
+                />
+                <Button 
+                    title = "test-screens"
+                    color = '#FF5733'
+                    onPress = {() => this.props.navigation.navigate('rHomepage')}
                     style ={{margin: 10}}
                 />
 
