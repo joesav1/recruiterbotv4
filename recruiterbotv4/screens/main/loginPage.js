@@ -26,7 +26,7 @@ export class LoginPage extends Component {
                     .then(user => {
                         console.log("User created");
                     });
-                //this.props.navigation.navigate('rHomepage')
+                this.props.navigation.navigate('rHomepage')
                 } catch(error) {
                 console.log(error.toString(error))
     
