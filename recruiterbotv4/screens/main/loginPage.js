@@ -26,7 +26,7 @@ export class LoginPage extends Component {
                     .then(user => {
                         console.log("User created");
                     });
-                this.props.navigation.navigate('rHomepage')
+                
                 } catch(error) {
                 console.log(error.toString(error))
     
@@ -41,6 +41,7 @@ export class LoginPage extends Component {
                     .then(res => {
                         console.log(res.user.email)
                     });
+                    this.props.navigation.navigate('rHomepage')
             } catch(error) {
                 console.log("Couldnt login")
             } 
