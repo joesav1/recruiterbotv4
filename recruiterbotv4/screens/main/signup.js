@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
-import firebase from 'firebase';
+import firebase, { firestore } from 'firebase';
 import { CheckBox } from 'react-native-elements';
+import '@firebase/firestore';
 //import ApiKeys from '../../constants/ApiKeys';
 //firebase.initializeApp(ApiKeys.FirebaseConfig)
 
@@ -71,15 +72,22 @@ export class Signup extends Component {
         }
 
         testDatabaseButton() {
-            console.log("Testing if user exists here - js")
-            //console.log(user.user.email)
-            console.log(this.state.isRecruiter)
-            console.log("End of test -js")
-            firebase.database().ref('test1').set({
+            // console.log("Testing if user exists here - js")
+            // //console.log(user.user.email)
+            // console.log(this.state.isRecruiter)
+            // console.log("End of test -js")
+            // firebase.database().ref('test1').set({
+            //     email: "Testbutton2@testsav.net",
+            //     //password: user.user.password,
+            //     uid: "123456789a",
+            //     isRecruiter: this.state.isRecruiter
+            console.log("start of testbutton -js")
+            firebase.firestore().collection('users').add({
                 email: "Testbutton2@testsav.net",
                 //password: user.user.password,
                 uid: "123456789a",
-                isRecruiter: this.state.isRecruiter
+                isRecruiter: this.state.isRecruiter                
+
             });
         }
     
