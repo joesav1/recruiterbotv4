@@ -42,9 +42,9 @@ export class Signup extends Component {
                         console.log(user.user.password)
                         console.log(user.user.uid)
                         console.log(this.state.isRecruiter)
-                        console.log("END OF USER DETIALZZ - js")
+                        console.log("end of user details - js")
                         //NEED TO INSTALL EXPO_FIREBASE_DATABASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        firebase.database().set('users/' + user.user.uid).set({
+                        firebase.firestore().collection('users').add({
                             email: user.user.email,
                             //password: user.user.password,
                             uid: user.user.uid,
