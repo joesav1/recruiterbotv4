@@ -17,25 +17,25 @@ export class LoginPage extends Component {
         this.state = {
             email: '',
             password: '',
-            isRecruiter: false,
+            //isRecruiter: false,
 
             };
         }
     
-        Signup = (email,password) => {
-            try {
-                firebase 
-                    .auth()
-                    .createUserWithEmailAndPassword(email,password)
-                    .then(user => {
-                        console.log("User created");
-                    });
+        // Signup = (email,password) => {
+        //     try {
+        //         firebase 
+        //             .auth()
+        //             .createUserWithEmailAndPassword(email,password)
+        //             .then(user => {
+        //                 console.log("User created");
+        //             });
                 
-                } catch(error) {
-                console.log(error.toString(error))
+        //         } catch(error) {
+        //         console.log(error.toString(error))
     
-            };
-        }
+        //     };
+        // }
     
         Login = (email, password) => {
             try {
@@ -51,16 +51,7 @@ export class LoginPage extends Component {
             } 
         }
 
-        setRecruiter() {
-            try {
-                console.log("checking if initialized setrecruiter -js")
-                this.state.isRecruiter = true
-                console.log(this.state.isRecruiter)
-                console.log("Checking if true for setrecruiter")
-            } catch(error) {
-                console.log("Setrecruiter isnt initialised -js")
-            }
-        }
+
     
     render() {
         //console.log("Checking debugger -JS")
@@ -80,20 +71,6 @@ export class LoginPage extends Component {
                     onPress = {() => this.Login(this.state.email, this.state.password)}
                     style ={{margin: 10}}
                 />
-                <Button 
-                    title = "Sign-up"
-                    color = '#FF5733'
-                    onPress = {() => this.Signup(this.state.email, this.state.password)}
-                    style ={{margin: 10}}
-                />
-                < CheckBox
-                    title= "Tick if Recruiter"
-                    checked = {this.state.checked}
-                    checkedIcon='dot-circle-o'
-                    uncheckedIcon='circle-o'
-                    onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
-                />
-
             </View>
         )
     }
