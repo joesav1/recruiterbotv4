@@ -43,7 +43,7 @@ export class Signup extends Component {
                         console.log(this.state.isRecruiter)
                         console.log("END OF USER DETIALZZ - js")
                         //NEED TO INSTALL EXPO_FIREBASE_DATABASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        firebase.database().ref('users').set({
+                        firebase.database().set('users/' + user.user.uid).set({
                             email: user.user.email,
                             //password: user.user.password,
                             uid: user.user.uid,
@@ -75,7 +75,7 @@ export class Signup extends Component {
             //console.log(user.user.email)
             console.log(this.state.isRecruiter)
             console.log("End of test -js")
-            firebase.database().ref('users').set({
+            firebase.database().ref('test1').set({
                 email: "Testbutton2@testsav.net",
                 //password: user.user.password,
                 uid: "123456789a",
