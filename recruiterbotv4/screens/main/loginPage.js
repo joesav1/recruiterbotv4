@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
+import '@firebase/firestore';
 import { CheckBox } from 'react-native-elements';
 
 
@@ -44,8 +45,28 @@ export class LoginPage extends Component {
                     .signInWithEmailAndPassword(email, password)
                     .then(res => {
                         console.log(res.user.email)
+                        console.log("checking what res.user gives")
+                        console.log(res.user)
+                        console.log("Checking res.user.uid")
+                        console.log(res.user.uid)
+                        console.log("End of res.user check - js")
+                        firebase.firestore().collection('users').doc(res.user.uid).get().then(doc => {
+                            console.log("checking what doc gives -js")
+                            console.log(doc.data())
+                            console.log("End of doc check -js")
+                            const getFullDoc = doc.data()
+                            const isRecruiterMainMain = getFullDoc.isRecruiter
+                            console.log("checking what recruiter check gives -js")
+                            console.log(this.isRecruiterMain)
+                            console.log("End of recruiterCheck test -js")
+                            if(isRecruiterMainMain) {
+                                this.props.navigation.navigate('rHomepage')
+                            } else {
+                                console.log("Recruiter is not ticked")
+                            }
+                        })
                     });
-                    this.props.navigation.navigate('rHomepage')
+
             } catch(error) {
                 console.log("Couldnt login")
             } 

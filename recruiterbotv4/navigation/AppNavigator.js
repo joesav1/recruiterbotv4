@@ -9,8 +9,8 @@ import Signup from '../screens/main/signup';
 const Rootstack = createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-    Signup: { screen: Signup },
     LoginPage: { screen: LoginPage},
+    Signup: { screen: Signup },
     rHomepage: { screen: rHomepage }
   });
 
