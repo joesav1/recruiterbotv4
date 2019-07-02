@@ -30,14 +30,14 @@ export class Signup extends Component {
             email: '',
             password: '',
             isRecruiter: false,
-            isRecruiterMain: false,
+            //isRecruiterMain: false,
 
             };
         }
     
         Signup = (email,password) => {
             try {
-                this.isRecruiterMain = false
+                //this.isRecruiterMain = false
                 firebase 
                     .auth()
                     .createUserWithEmailAndPassword(email,password)
@@ -52,16 +52,22 @@ export class Signup extends Component {
                             console.log("USER ADDED is working -js")
                             console.log(user.user.uid)
 
+                            //remember here to use doc and not function(doc)
                             firebase.firestore().collection('users').doc(user.user.uid).get().then(doc => {
-                                console.log("checking what doc gives -js")
-                                console.log(doc.data())
-                                console.log("End of doc check -js")
+                                // console.log("checking what doc gives -js")
+                                // console.log(doc.data())
+                                // console.log("End of doc check -js")
                                 const getFullDoc = doc.data()
-                                this.isRecruiterMain = getFullDoc.isRecruiter
-                                console.log("checking what recruiter check gives -js")
-                                console.log(this.isRecruiterMain)
-                                console.log("End of recruiterCheck test -js")
-                                this.testDatabaseButton()
+                                const isRecruiterMainMain = getFullDoc.isRecruiter
+                                // console.log("checking what recruiter check gives -js")
+                                // console.log(this.isRecruiterMain)
+                                // console.log("End of recruiterCheck test -js")
+                                if(isRecruiterMainMain) {
+                                    this.testDatabaseButton()
+                                } else {
+                                    console.log("Recruiter is not ticked")
+                                }
+                                
                             })
 
                             console.log("checking what recruiter check gives 2 -js")
