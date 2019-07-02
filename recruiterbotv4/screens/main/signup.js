@@ -52,7 +52,10 @@ export class Signup extends Component {
                             console.log("USER ADDED is working -js")
                             console.log(user.user.uid)
 
-                            firebase.firestore().collection('users').doc(user.user.uid).get().then(function(doc) {
+                            firebase.firestore().collection('users').doc(user.user.uid).get().then(doc => {
+                                console.log("checking what doc gives -js")
+                                console.log(doc.data())
+                                console.log("End of doc check -js")
                                 const getFullDoc = doc.data()
                                 this.isRecruiterMain = getFullDoc.isRecruiter
                                 console.log("checking what recruiter check gives -js")
@@ -120,7 +123,7 @@ export class Signup extends Component {
 
         testDatabaseButton() {
             console.log("Hi from the tdb")
-            //this.props.navigation.navigate('rHomepage')
+            this.props.navigation.navigate('rHomepage')
         }
     
     render() {
