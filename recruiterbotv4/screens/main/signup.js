@@ -4,8 +4,11 @@ import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
 import firebase, { firestore } from 'firebase';
 import { CheckBox } from 'react-native-elements';
 import '@firebase/firestore';
+import { YellowBox } from 'react-native';
 //import ApiKeys from '../../constants/ApiKeys';
 //firebase.initializeApp(ApiKeys.FirebaseConfig)
+console.disableYellowBox = true
+YellowBox.ignoreWarnings(['Require cycle']);
 
 
 
@@ -19,38 +22,82 @@ export class Signup extends Component {
         super(props);
 
         //needed?
-        this.unsubscribe = null;
+        //this.unsubscribe = null;
+
+        this.ref = firebase.firestore().collection('users');
 
         this.state = {
             email: '',
             password: '',
             isRecruiter: false,
+            isRecruiterMain: false,
 
             };
         }
     
         Signup = (email,password) => {
             try {
+                this.isRecruiterMain = false
                 firebase 
                     .auth()
                     .createUserWithEmailAndPassword(email,password)
                     .then(user => {
                         console.log("user created -js")
-                        console.log(user)
-                        console.log("testing user.email output - js")
-                        console.log(user.user.email)
-                        console.log(user.user.password)
-                        console.log(user.user.uid)
-                        console.log(this.state.isRecruiter)
-                        console.log("end of user details - js")
-                        //NEED TO INSTALL EXPO_FIREBASE_DATABASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        firebase.firestore().collection('users').add({
+                        this.ref.doc(user.user.uid).set({
                             email: user.user.email,
                             //password: user.user.password,
                             uid: user.user.uid,
                             isRecruiter: this.state.isRecruiter
                         });
-                    });
+                            console.log("USER ADDED is working -js")
+                            console.log(user.user.uid)
+
+                            firebase.firestore().collection('users').doc(user.user.uid).get().then(function(doc) {
+                                const getFullDoc = doc.data()
+                                this.isRecruiterMain = getFullDoc.isRecruiter
+                                console.log("checking what recruiter check gives -js")
+                                console.log(this.isRecruiterMain)
+                                console.log("End of recruiterCheck test -js")
+                                this.testDatabaseButton()
+                            })
+
+                            console.log("checking what recruiter check gives 2 -js")
+                            console.log(this.isRecruiterMain)
+                            console.log("End of recruiterCheck test 2 -js")
+
+
+
+
+                            // const recruiterCheck = userUID.data().isRecruiter
+                            // console.log("Checking recruiterCheck variable")
+                            // console.log(recruiterCheck)
+                            // console.log("End of recruiterCheck -js")
+                            
+
+                            // firebase.firestore().runTransaction(async transaction => {
+                            // const userUID = await transaction.get(ref.doc(user.user.uid));
+                            // console.log("CHecking userUID")
+                            // console.log(userUID)
+                            // console.log("End of userUID check")
+
+                            // const recruiterCheck = userUID.data().isRecruiter
+                            // console.log("Checking recruiterCheck variable")
+                            // console.log(recruiterCheck)
+                            // console.log("End of recruiterCheck -js")
+                            // if (recruiterCheck == 'true') {
+                            //     console.log("Can return recruiter check as true! -js")
+                            // } else {
+                            //     console.log("checked recruiter returned false -js")
+                            // }
+                            
+                            // })
+                        
+                        // const userUID = this.ref.doc(user.user.uid).get()
+                        // console.log("checking if userUID returns anything")
+                        // console.log(userUID)
+                        // console.log("End of userUID test- js")
+                        
+                    })
 
                 
                 } catch(error) {
@@ -72,23 +119,8 @@ export class Signup extends Component {
         }
 
         testDatabaseButton() {
-            // console.log("Testing if user exists here - js")
-            // //console.log(user.user.email)
-            // console.log(this.state.isRecruiter)
-            // console.log("End of test -js")
-            // firebase.database().ref('test1').set({
-            //     email: "Testbutton2@testsav.net",
-            //     //password: user.user.password,
-            //     uid: "123456789a",
-            //     isRecruiter: this.state.isRecruiter
-            console.log("start of testbutton -js")
-            firebase.firestore().collection('users').add({
-                email: "Testbutton2@testsav.net",
-                //password: user.user.password,
-                uid: "123456789a",
-                isRecruiter: this.state.isRecruiter                
-
-            });
+            console.log("Hi from the tdb")
+            //this.props.navigation.navigate('rHomepage')
         }
     
     render() {
