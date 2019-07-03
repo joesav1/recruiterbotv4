@@ -10,9 +10,13 @@ import createCampaign from '../screens/Recruiter/createCampaign';
 const Rootstack = createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+    
+
     LoginPage: { screen: LoginPage},
-    rHomepage: { screen: rHomepage },
     Signup: { screen: Signup },
+    
+    rHomepage: { screen: rHomepage },
+    
     createCampaign: { screen: createCampaign}
     
   });

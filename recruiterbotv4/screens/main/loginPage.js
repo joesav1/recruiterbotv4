@@ -11,10 +11,14 @@ import { CheckBox } from 'react-native-elements';
 import AppNavigator from './../../navigation/AppNavigator';
 
 
-
 export class LoginPage extends Component {
     constructor(props) {
         super(props);
+
+        this.userDetails = firebase.auth().currentUser
+        console.log("Checking userDetails")
+        console.log(this.userDetails)
+        console.log("end of userDetails check -js")
         this.state = {
             email: '',
             password: '',
@@ -22,24 +26,16 @@ export class LoginPage extends Component {
 
             };
         }
+        
+
+
+
+        
     
-        // Signup = (email,password) => {
-        //     try {
-        //         firebase 
-        //             .auth()
-        //             .createUserWithEmailAndPassword(email,password)
-        //             .then(user => {
-        //                 console.log("User created");
-        //             });
-                
-        //         } catch(error) {
-        //         console.log(error.toString(error))
-    
-        //     };
-        // }
-    
+
         Login = (email, password) => {
             try {
+
                 firebase
                     .auth()
                     .signInWithEmailAndPassword(email, password)

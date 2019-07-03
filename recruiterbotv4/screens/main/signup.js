@@ -21,6 +21,7 @@ export class Signup extends Component {
     constructor(props) {
         super(props);
 
+
         //needed?
         //this.unsubscribe = null;
 
@@ -37,6 +38,7 @@ export class Signup extends Component {
     
         Signup = (email,password) => {
             try {
+
                 //this.isRecruiterMain = false
                 firebase 
                     .auth()
