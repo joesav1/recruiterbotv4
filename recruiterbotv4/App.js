@@ -10,6 +10,11 @@ import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
 
+console.ignoredYellowBox = [
+  'Setting a timer'
+];
+
+console.ignoredYellowBox = ['Require cycles'];
 firebase.initializeApp(ApiKeys.FirebaseConfig)
 
 
