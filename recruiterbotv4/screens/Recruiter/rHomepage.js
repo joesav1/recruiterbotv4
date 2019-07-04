@@ -3,8 +3,14 @@ import { Text, View, TextInput, StyleSheet, Button} from 'react-native';
 import firebase from 'firebase';
 import '@firebase/firestore';
 export class rHomepage extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        var params = props.navigation.state.params.testUID
+
+        console.log("rHomepage checking if params exists!")
+        console.log(params)
+        console.log("rHomepage end of checking params")
+
         this.state = {
           loading: true,
           authenticated: false,
@@ -42,6 +48,7 @@ export class rHomepage extends Component {
         return (
               <View>
                 <Text style={{fontSize: 35, fontWeight: "bold"}}> Campaigns</Text>
+                <Text> {this.params}</Text>
                 <Button 
                 title = "Create Campaign"
                 color = '#FF5733'
