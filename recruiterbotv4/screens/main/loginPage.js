@@ -64,7 +64,14 @@ export class LoginPage extends Component {
                                 console.log("Recruiter is not ticked")
                             }
                         })
+
+    
                     });
+
+                    var testingUser = firebase.auth().currentUser
+                    // console.log("CHecking if testing user exists 1")
+                    // console.log(testingUser)
+                    // console.log("ENd of test")
 
             } catch(error) {
                 console.log("Couldnt login")
