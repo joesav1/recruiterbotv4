@@ -50,7 +50,7 @@ export class createCampaign extends Component {
       // console.log(this.state.candidates)
       // console.log("End of campaignButton states check, taskCreation, createCampaign.js")
 
-      firebase.firestore().collection('users').where("email","==",this.state.candidates)
+      firebase.firestore().collection('users').where("email","==",this.state.candidates.toLocaleLowerCase())
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
