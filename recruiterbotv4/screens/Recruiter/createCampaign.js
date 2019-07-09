@@ -3,6 +3,7 @@ import { Text, View, TextInput, Button } from 'react-native'
 import firebase from 'firebase';
 import '@firebase/firestore';
 
+
 export class createCampaign extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,7 @@ export class createCampaign extends Component {
             loading: true,
             authenticated: false,
             title: '',
-            candidates: [],
+            candidates: '',
             params: props.navigation.state.params.testUID
         };
     }
@@ -32,15 +33,65 @@ export class createCampaign extends Component {
     }
 
     campaignButton = (title, candidates) => {
-        console.log("Checking what the states currently hold, createCampaign.js")
-        console.log(this.state.title)
-        console.log(this.state.candidates)
-        console.log("End of campaignButton states check, createCampaign.js")
+        // console.log("Checking what the states currently hold, createCampaign.js")
+        // console.log(this.state.title)
+        // console.log(this.state.candidates)
+        // console.log("End of campaignButton states check, createCampaign.js")
         firebase.firestore().collection('users').doc(this.state.params).collection('campaigns').add({
           title: this.state.title,
           candidates: this.state.candidates,
         })
-        this.props.navigation.goBack()
+        
+    }
+
+    taskCreation = (title, candidates) => {
+      console.log("Checking what the states currently hold, taskCreation, createCampaign.js")
+      console.log(this.state.title)
+      console.log(this.state.candidates)
+      console.log("End of campaignButton states check, taskCreation, createCampaign.js")
+      // console.log("Also checking 'title', js")
+      // console.log(title)
+      // console.log('end of title check')
+      // const testingUserEmail = firebase.firestore().collection('users').where('email', '==', this.state.candidates).get()
+      // const tu2  = testingUserEmail.then(snapshot => {
+      //   console.log("do we even get to data? -js, creatcampaign.js")
+      //   const data = snapshot.data()
+      //   response.send(data)
+      //   console.log("Checking for 'data'")
+      //   console.log(data)
+      //   console.log("end of 'data' check")
+      // })
+      // tu2.catch(error => {
+      //   console.log(error)
+      // })
+      // console.log("Checking tu2, createCampaign, js!!!!!!!!!!!!!!!!")
+      // console.log(tu2)
+      // console.log("End of tu2!!!!!!!!!!!!!!!!!!")
+
+      firebase.firestore().collection('users').where("email","==",this.state.candidates)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            console.log(doc.id, '=>', doc.data())
+            firebase.firestore().collection('users').doc(doc.id).collection('tasks').add({
+              completed: false,
+              title: title,
+              transcript: null,
+
+            });
+
+
+          }
+          );
+        }
+        ).catch(function(error) {
+          console.log("Error getting documents:", error);
+        });
+
+
+
+ 
+      //this.props.navigation.goBack()
     }
 
 
@@ -48,9 +99,6 @@ export class createCampaign extends Component {
 
 
     render() {
-        console.log("firstcheck that params gives something, createCampaign-js")
-        console.log(this.state.params)
-        console.log("end of first param check")
         return (
             <View>
                 <TextInput
@@ -66,7 +114,7 @@ export class createCampaign extends Component {
                 <Button 
                     title = "Submit"
                     color = "#841584"
-                    onPress = {() => this.campaignButton(this.state.title, this.state.candidates)}
+                    onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.candidates)}}
                     style ={{margin: 10}}
                 />
                 

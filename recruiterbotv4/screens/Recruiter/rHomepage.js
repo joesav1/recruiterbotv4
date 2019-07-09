@@ -47,9 +47,9 @@ export class rHomepage extends Component {
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            console.log("Checking for a user - rhomepage")
-            console.log(user.user)
-            console.log("End of user check rhomepage-js")
+            // console.log("Checking for a user - rhomepage")
+            // console.log(user.user)
+            // console.log("End of user check rhomepage-js")
             this.setState({ loading: false, authenticated: true });
           } else {
             this.setState({ loading: false, authenticated: false });
@@ -62,26 +62,26 @@ export class rHomepage extends Component {
       }
     
       render() {
-        console.log("third check that params gives something, rhomepage-js")
-        console.log(this.state.params)
-        console.log("end of third param check")
+        // console.log("third check that params gives something, rhomepage-js")
+        // console.log(this.state.params)
+        // console.log("end of third param check")
         if (this.state.loading) {
             console.log("nobody is logged in rhomepage-js")
             return null;
             } // Render loading/splash screen etc
     
         if (!this.state.authenticated) {
-          console.log("Checking for a user - rhomepage")
-          console.log(user.user)
-          console.log("End of user check rhomepage-js")
-          console.log("nobody is logeed in still! rohomepage-js")
+          // console.log("Checking for a user - rhomepage")
+          // console.log(user.user)
+          // console.log("End of user check rhomepage-js")
+          // console.log("nobody is logeed in still! rohomepage-js")
             return null;
             }
-        console.log("Checking again to make sure the session is active! rhomepage-js")
-        console.log(this.state.authenticated)
-        console.log("second check that params gives something, rhomepage-js")
-        console.log(this.params)
-        console.log("end of second param check")
+        // console.log("Checking again to make sure the session is active! rhomepage-js")
+        // console.log(this.state.authenticated)
+        // console.log("second check that params gives something, rhomepage-js")
+        // console.log(this.params)
+        // console.log("end of second param check")
 
         return (
               <View>
