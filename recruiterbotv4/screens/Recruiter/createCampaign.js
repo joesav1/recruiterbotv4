@@ -45,28 +45,10 @@ export class createCampaign extends Component {
     }
 
     taskCreation = (title, candidates) => {
-      console.log("Checking what the states currently hold, taskCreation, createCampaign.js")
-      console.log(this.state.title)
-      console.log(this.state.candidates)
-      console.log("End of campaignButton states check, taskCreation, createCampaign.js")
-      // console.log("Also checking 'title', js")
-      // console.log(title)
-      // console.log('end of title check')
-      // const testingUserEmail = firebase.firestore().collection('users').where('email', '==', this.state.candidates).get()
-      // const tu2  = testingUserEmail.then(snapshot => {
-      //   console.log("do we even get to data? -js, creatcampaign.js")
-      //   const data = snapshot.data()
-      //   response.send(data)
-      //   console.log("Checking for 'data'")
-      //   console.log(data)
-      //   console.log("end of 'data' check")
-      // })
-      // tu2.catch(error => {
-      //   console.log(error)
-      // })
-      // console.log("Checking tu2, createCampaign, js!!!!!!!!!!!!!!!!")
-      // console.log(tu2)
-      // console.log("End of tu2!!!!!!!!!!!!!!!!!!")
+      // console.log("Checking what the states currently hold, taskCreation, createCampaign.js")
+      // console.log(this.state.title)
+      // console.log(this.state.candidates)
+      // console.log("End of campaignButton states check, taskCreation, createCampaign.js")
 
       firebase.firestore().collection('users').where("email","==",this.state.candidates)
         .get()
@@ -91,7 +73,7 @@ export class createCampaign extends Component {
 
 
  
-      //this.props.navigation.goBack()
+      this.props.navigation.goBack()
     }
 
 
