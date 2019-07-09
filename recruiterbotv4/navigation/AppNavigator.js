@@ -7,8 +7,10 @@ import rHomepage from '../screens/Recruiter/rHomepage';
 import Signup from '../screens/main/signup';
 import createCampaign from '../screens/Recruiter/createCampaign';
 import Campaign from '../screens/Recruiter/campaign'
-
 import campaignDetails from '../screens/Recruiter/campaignDetails';
+import cHomepage from '../screens/Candidate/cHomepage';
+import taskDetails from '../screens/Candidate/taskDetails';
+
 
 const Rootstack = createStackNavigator({
 
@@ -20,6 +22,8 @@ const Rootstack = createStackNavigator({
     createCampaign: { screen: createCampaign},
     campaignDetails: { screen: campaignDetails},
     Campaign: { screen: Campaign },
+    cHomepage: { screen: cHomepage },
+    taskDetails: { screen: taskDetails },
     
     
   });

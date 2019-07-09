@@ -61,7 +61,8 @@ export class LoginPage extends Component {
                                 console.log("End of res.user.uid check -js")
                                 this.props.navigation.navigate('rHomepage', {testUID: res.user.uid})
                             } else {
-                                console.log("Recruiter is not ticked")
+                                console.log("Recruiter is not ticked, so navogating to cHomepage!")
+                                this.props.navigation.navigate('cHomepage', {testUID: res.user.uid})
                             }
                         })
 
