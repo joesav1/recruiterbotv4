@@ -1,13 +1,7 @@
-
 import base64 from 'react-native-base64'
-import { USERNAME, PASSWORD, URL, SKILL_ID } from 'react-native-dotenv'
+import { ASSISTANT_IAM_APIKEY, ASSISTANT_URL, SKILL_ID } from 'react-native-dotenv'
 
-// Watson Assistant API documentation:
-// https://console.bluemix.net/apidocs/assistant
 MessageRequest = (input, context = {}) => {
-    console.log("Do we even eneter messagerequest? checking USERNAME")
-    console.log(USERNAME)
-    console.log("End of USERNAME check")
   let body = {
     alternate_intents: true,
     input: {
@@ -17,10 +11,10 @@ MessageRequest = (input, context = {}) => {
   if (context) {
     body.context = context;
   }
-  return fetch(URL + '/v2/workspaces' + SKILL_ID + '/sessions', {
+  return fetch(ASSISTANT_URL + '/v1/workspaces/' + SKILL_ID + '/message?version=2018-07-10', {
     method: 'POST',
     headers: {
-      Authorization: 'Basic ' + base64.encode(USERNAME + ":" + PASSWORD),
+      Authorization: 'Basic ' + base64.encode("apikey:"+ASSISTANT_IAM_APIKEY),
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -28,10 +22,9 @@ MessageRequest = (input, context = {}) => {
   })
   .then((response) => response.json())
   .then((responseJson) => {
-
-    console.log("Checking responseJson chatbot.js")
+    console.log("Checking reponseJson")
     console.log(responseJson);
-    console.log("end of reposnseJson check")
+    console.log("END OF RESPONSE JSON CHECK")
     return responseJson;
   })
   .catch((error) => {
