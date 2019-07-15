@@ -9,9 +9,9 @@ export class cHomepage extends Component {
         super(props);
 
         let testingUser = firebase.auth().currentUser
-        console.log("chomepage! CHecking if testing user exists 1")
-        console.log(testingUser)
-        console.log("chonmepage! ENd of test")
+        // console.log("chomepage! CHecking if testing user exists 1")
+        // console.log(testingUser)
+        // console.log("chonmepage! ENd of test")
 
         this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
 
@@ -28,12 +28,17 @@ export class cHomepage extends Component {
         const tasks = [];
         querySnapshot.forEach((doc) => {
             const {title, completed} = doc.data();
+            const docID = doc.id
+            
+            
+
             tasks.push({
                 //double check if this is doc.uid
                 key: doc.uid,
                 doc,
                 title,
-                completed
+                completed,
+                docID
             });
         });
 

@@ -15,21 +15,13 @@ export class Task extends Component {
                 <View style={{ flex: 8}}>
                     <Text>{this.props.title}</Text>
                 </View>
-                <View style={{ flex: 8 }}>
-                    {!this.props.completed && (
-                        <Text>In Progress</Text>
-                    )}
-                    {this.props.completed && (
-                        <Text>Completed</Text>
-                    )}
+                
 
-
-                </View>
                 <View style={{flex: 10}}>
                     <Button 
                     title = "Start"
                     color = '#FF5733'
-                    onPress = {() => this.props.navigation.navigate('taskDetails')}
+                    onPress = {() => this.props.navigation.navigate('cHoldingPage', {title: this.props.title, docID: this.props.docID})}
                     style ={{margin: 10}}
                     />
                 </View>

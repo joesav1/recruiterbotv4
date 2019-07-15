@@ -14,10 +14,18 @@ export class chatbotShell extends Component {
   constructor (props) {
     super (props);
 
+    let testingUser = firebase.auth().currentUser
+    console.log("chtbotshell! CHecking if testing user exists 1")
+    console.log(testingUser)
+    console.log("chatbotshell! ENd of test")
+
+    this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
+
     this.state = {
       messages: [],
       conversationID: null,
       context: null,
+      docIDMAIN: props.navigation.state.params.docIDMain
     }
   }
 
@@ -25,7 +33,16 @@ export class chatbotShell extends Component {
     this.initialMessage();
   }
 
+  endOfTimer() {
+    this.ref.doc(this.state.docIDMAIN).update({
+      completed: true,
+    })
+  }
+
   render() {
+    console.log("CHecking if docIDMAIN works, chatbotshell.js")
+    console.log(this.state.docIDMAIN)
+    console.log("End of docidmain check")
     return (
       <View
         style={styles.container}
@@ -36,7 +53,7 @@ export class chatbotShell extends Component {
             until={10}
             size = {20}
             timeToShow={['M','S']}
-            onFinish={() => {console.log("The timer has finished")}}
+            onFinish={() => {this.endOfTimer()}}
         />
 
         <GiftedChat 
