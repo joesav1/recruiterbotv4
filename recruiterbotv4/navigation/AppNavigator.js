@@ -16,8 +16,13 @@ import cHoldingPage from '../screens/Candidate/cHoldingPage';
 
 const Rootstack = createStackNavigator({
 
-    cHoldingPage: { screen: cHoldingPage },
-    chatbotShell: { screen: chatbotShell },
+    cHoldingPage: { screen: cHoldingPage, },
+    chatbotShell: {
+        screen: chatbotShell,
+        navigationOptions: {
+        header: null
+      } 
+    },
     LoginPage: { screen: LoginPage},
     Signup: { screen: Signup },
     rHomepage: { screen: rHomepage },

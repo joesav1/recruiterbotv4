@@ -22,9 +22,9 @@ MessageRequest = (input, context = {}) => {
   })
   .then((response) => response.json())
   .then((responseJson) => {
-    console.log("Checking reponseJson")
-    console.log(responseJson);
-    console.log("END OF RESPONSE JSON CHECK")
+    // console.log("Checking reponseJson")
+    // console.log(responseJson);
+    // console.log("END OF RESPONSE JSON CHECK")
     return responseJson;
   })
   .catch((error) => {

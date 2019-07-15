@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import { StyleSheet, WebView} from 'react-native';
+import { View, StyleSheet, WebView, Text} from 'react-native';
 import { MessageRequest } from './chatbot'
 import WatsonIcon from './WatsonIcon'
 import { GiftedChat } from 'react-native-gifted-chat';
+import CountDown from 'react-native-countdown-component';
+import firebase from 'firebase';
+import '@firebase/firestore';
 
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+})
 export class chatbotShell extends Component {
   constructor (props) {
     super (props);
@@ -21,31 +27,48 @@ export class chatbotShell extends Component {
 
   render() {
     return (
-      <GiftedChat
-        placeholder="Send your message"
-        messages={this.state.messages}
-        onSend={(messages) => this.onSend(messages)}
-        renderAvatar={this.renderAvatar}
-        multiline={false}
-        user={{
-          _id: '1',
-        }}
-      />
+      <View
+        style={styles.container}
+        accessible
+        accessibilityLabel='main'
+      >
+        <CountDown style={{marginTop: 80}}
+            until={10}
+            size = {20}
+            timeToShow={['M','S']}
+            onFinish={() => {console.log("The timer has finished")}}
+        />
+
+        <GiftedChat 
+          placeholder="Send your message"
+          //renderCustomView={this.renderCustomView}
+          messages={this.state.messages}
+          onSend={(messages) => this.onSend(messages)}
+          renderAvatar={this.renderAvatar}
+          multiline={false}
+          user={{
+            _id: '1',
+          }}
+        />
+      </View>
+    
+
     );
   }
 
   renderCustomView = (props) => {
-    if (props.currentMessage.text.includes('Welcome')) {
+    console.log(props.currentMessage.text)
       return (
-        <View style={styles.container}>
+        <View>   
+
+
           <Text>Welcome to your interview for the role, role.
           The interview will consist of questionNumber questions. Each question will last 4 minutes. Please do not attempt to copy and paste your answer as this will be flagged. 
           Treat this as a real interview as the Recruiter will be able to watch your responses back.  </Text>
         </View>
       );
     }
-    return null;
-  }
+
 
   onSend = (message = []) => {
     this.setState((previousState) => ({
@@ -104,5 +127,3 @@ export class chatbotShell extends Component {
 
 export default chatbotShell
 
-const styles = StyleSheet.create({
-});
