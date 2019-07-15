@@ -22,7 +22,7 @@ export class chatbotShell extends Component {
   render() {
     return (
       <GiftedChat
-        placeholder="Send your message to Watson..."
+        placeholder="Send your message"
         messages={this.state.messages}
         onSend={(messages) => this.onSend(messages)}
         renderAvatar={this.renderAvatar}
@@ -60,15 +60,16 @@ export class chatbotShell extends Component {
     this.setState({
       context: response.context,
     })
+    let mainText = ['Welcome to your interview', 'This will be line 2', 'this will be line 3',"\n\n"]
     let message = {
       _id: Math.round(Math.random() * 1000000).toString(),
-      text: response.output.text.join(' '),
+      text: mainText.join("\n") + response.output.text.join(' '),
       createdAt: new Date(),
       user: {
         _id: '2',
         name: 'Watson Assistant',
       },
-      image: 'https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/d4IAAOSw-CpX~8b~/$_35.JPG',
+      //image: 'https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/d4IAAOSw-CpX~8b~/$_35.JPG',
     };
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, message),

@@ -11,11 +11,12 @@ import campaignDetails from '../screens/Recruiter/campaignDetails';
 import cHomepage from '../screens/Candidate/cHomepage';
 import taskDetails from '../screens/Candidate/taskDetails';
 import chatbotShell from '../screens/chatbot/chatbotShell';
+import cHoldingPage from '../screens/Candidate/cHoldingPage';
 
 
 const Rootstack = createStackNavigator({
 
-    
+    cHoldingPage: { screen: cHoldingPage },
     chatbotShell: { screen: chatbotShell },
     LoginPage: { screen: LoginPage},
     Signup: { screen: Signup },
