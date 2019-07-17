@@ -40,9 +40,9 @@ export class chatbotShell extends Component {
   }
 
   render() {
-    console.log("CHecking if docIDMAIN works, chatbotshell.js")
-    console.log(this.state.docIDMAIN)
-    console.log("End of docidmain check")
+    // console.log("CHecking if docIDMAIN works, chatbotshell.js")
+    // console.log(this.state.docIDMAIN)
+    // console.log("End of docidmain check")
     return (
       <View
         style={styles.container}
