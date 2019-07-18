@@ -14,8 +14,10 @@ export class createCampaign extends Component {
             loading: true,
             authenticated: false,
             title: '',
-            candidates: '',
-            params: props.navigation.state.params.testUID
+            candidates: null,
+            params: props.navigation.state.params.testUID,
+            candidatesMain: [],
+            candidatesTemp: [],
         };
     }
 
@@ -32,6 +34,15 @@ export class createCampaign extends Component {
         });
     }
 
+    submitAndClear = (candidate) => {
+      this.state.candidatesMain.push(candidate)
+      console.log("checking the add candidate button actually adds a candidate")
+      console.log(this.state.candidatesMain)
+      console.log("end of candidatesMian check")
+      this.setState({candidates: null})
+      
+    }
+
     campaignButton = (title, candidates) => {
         // console.log("Checking what the states currently hold, createCampaign.js")
         // console.log(this.state.title)
@@ -39,7 +50,7 @@ export class createCampaign extends Component {
         // console.log("End of campaignButton states check, createCampaign.js")
         firebase.firestore().collection('users').doc(this.state.params).collection('campaigns').add({
           title: this.state.title,
-          candidates: this.state.candidates,
+          candidates: this.state.candidatesMain,
         })
         
     }
@@ -90,8 +101,15 @@ export class createCampaign extends Component {
                 />
                 <TextInput
                   style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                  placeholder = {"Candidates"}
+                  placeholder = {"Enter candidate email"}
                   onChangeText = {candidates => this.setState({ candidates })}
+                  value = {this.state.candidates}
+                />
+                <Button 
+                    title = "Add candidate"
+                    color = "#FFFF00"
+                    onPress = {() => {this.submitAndClear(this.state.candidates);}}
+                    style ={{margin: 10}}
                 />
                 <Button 
                     title = "Submit"
@@ -99,6 +117,7 @@ export class createCampaign extends Component {
                     onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.candidates)}}
                     style ={{margin: 10}}
                 />
+
                 
             </View>
         )
