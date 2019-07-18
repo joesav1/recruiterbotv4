@@ -18,6 +18,7 @@ export class createCampaign extends Component {
             params: props.navigation.state.params.testUID,
             candidatesMain: [],
             candidatesTemp: [],
+            placeholderCandidate: null,
         };
     }
 
@@ -39,8 +40,21 @@ export class createCampaign extends Component {
       console.log("checking the add candidate button actually adds a candidate")
       console.log(this.state.candidatesMain)
       console.log("end of candidatesMian check")
+      this.setState({placeholderCandidate: this.state.candidates})
       this.setState({candidates: null})
       
+    }
+
+    promptMessage() {
+      if(this.state.placeholderCandidate) {
+        return(
+          <Text>{this.state.placeholderCandidate} added!</Text>
+        )} else {
+          return (
+            null
+          )
+      }
+
     }
 
     campaignButton = (title, candidates) => {
@@ -108,6 +122,7 @@ export class createCampaign extends Component {
                   onChangeText = {candidates => this.setState({ candidates })}
                   value = {this.state.candidates}
                 />
+                <View>{this.promptMessage()}</View>
                 <Button 
                     title = "Add candidate"
                     color = "#FFFF00"
