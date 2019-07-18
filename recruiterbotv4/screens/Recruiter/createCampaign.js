@@ -60,26 +60,29 @@ export class createCampaign extends Component {
       // console.log(this.state.title)
       // console.log(this.state.candidates)
       // console.log("End of campaignButton states check, taskCreation, createCampaign.js")
+      var i = 0
+      for(i=0;i<this.state.candidatesMain.length; i++) {
+          firebase.firestore().collection('users').where("email","==",this.state.candidatesMain[i].toLocaleLowerCase())
+            .get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(doc) {
+                console.log(doc.id, '=>', doc.data())
+                firebase.firestore().collection('users').doc(doc.id).collection('tasks').add({
+                  completed: false,
+                  title: title,
+                  transcript: null,
 
-      firebase.firestore().collection('users').where("email","==",this.state.candidates.toLocaleLowerCase())
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            console.log(doc.id, '=>', doc.data())
-            firebase.firestore().collection('users').doc(doc.id).collection('tasks').add({
-              completed: false,
-              title: title,
-              transcript: null,
+                });
 
+
+              }
+              );
+            }
+            ).catch(function(error) {
+              console.log("Error getting documents:", error);
             });
 
-
-          }
-          );
-        }
-        ).catch(function(error) {
-          console.log("Error getting documents:", error);
-        });
+      }
 
 
 
