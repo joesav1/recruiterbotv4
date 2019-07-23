@@ -12,6 +12,7 @@ import cHomepage from '../screens/Candidate/cHomepage';
 import taskDetails from '../screens/Candidate/taskDetails';
 import chatbotShell from '../screens/chatbot/chatbotShell';
 import cHoldingPage from '../screens/Candidate/cHoldingPage';
+import rolesMain from '../screens/Recruiter/roles/rolesMain';
 
 
 const Rootstack = createStackNavigator({
@@ -32,6 +33,7 @@ const Rootstack = createStackNavigator({
         header: null
       } 
     },
+    rolesMain: { screen: rolesMain },
     
   });
 

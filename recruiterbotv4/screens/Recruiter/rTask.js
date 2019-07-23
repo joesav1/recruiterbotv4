@@ -25,7 +25,7 @@ export class RTask extends Component {
                             <Button 
                             title = "Start"
                             color = '#FF5733'
-                            onPress = {() => console.log("RTask pressed yas!")}
+                            onPress = {() => this.props.navigation.navigate('rolesMain', {email: this.props.email, title: this.props.title, transcript: this.props.transcript, uid: this.props.uid})}
                             style ={{flex: 1, margin: 10}}
                             />
                     )}
