@@ -20,7 +20,7 @@ export class Campaign extends Component {
                     <Button 
                     title = "Go"
                     color = '#FF5733'
-                    onPress = {() => this.props.navigation.navigate('campaignDetails')}
+                    onPress = {() => this.props.navigation.navigate('campaignDetails', {title: this.props.title, candidates: this.props.candidates})}
                     style ={{margin: 10}}
                     />
                 </View>

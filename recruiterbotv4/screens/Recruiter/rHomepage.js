@@ -28,12 +28,14 @@ export class rHomepage extends Component {
         const campaigns = [];
         querySnapshot.forEach((doc) => {
           const {title, candidates} = doc.data();
+          const docID = doc.id
 
           campaigns.push({
             key: doc.uid,
             doc,
             title,
             candidates,
+            docID
           });
         });
 
