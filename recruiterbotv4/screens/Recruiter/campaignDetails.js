@@ -47,32 +47,8 @@ export class campaignDetails extends Component {
         })
       }
 
-    //   testFunction = (i) => {
-    //     var titleNameTest = this.state.titleMain2
-    //     var emailChainTest = []
-    //     var completedChainTest = []
-    //     firebase.firestore().collection('users').where("email","==",this.state.candidatesMain2[i].toLocaleLowerCase())
-    //       .get()
-    //       .then(function(querySnapshot) {
-    //         querySnapshot.forEach(function(doc) {
-    //             console.log(doc.id, '=>', doc.data())
-    //             emailChainTest.push(doc.data().email)
-    //             firebase.firestore().collection('users').doc(doc.id).collection('tasks').where("title","==",titleNameTest).get()
-    //             .then(function(querySnapshot){
-    //                 querySnapshot.forEach(function(doc){
-    //                     console.log(doc.id, '=>', doc.data())
-    //                 })
-    //             }) 
-    //         }
-    //         );
-    //       }
-    //       ).catch(function(error) {
-    //         console.log("Error getting documents:", error);
-    //       });
-        
 
-    //   }
-      
+            
       async testButtonTwo() {
           console.log("test butto ntwo pressed")
         var i = 0
@@ -81,9 +57,8 @@ export class campaignDetails extends Component {
         for(i=0;i<this.state.candidatesMain2.length; i++) {
             const docStuff = await firebase.firestore().collection('users').where("email","==",this.state.candidatesMain2[i].toLocaleLowerCase()).get();
             for (const member of docStuff.docs) {
-                console.log("Checking if member gives me an id")
-                console.log(member.id)
-                console.log("end of member.id check")
+ 
+                
 
                 tokens.push(member.data());
                 const docStuff2 = await firebase.firestore().collection('users').doc(member.id).collection('tasks').where("title","==",this.state.titleMain2).get();
@@ -94,27 +69,18 @@ export class campaignDetails extends Component {
 
         
         }
-        console.log("Seeing if tokens gives me anything")
-        console.log(tokens)
-        console.log("End of checking tokens")
-        console.log("Seeing if tokens2 gives me anything")
-        console.log(tokens2)
-        console.log("End of checking tokens2")
+
 
         let tokens3 = []
 
         tokens.forEach((itm,i) => {
             tokens3.push(Object.assign({}, itm, tokens2[i]));
         });
-        console.log("Seeing if tokens3 gives me anything~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        console.log(tokens3)
-        console.log("End of checking tokens3~~~~~~~~~~~")
 
 
-        this.setState({ candidatesTasks: tokens})
-        console.log("checking state")
-        console.log(this.state.candidatesTasks)
-       //return await sendPush(tokens);
+        this.setState({ candidatesTasks: tokens3})
+
+
       }
 
 
@@ -122,31 +88,33 @@ export class campaignDetails extends Component {
 
     
       componentDidMount() {
-        console.log("Component mounted")
+        this.unsubscribe = this.testButtonTwo()
+
+        this.setState({ loading: false})
 
       }
 
-      componentWillUnmount() {
-        //this.unsubscribe();
-      }
+
     
       render() {
+
+        if(this.state.loading) {
+            return (
+                <View>
+                    <Text>LOADING...</Text>
+                </View>
+            )
+        }
         
-        console.log(this.state.titleMain2)
-        console.log("checking what candidateMain 2 gives")
-        console.log(this.state.candidatesMain2)
-        console.log("checking candidates tasks")
-        console.log(this.state.candidatesTasks)
-        console.log("end of canddatetasks check")
+        // console.log(this.state.titleMain2)
+        // console.log("checking what candidateMain 2 gives")
+        // console.log(this.state.candidatesMain2)
+        // console.log("checking candidates tasks")
+        // console.log(this.state.candidatesTasks)
+        // console.log("end of canddatetasks check")
         return (
               <View>
-                <Button 
-                    title = "DOC TEST"
-                    color = "#FFFF00"
-                    onPress = {() => {this.testButtonTwo()}}
-                    style ={{margin: 10}}
-                />
-                <Text style={{fontSize: 35, fontWeight: "bold"}}> {this.state.titleMain2}</Text>
+                <Text style={{fontSize: 20, fontWeight: "bold"}}> Role: {this.state.titleMain2}</Text>
                 
                 <FlatList  
                     data = {this.state.candidatesTasks}
