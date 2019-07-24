@@ -37,12 +37,22 @@ export class chatbotShell extends Component {
     this.ref.doc(this.state.docIDMAIN).update({
       completed: true,
     })
+    this.props.navigation.navigate('chatbotHoldingPage', {messagesPass: this.state.messages})
+  }
+
+  CollateMessages() {
+    let messagesCollated = []
+    for( i in this.state.messages) {
+      messagesCollated.push(i.text)
+    }
+    console.log("Checking messages collated ")
   }
 
   render() {
     // console.log("CHecking if docIDMAIN works, chatbotshell.js")
     // console.log(this.state.docIDMAIN)
     // console.log("End of docidmain check")
+
     return (
       <View
         style={styles.container}
@@ -50,7 +60,7 @@ export class chatbotShell extends Component {
         accessibilityLabel='main'
       >
         <CountDown style={{marginTop: 80}}
-            until={10}
+            until={30}
             size = {20}
             timeToShow={['M','S']}
             onFinish={() => {this.endOfTimer()}}
@@ -73,6 +83,7 @@ export class chatbotShell extends Component {
     );
   }
 
+  //do i need this?
   renderCustomView = (props) => {
     console.log(props.currentMessage.text)
       return (
