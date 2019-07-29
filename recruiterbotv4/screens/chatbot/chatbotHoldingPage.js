@@ -20,38 +20,18 @@ export class chatbotHoldingPage extends Component {
         var textOnlyMessages = [];
         var finalTextOutput = null;
         for( const member of rawMessages ){
-            // console.log("Chekcing i")
-            // console.log(member)
-            // console.log("end of i check")
-            // console.log("checking i.user")
-            // console.log(member.user)
-            // console.log("Checking i.user._id")
-            // console.log(member.user._id)
-            // console.log("End of checks")
             if( member.user._id !== "2" ) {
                 filteredMessages.push(member)
             }
         }
-        // console.log("checking filteredMessages")
-        // console.log(filteredMessages)
-        // console.log("end of filteredMessages check")
         for( const text of filteredMessages) {
 
             textOnlyMessages.push(text.text)
         }
-        // console.log("checking textOnlyMessages")
-        // console.log(textOnlyMessages)
-        // console.log("end of textOnlyMessages check")
         textOnlyMessages.pop()
         finalTextOutput = textOnlyMessages.join(' ');
-        // console.log("checking finalTextOutput")
-        // console.log(finalTextOutput)
-        // console.log("end of finalTextOutput check")
  
         this.setState({finalText1: finalTextOutput});
-        // console.log("checking this.state.finalText")
-        // console.log(this.state.finalText1)
-        // console.log("end of finalText check")
 
 
     }
@@ -66,17 +46,52 @@ export class chatbotHoldingPage extends Component {
 
     startPersonality = async() => {
         let response = await personalityRequest(this.state.finalText1)
-        console.log("chatbotholdingpage seeing if response does anything")
-        console.log(response)
-        console.log("end of chatbotholdingpage, startPersonality repsonse check")
+        // console.log("chatbotholdingpage seeing if response does anything")
+        // console.log(response)
+        // console.log("end of chatbotholdingpage, startPersonality repsonse check")
+        let mainData = response.mydata.personality
+        let traitData = []
+
+        for(const trait of mainData) {
+            // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CHECKING TRAIT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            // console.log(trait)
+            // console.log("END OF CHECKING TRAIT")
+            let traitDatabig5 = trait.trait_id
+            let traitDatapercentile = trait.percentile
+            let subData = null
+            let tempSubData = []
+            for(const subTrait of trait.children) {
+                console.log("checking subtraits~~~~~~~~~~~~~~~~~~~~~")
+                console.log(subTrait)
+                console.log("end of checking subtraits")
+                tempSubData.push(subTrait.percentile)
+            }
+
+            var largestValue = Math.max.apply(Math, tempSubData);
+            console.log("checking largest value")
+            console.log(largestValue)
+
+            for(const subTrait2 of trait.children) {
+                console.log("this loop looops")
+
+                if(subTrait2.percentile == largestValue) {
+                     subData = subTrait2.name
+                }
+
+            }
+
+            traitData.push({traitDatabig5:traitDatabig5, traitDatapercentile:traitDatapercentile, traitSubData: subData})
+        }
+
+        console.log("Checking what traitData gives me")
+        console.log(traitData)
+        console.log("End of traitdata check")
+        
 
     }
 
 
     render() {
-        // console.log("chatbotHP checking messagesMain1")
-        // console.log(this.state.messagesMain1)
-        // console.log("end of messages main one test")
         console.log("checking this.state.finalText in the render")
         console.log(this.state.finalText1)
         console.log("end of finalText check in the render")
