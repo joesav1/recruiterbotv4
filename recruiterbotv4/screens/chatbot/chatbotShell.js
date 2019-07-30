@@ -37,7 +37,7 @@ export class chatbotShell extends Component {
     this.ref.doc(this.state.docIDMAIN).update({
       completed: true,
     })
-    this.props.navigation.navigate('chatbotHoldingPage', {messagesPass: this.state.messages})
+    this.props.navigation.navigate('chatbotHoldingPage', {messagesPass: this.state.messages, docIDTask: this.state.docIDMAIN})
   }
 
   CollateMessages() {

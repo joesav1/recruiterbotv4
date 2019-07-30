@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import { Text, View, Button } from 'react-native'
 import { personalityRequest } from './personality';
+import firebase from 'firebase';
+import '@firebase/firestore';
 
 export class chatbotHoldingPage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        let testingUser = firebase.auth().currentUser
+        console.log("chtbotHoldingPage! CHecking if testing user exists again")
+        console.log(testingUser)
+        console.log("chatbotHoldingPage ENd of test")
+
+        this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
 
         this.state = {
+            transcriptText: null,
             finalText1: null,
             messagesMain1: props.navigation.state.params.messagesPass,
+            docIDTaskMain: props.navigation.state.params.docIDTask,
 
             
         }
@@ -41,6 +52,10 @@ export class chatbotHoldingPage extends Component {
         console.log("checking this.state.finalText in componentdidMount")
         console.log(this.state.finalText1)
         console.log("end of finalText check in the componentdidMount")
+        console.log("checking this.state.docIDTaskMain in componentdidMount")
+        console.log(this.state.docIDTaskMain)
+        console.log("end of docIDTaskMain check in the componentdidMount")
+        
         
     }
 
@@ -61,18 +76,18 @@ export class chatbotHoldingPage extends Component {
             let subData = null
             let tempSubData = []
             for(const subTrait of trait.children) {
-                console.log("checking subtraits~~~~~~~~~~~~~~~~~~~~~")
-                console.log(subTrait)
-                console.log("end of checking subtraits")
+                // console.log("checking subtraits~~~~~~~~~~~~~~~~~~~~~")
+                // console.log(subTrait)
+                // console.log("end of checking subtraits")
                 tempSubData.push(subTrait.percentile)
             }
 
             var largestValue = Math.max.apply(Math, tempSubData);
-            console.log("checking largest value")
-            console.log(largestValue)
+            // console.log("checking largest value")
+            // console.log(largestValue)
 
             for(const subTrait2 of trait.children) {
-                console.log("this loop looops")
+                //console.log("this loop looops")
 
                 if(subTrait2.percentile == largestValue) {
                      subData = subTrait2.name
@@ -83,17 +98,25 @@ export class chatbotHoldingPage extends Component {
             traitData.push({traitDatabig5:traitDatabig5, traitDatapercentile:traitDatapercentile, traitSubData: subData})
         }
 
-        console.log("Checking what traitData gives me")
-        console.log(traitData)
-        console.log("End of traitdata check")
+        // console.log("Checking what traitData gives me")
+        // console.log(traitData)
+        // console.log("End of traitdata check")
         
+        console.log("#############################start of update database##################################")
+        try {this.ref.doc(this.state.docIDTaskMain).update({
+            traits: traitData
 
+            })
+        } catch(error) {
+            console.log(error.toString(error))}
     }
 
 
+
+
     render() {
-        console.log("checking this.state.finalText in the render")
-        console.log(this.state.finalText1)
+        console.log("checking this.state.finalText in the render!!!!!!!!!!!!!!!!!!!!!!!!!")
+        //console.log(this.state.messagesMain1)
         console.log("end of finalText check in the render")
 
         return (
