@@ -9,6 +9,9 @@ export class RTask extends Component {
         super(props);
     }
 
+
+
+
     render() {
         // console.log("checking if we get anyhting rTasks")
         // console.log(this.props)
@@ -19,6 +22,9 @@ export class RTask extends Component {
             <View style={{ flex: 3, height: 48, flexDirection: 'row', alignItems: "center", borderWidth: 0.25, borderColor: "#0B152C",}}>
                 <View style={{ flex: 1}}>
                     <Text>{this.props.email}</Text>
+                </View>
+                <View style={{ flex: 1}}>
+                    <Text>{this.props.finalScore}</Text>
                 </View>
                 <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
                     {this.props.completed && (
