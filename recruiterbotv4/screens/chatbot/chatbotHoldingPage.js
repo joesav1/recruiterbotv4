@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
+import { Text, View, Button, ActivityIndicator, StyleSheet } from 'react-native'
 import { personalityRequest } from './personality';
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -9,9 +9,9 @@ export class chatbotHoldingPage extends Component {
         super(props);
 
         let testingUser = firebase.auth().currentUser
-        console.log("chtbotHoldingPage! CHecking if testing user exists again")
-        console.log(testingUser)
-        console.log("chatbotHoldingPage ENd of test")
+        // console.log("chtbotHoldingPage! CHecking if testing user exists again")
+        // console.log(testingUser)
+        // console.log("chatbotHoldingPage ENd of test")
 
         this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
 
@@ -20,6 +20,7 @@ export class chatbotHoldingPage extends Component {
             finalText1: null,
             messagesMain1: props.navigation.state.params.messagesPass,
             docIDTaskMain: props.navigation.state.params.docIDTask,
+            loading: true,
 
             
         }
@@ -43,18 +44,57 @@ export class chatbotHoldingPage extends Component {
         finalTextOutput = textOnlyMessages.join(' ');
  
         this.setState({finalText1: finalTextOutput});
+    }
 
+    prepareTranscript() {
+        var rawMessages = this.state.messagesMain1
+        var transcriptText = []
+        var transcriptTempArray = []
+        var transcriptTextMain = ''
+        for(const message of rawMessages) {
+            console.log("checking messages")
+            console.log(message)
+            console.log("end of message check")
+            transcriptText.push(message.text)
+        }
+        // var i = 0
+        // for(i=(transcriptText.length-1); i=0; i-- ) {
+        //     transcriptTempArray.push(transcriptText[i])
+        // }
+
+        transcriptTempArray = transcriptText.reverse()
+        console.log("Checking transcriptText")
+        console.log(transcriptText)
+        console.log("end of transcriptText check")
+        console.log("Checking transcriptTempArray")
+        console.log(transcriptTempArray)
+        console.log("end of transcriptTempArray check")
+        transcriptTextMain = transcriptTempArray.join('\n\n')
+        console.log("Checking transcriptTextMain")
+        console.log(transcriptTextMain)
+        console.log("end of transcriptTextMain check")
+        //this.setState({transcriptText: transcriptTextMain})
+        try {this.ref.doc(this.state.docIDTaskMain).update({
+            transcript: transcriptTextMain
+
+            })
+        } catch(error) {
+            console.log(error.toString(error))}
 
     }
 
-    componentDidMount() {
-        this.prepareMessages()
-        console.log("checking this.state.finalText in componentdidMount")
-        console.log(this.state.finalText1)
-        console.log("end of finalText check in the componentdidMount")
-        console.log("checking this.state.docIDTaskMain in componentdidMount")
-        console.log(this.state.docIDTaskMain)
-        console.log("end of docIDTaskMain check in the componentdidMount")
+    async componentDidMount() {
+        await this.prepareMessages()
+        // console.log("checking this.state.finalText in componentdidMount")
+        // console.log(this.state.finalText1)
+        // console.log("end of finalText check in the componentdidMount")
+        // console.log("checking this.state.docIDTaskMain in componentdidMount")
+        // console.log(this.state.docIDTaskMain)
+        // console.log("end of docIDTaskMain check in the componentdidMount")
+        await this.prepareTranscript()
+        await this.startPersonality()
+        await this.setState({loading: false})
+        
         
         
     }
@@ -115,17 +155,24 @@ export class chatbotHoldingPage extends Component {
 
 
     render() {
-        console.log("checking this.state.finalText in the render!!!!!!!!!!!!!!!!!!!!!!!!!")
-        //console.log(this.state.messagesMain1)
-        console.log("end of finalText check in the render")
-
+        
+        // console.log("checking this.state.finalText in the render!!!!!!!!!!!!!!!!!!!!!!!!!")
+        // //console.log(this.state.messagesMain1)
+        // console.log("end of finalText check in the render")
+        if(this.state.loading) {
+            return (
+                <View style={[styles.container, styles.horizontal]}>
+                 <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            )
+        }
+        if(!this.state.loading)
         return (
-            <View>
-                <Text> textInComponent </Text>
+            <View style={[styles.container]}>
                 <Button
-                    title = "Test personality"
+                    title = "Continue"
                     color = "#841584"
-                    onPress ={()=>this.startPersonality()}       
+                    onPress ={()=>this.props.navigation.navigate('cHomepage')}       
                     style={{margin: 10}}         
                 />
             </View>
@@ -135,3 +182,15 @@ export class chatbotHoldingPage extends Component {
 }
 
 export default chatbotHoldingPage
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center'
+    },
+    horizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding: 10
+    }
+  })
