@@ -83,9 +83,9 @@ export class campaignDetails extends Component {
 
         var tokens4 = await this.generateScore(tokens3)
 
-        console.log("~~~~~~~~~~checking tokens4~~~~~~~~~~")
-        console.log(tokens4)
-        console.log("end of tokens4 chjeck")
+        // console.log("~~~~~~~~~~checking tokens4~~~~~~~~~~")
+        // console.log(tokens4)
+        // console.log("end of tokens4 chjeck")
 
 
 
@@ -93,9 +93,9 @@ export class campaignDetails extends Component {
 
         await this.setState({ candidatesTasks: tokens4})
 
-        console.log("~~~~~~~~~~~~checking this.state.candidates task~~~~~~~~~~")
-        console.log(this.state.candidatesTasks)
-        console.log("~~~~~~~~~~~~end of this.state.candudatestask check~~~~~~~~~~~~~~~")
+        // console.log("~~~~~~~~~~~~checking this.state.candidates task~~~~~~~~~~")
+        // console.log(this.state.candidatesTasks)
+        // console.log("~~~~~~~~~~~~end of this.state.candudatestask check~~~~~~~~~~~~~~~")
 
 
       }

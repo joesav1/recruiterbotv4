@@ -24,14 +24,14 @@ export class RTask extends Component {
                     <Text>{this.props.email}</Text>
                 </View>
                 <View style={{ flex: 1}}>
-                    <Text>{this.props.finalScore}</Text>
+                    <Text>Score: {this.props.finalScore}</Text>
                 </View>
                 <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
                     {this.props.completed && (
                             <Button 
                             title = "Start"
                             color = '#FF5733'
-                            onPress = {() => this.props.navigation.navigate('rolesMain', {email: this.props.email, title: this.props.title, transcript: this.props.transcript, uid: this.props.uid})}
+                            onPress = {() => this.props.navigation.navigate('rolesMain', {propsMain: this.props})}
                             style ={{flex: 1, margin: 10}}
                             />
                     )}
