@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, Button, Icon } from 'react-native'
+import { Text, View, FlatList, Button, Icon, ScrollView } from 'react-native'
+import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
+
 
 
 export class rolesMain extends Component {
@@ -22,16 +24,26 @@ export class rolesMain extends Component {
         })
     }
 
-
     render() {
         return (
-            <View>
+            <ScrollView>
                 <Text> Email: {this.state.emailRoles} </Text>
                 <Text> Overall Score: {this.state.mainProps.finalScore}  </Text>
                 <Text> Main Traits </Text>
                 {this.renderList()}
-               
-            </View>
+                <Collapse>
+                        <CollapseHeader>
+                            <View>
+                                <Text style={{fontSize: 15}}>Transcript</Text>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                            <Text>{this.state.mainProps.transcript}</Text>
+                        </CollapseBody>
+                </Collapse>
+
+                
+            </ScrollView>
         )
     }
 }

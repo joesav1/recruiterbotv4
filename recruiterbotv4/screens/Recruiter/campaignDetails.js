@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Button, FlatList} from 'react-native';
+import { Text, View, TextInput, StyleSheet, Button, FlatList, ScrollView} from 'react-native';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import RTask from './rTask';
@@ -198,16 +198,16 @@ export class campaignDetails extends Component {
         // console.log(this.state.candidatesTasks)
         // console.log("##############end of canddatetasks check###################")
         return (
-              <View>
+              <ScrollView>
                 <Text style={{fontSize: 20, fontWeight: "bold"}}> Role: {this.state.titleMain2}</Text>
                 
                 <FlatList  
-                    data = {this.state.candidatesTasks}
+                    data = {this.state.candidatesTasks.sort((a,b)=> (a.hasOwnProperty('finalScore') ? -1: b.hasOwnProperty('finalScore') ? 1:0))}
                     renderItem = {({item}) => <RTask 
                     {...item}
                     />}
                 />
-              </View>
+              </ScrollView>
         )}
     }
 export default campaignDetails
