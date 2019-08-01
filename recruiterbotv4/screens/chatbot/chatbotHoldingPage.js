@@ -8,6 +8,7 @@ export class chatbotHoldingPage extends Component {
     constructor(props) {
         super(props);
 
+        //Dont get rid of this one
         let testingUser = firebase.auth().currentUser
         // console.log("chtbotHoldingPage! CHecking if testing user exists again")
         // console.log(testingUser)

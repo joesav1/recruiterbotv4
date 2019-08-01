@@ -14,6 +14,7 @@ export class chatbotShell extends Component {
   constructor (props) {
     super (props);
 
+    //Dont get rid of this one
     let testingUser = firebase.auth().currentUser
     console.log("chtbotshell! CHecking if testing user exists 1")
     console.log(testingUser)

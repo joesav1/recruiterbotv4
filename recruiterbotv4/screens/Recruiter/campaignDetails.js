@@ -7,7 +7,7 @@ export class campaignDetails extends Component {
     constructor(props) {
         super(props);
         
-        var testingUser = firebase.auth().currentUser
+        //var testingUser = firebase.auth().currentUser
         
 
         this.state = {

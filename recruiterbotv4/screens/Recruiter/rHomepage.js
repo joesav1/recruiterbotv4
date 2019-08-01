@@ -7,6 +7,7 @@ export class rHomepage extends Component {
     constructor(props) {
         super(props);
         
+        //Dont delete this one
         var testingUser = firebase.auth().currentUser
         // console.log("rhomepage! CHecking if testing user exists 1")
         // console.log(testingUser)

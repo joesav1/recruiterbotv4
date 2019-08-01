@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, DrawerNavigator } from 'react-navigation';
 
 
 import LoginPage from '../screens/main/loginPage';
@@ -14,14 +14,23 @@ import chatbotShell from '../screens/chatbot/chatbotShell';
 import cHoldingPage from '../screens/Candidate/cHoldingPage';
 import rolesMain from '../screens/Recruiter/roles/rolesMain';
 import chatbotHoldingPage from '../screens/chatbot/chatbotHoldingPage';
+import CustomHeader from './CustomHeader';
 
 
 const Rootstack = createStackNavigator({
 
-
-    LoginPage: { screen: LoginPage},
+    
+    LoginPage: { screen: LoginPage,
+      navigationOptions: {
+        header: <CustomHeader/>
+      }
+                },
     Signup: { screen: Signup },
-    rHomepage: { screen: rHomepage },
+    rHomepage: { screen: rHomepage,
+      navigationOptions: {
+        header: <CustomHeader/>
+      }
+     },
     createCampaign: { screen: createCampaign},
     campaignDetails: { screen: campaignDetails},
     Campaign: { screen: Campaign },

@@ -7,7 +7,7 @@ export class cHoldingPage extends Component {
     constructor(props) {
         super(props);
 
-        this.userDetails = firebase.auth().currentUser
+        //this.userDetails = firebase.auth().currentUser
         this.state = {
              titleMain: props.navigation.state.params.title,
              docIDMain: props.navigation.state.params.docID
