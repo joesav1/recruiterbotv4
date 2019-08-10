@@ -15,6 +15,8 @@ import cHoldingPage from '../screens/Candidate/cHoldingPage';
 import rolesMain from '../screens/Recruiter/roles/rolesMain';
 import chatbotHoldingPage from '../screens/chatbot/chatbotHoldingPage';
 import CustomHeader from './CustomHeader';
+import userSettings from '../screens/main/userSettings';
+
 
 
 const Rootstack = createStackNavigator({
@@ -45,6 +47,8 @@ const Rootstack = createStackNavigator({
     },
     rolesMain: { screen: rolesMain },
     chatbotHoldingPage: { screen: chatbotHoldingPage },
+    userSettings: { screen: userSettings },
+    CustomHeader: { screen: CustomHeader }
     
   });
 
