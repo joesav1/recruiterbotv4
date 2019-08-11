@@ -60,7 +60,7 @@ export class CustomHeader extends Component {
         }
         return (
             <View style = {styles.container}>
-                <Ionicons name="arrowleft" size={22} color="black" onPress={this.props.navigation.goBack()}/>
+                <Ionicons style={{flex: 0.5}} onPress={console.log("Pressed back button")} name="md-arrow-round-back" size={28} color="black"/>
                 <Text style = {{flex: 2}} > Header test 1 </Text>
                 <View style = {styles.icon}>
                     <Menu style={styles.menu}

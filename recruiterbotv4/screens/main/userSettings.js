@@ -11,12 +11,29 @@ export class userSettings extends Component {
         this.state = {
             recruiterSettings: false,
         }
+        this.ref = firebase.firestore().collection('users')
+
     }
 
+    componentDidMount() {
+        this.ref.doc(this.userDetailsSettings.uid).get().then(doc => {
+            const getFullDoc = doc.data()
+            if(getFullDoc.isRecruiter == true) {
+                this.setState({recruiterSettings: true})
+            }
+        })
+    }
+
+
+
     render() {
-        console.log("Checking userDetailsSettings on the settings page")
-        console.log(this.userDetailsSettings)
-        console.log("end of userDetailsSettingsCheck")
+        if(this.state.recruiterSettings) {
+            return(
+                <View>
+                    
+                </View>
+            )
+        }
         return (
             <View>
                 <Text> Test2</Text>
