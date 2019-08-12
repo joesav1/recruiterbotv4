@@ -159,6 +159,13 @@ export class Signup extends Component {
                     onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
                 />
 
+                <Button 
+                    title = "Login"
+                    color = '#FF8733'
+                    onPress = {() => this.props.navigation.navigate('LoginPage')}
+                    style ={{margin: 10}}
+                />
+
             </View>
         )
     }
