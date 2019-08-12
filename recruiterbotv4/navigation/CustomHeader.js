@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Modal } from 'react-native';
+import { Text, View, StyleSheet, Modal, TouchableHighlight } from 'react-native';
 import Menu, {MenuItem, MenuDivider} from 'react-native-material-menu';
-import { Icon } from "react-native-elements";
+
 import firebase from 'firebase';
 import '@firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
-
+import { Button , Icon } from 'react-native-elements';
 export class CustomHeader extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +60,6 @@ export class CustomHeader extends Component {
         }
         return (
             <View style = {styles.container}>
-                <Ionicons style={{flex: 0.5}} onPress={console.log("Pressed back button")} name="md-arrow-round-back" size={28} color="black"/>
                 <Text style = {{flex: 2}} > Header test 1 </Text>
                 <View style = {styles.icon}>
                     <Menu style={styles.menu}
