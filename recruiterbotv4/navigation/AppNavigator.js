@@ -21,13 +21,13 @@ import userSettings from '../screens/main/userSettings';
 
 const Rootstack = createStackNavigator({
 
-    
+    Signup: { screen: Signup },
     LoginPage: { screen: LoginPage,
       navigationOptions: {
         header: <CustomHeader/>
       }
                 },
-    Signup: { screen: Signup },
+    
     rHomepage: { screen: rHomepage,
       navigationOptions: {
         header: <CustomHeader/>

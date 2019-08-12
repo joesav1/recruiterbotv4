@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
+import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Modal} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -22,6 +22,7 @@ export class LoginPage extends Component {
         this.state = {
             email: '',
             password: '',
+            modalVisible: false,
             //isRecruiter: false,
 
             };
@@ -30,7 +31,9 @@ export class LoginPage extends Component {
 
 
 
-        
+        setModalVisible(visible) {
+            this.setState({modalVisible: visible});
+          }
     
 
         Login = (email, password) => {
@@ -41,11 +44,16 @@ export class LoginPage extends Component {
                     .signInWithEmailAndPassword(email, password)
                     .then(res => {
                         // console.log(res.user.email)
-                        // console.log("checking what res.user gives")
-                        // console.log(res.user)
+                        console.log("checking what res gives")
+                        console.log(res)
                         // console.log("Checking res.user.uid")
                         // console.log(res.user.uid)
-                        // console.log("End of res.user check - js")
+                        console.log("End of res.user check - js")
+                        if(res.user.emailVerified == false) {
+                            console.log("Made it inside the res.user.emailVerified loop")
+                            this.setModalVisible(true)
+                        } else {
+
                         firebase.firestore().collection('users').doc(res.user.uid).get().then(doc => {
                             // console.log("checking what doc gives -js")
                             // console.log(doc.data())
@@ -65,9 +73,13 @@ export class LoginPage extends Component {
                                 this.props.navigation.navigate('cHomepage', {testUID: res.user.uid})
                             }
                         })
+                    
+                    }
 
     
-                    });
+                });
+
+
 
                     var testingUser = firebase.auth().currentUser
                     // console.log("CHecking if testing user exists 1")
@@ -80,11 +92,35 @@ export class LoginPage extends Component {
         }
 
 
+
+
     
     render() {
         //console.log("Checking debugger -JS")
         return (
-            <View>
+            <View style={styles.container}>
+                <View style={{marginTop: 22}}>
+                                    <Modal
+                                    animationType="slide"
+                                    transparent={false}
+                                    visible={this.state.modalVisible}
+                                    onRequestClose={() => {
+                                        Alert.alert('Modal has been closed.');
+                                    }}>
+                                    <View style={styles.container2}>
+                                        <View >
+                                        <Text>Please verify your email</Text>
+
+                                        <Button
+                                            title = "Close"
+                                            onPress={() => {
+                                            this.setModalVisible(!this.state.modalVisible);
+                                            }}/>
+                                            
+                                        </View>
+                                    </View>
+                                    </Modal>
+                </View>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
                     onChangeText = {email => this.setState({ email }) }
@@ -109,8 +145,20 @@ export default LoginPage
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      flexDirection: "column",
+      //backgroundColor: "#fff",
       // alignItems: "center",
-      justifyContent: "center"
+      //justifyContent: "center"
+    },
+    container2: {
+        flex: 0.25,
+        flexDirection: "column",
+        width: 100,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalContainer: {
+
     }
   });

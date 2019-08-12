@@ -70,7 +70,13 @@ export class Signup extends Component {
                                     console.log("Recruiter is not ticked")
                                 }
                                 
-                            })
+                            }).then(firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password))
+                            .then(firebase.auth().currentUser.sendEmailVerification())
+                            .then(this.props.navigation.navigate('LoginPage'))
+
+                            console.log("Checking is currentuser exists via sendUseremailauth on signup 222222222222222222222")
+                            console.log(firebase.auth().currentUser)
+                            console.log("end of check for user 2222222 ")
 
                             console.log("checking what recruiter check gives 2 -js")
                             console.log(this.isRecruiterMain)
@@ -79,36 +85,11 @@ export class Signup extends Component {
 
 
 
-                            // const recruiterCheck = userUID.data().isRecruiter
-                            // console.log("Checking recruiterCheck variable")
-                            // console.log(recruiterCheck)
-                            // console.log("End of recruiterCheck -js")
-                            
-
-                            // firebase.firestore().runTransaction(async transaction => {
-                            // const userUID = await transaction.get(ref.doc(user.user.uid));
-                            // console.log("CHecking userUID")
-                            // console.log(userUID)
-                            // console.log("End of userUID check")
-
-                            // const recruiterCheck = userUID.data().isRecruiter
-                            // console.log("Checking recruiterCheck variable")
-                            // console.log(recruiterCheck)
-                            // console.log("End of recruiterCheck -js")
-                            // if (recruiterCheck == 'true') {
-                            //     console.log("Can return recruiter check as true! -js")
-                            // } else {
-                            //     console.log("checked recruiter returned false -js")
-                            // }
-                            
-                            // })
-                        
-                        // const userUID = this.ref.doc(user.user.uid).get()
-                        // console.log("checking if userUID returns anything")
-                        // console.log(userUID)
-                        // console.log("End of userUID test- js")
+                           
                         
                     })
+
+
 
                 
                 } catch(error) {
@@ -133,6 +114,14 @@ export class Signup extends Component {
             console.log("Hi from the tdb")
             this.props.navigation.navigate('rHomepage')
         }
+
+        sendUserEmailAuth() {
+            console.log("Checking is currentuser exists via sendUseremailauth on signup")
+            console.log(firebase.auth().currentUser)
+            console.log("end of check for user ")
+            
+
+        }
     
     render() {
         //console.log("Checking debugger -JS")
@@ -150,10 +139,9 @@ export class Signup extends Component {
                 <Button 
                     title = "Sign-up"
                     color = '#FF5733'
-                    onPress = {() => this.Signup(this.state.email, this.state.password)}
+                    onPress = {() => {this.Signup(this.state.email, this.state.password)}}
                     style ={{margin: 10}}
                 />
-
 
                 <Button 
                     title = "Test Button"
