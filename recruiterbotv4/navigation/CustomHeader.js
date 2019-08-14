@@ -39,7 +39,13 @@ export class CustomHeader extends Component {
       }
 
       logout = () => {
-          this.props.navigation.navigate('LoginPage')
+          this._menu.hide();
+          firebase.auth().signOut().catch(function(error) {
+              console.log("An error occured")
+          })
+            console.log("Signout succesful")
+            this.props.navigation.navigate('LoginPage')
+
       }
 
     
@@ -48,24 +54,24 @@ export class CustomHeader extends Component {
         if(this.userDetailsHeader == null) {
             this.logout
         }
-        // console.log("HEADER checking if userDetailsHeader exists")
-        // console.log(this.userDetailsHeader)
-        // console.log("End of HEADER check on userdetailsheader")
+        console.log("HEADER checking if userDetailsHeader exists")
+        console.log(this.userDetailsHeader)
+        console.log("End of HEADER check on userdetailsheader")
         if(this.userDetailsHeader == null) {
             return (
-                <View style = {styles.container}>
-                    <Text style = {{flex: 2}} > Header test 1 </Text>
+                <View style = {styles.container3}>
+                    <Text style = {{flex: 2, color: 'white'}} > Header test 1 </Text>
                 </View>
             )
         }
         return (
             <View style = {styles.container}>
-                <Text style = {{flex: 2}} > Header test 1 </Text>
+                <Text style ={{flex:2, color:"white"}} > Header test 1 </Text>
                 <View style = {styles.icon}>
                     <Menu style={styles.menu}
                         ref={this.setMenuRef}
                         button={<Text onPress={this.showMenu}>
-                            <Ionicons  name="md-menu" size={32} color="black" />
+                            <Ionicons  name="md-menu" size={32} color="white" />
                         </Text>}
                     >
                         <MenuItem onPress={this.settingsPage}>Settings</MenuItem>
@@ -89,18 +95,28 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: 'center',
+        paddingTop: 38,
+        paddingLeft: 10,
+        paddingBottom: 15,
+        borderWidth: 0.5,
+        backgroundColor: '#19273c',
+        // borderColor: '#d6d7da',
+        // shadowColor: '#000000',
+    },
+
+    container3: {
+        flexDirection: "row",
+        alignItems: 'center',
         paddingTop: 45,
         paddingLeft: 10,
         paddingBottom: 15,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
-        shadowColor: '#000000',
-
-        
-
-
-
+        backgroundColor: '#19273c',
+        // borderColor: '#d6d7da',
+        // shadowColor: '#000000',
     },
+
+
     icon: {
         flex: 1,
         alignItems: "flex-end",

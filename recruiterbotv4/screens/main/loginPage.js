@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Modal} from 'react-native'
+import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Dimensions, Modal} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
 import '@firebase/firestore';
-import { CheckBox } from 'react-native-elements';
+import { Input, CheckBox } from 'react-native-elements';
 
 
 
 //needed?
 import AppNavigator from './../../navigation/AppNavigator';
 
+
+const ScreenWidth = Dimensions.get('window').width
 
 export class LoginPage extends Component {
     constructor(props) {
@@ -123,20 +125,34 @@ export class LoginPage extends Component {
                                     </View>
                                     </Modal>
                 </View>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                    onChangeText = {email => this.setState({ email }) }
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                    onChangeText = {password => this.setState({ password }) }
-                />
-                <Button 
-                    title = "Login"
-                    color = "#841584"
-                    onPress = {() => this.Login(this.state.email, this.state.password)}
-                    style ={{margin: 10}}
-                />
+                <View style={styles.subContainer}>
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Email'
+                        leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                        onChangeText = {email => this.setState({ email }) }
+                        inputStyle ={{margin: 10, color: 'white'}} 
+                        //errorMessage = 'That email already exists in the system'
+                    />
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Password'
+                        leftIcon={{ type: 'font-awesome', name: 'lock', size:20, color:'white', marginRight:15 }}
+                        onChangeText = {password => this.setState({ password }) }
+                        inputStyle ={{margin: 10, color: 'white'}}
+                        secureTextEntry={true}
+                        //errorMessage = 'Password must be at least 6 characters long'
+                    />
+                </View>
+                <View style={{flex:0.4, width: ScreenWidth*0.6, margin: 30}}>
+                        <Button 
+                            title = "Login"
+                            color = "#19273c"
+                            onPress = {() => this.Login(this.state.email, this.state.password)}
+                            buttonStyle ={{margin: 10, backgroundColor:'#19273c'}}
+                        />
+                        
+                </View>
             </View>
         )
     }
@@ -147,18 +163,16 @@ export default LoginPage
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: "column",
+      //flexDirection: "column",
       //backgroundColor: "#fff",
-      // alignItems: "center",
-      //justifyContent: "center"
+      alignItems: "center",
+      justifyContent: "center"
     },
-    container2: {
-        flex: 0.25,
+    subContainer: {
+        width: ScreenWidth*0.8,
         flexDirection: "column",
-        width: 100,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
     },
     modalContainer: {
 

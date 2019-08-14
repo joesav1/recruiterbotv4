@@ -57,7 +57,8 @@ export class Signup extends Component {
                         console.log("user created -js")
                         this.ref.doc(user.user.uid).set({
                             email: user.user.email,
-                            //password: user.user.password,
+                            firstname: this.state.firstname,
+                            surname: this.state.surname,
                             uid: user.user.uid,
                             isRecruiter: this.state.isRecruiter
                         });
@@ -134,8 +135,7 @@ export class Signup extends Component {
         }
     
     render() {
-        console.log("Checking sign-up screen width -JS2222222222")
-        console.log(ScreenWidth)
+
 
         return (
             <View style={styles.container}>
@@ -145,28 +145,31 @@ export class Signup extends Component {
                         placeholder='Firstname'
                         leftIcon={{ type: 'font-awesome', name: 'user', size:20, color:'white', marginRight:15 }}
                         onChangeText = {firstname => this.setState({ firstname }) }
-                        inputStyle ={{margin: 10}} 
+                        inputStyle ={{margin: 10, color: 'white'}} 
                     />
                     <Input
                         style={styles.textInputStyle}
-                        placeholder='Firstname'
+                        placeholder='Surname'
                         leftIcon={{ type: 'font-awesome', name: 'user', size:20, color:'white', marginRight:15 }}
                         onChangeText = {surname => this.setState({ surname }) }
-                        inputStyle ={{margin: 10}} 
+                        inputStyle ={{margin: 10, color: 'white'}} 
                     />
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Email'
                         leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
                         onChangeText = {email => this.setState({ email }) }
-                        inputStyle ={{margin: 10}} 
+                        inputStyle ={{margin: 10, color: 'white'}} 
+                        //errorMessage = 'That email already exists in the system'
                     />
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Password'
                         leftIcon={{ type: 'font-awesome', name: 'lock', size:20, color:'white', marginRight:15 }}
                         onChangeText = {password => this.setState({ password }) }
-                        inputStyle ={{margin: 10}} 
+                        inputStyle ={{margin: 10, color: 'white'}}
+                        secureTextEntry={true}
+                        //errorMessage = 'Password must be at least 6 characters long'
                     />
                 
                     <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10}}>
