@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button} from 'react-native'
-//import { Container, Item, Form, Input, Button, Label } from "native-base";
-import firebase, { firestore } from 'firebase';
-import { CheckBox } from 'react-native-elements';
-import '@firebase/firestore';
+import { Text, View, TextInput, StyleSheet, Dimensions, PixelRatio} from 'react-native'
 import { YellowBox } from 'react-native';
-//import ApiKeys from '../../constants/ApiKeys';
-//firebase.initializeApp(ApiKeys.FirebaseConfig)
+
+
+import { CheckBox, Input, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+
+import firebase, { firestore } from 'firebase';
+import '@firebase/firestore';
+
+
+const ScreenWidth = Dimensions.get('window').width
+const ScreenHeight = Dimensions.get('window').height
+
+
 console.disableYellowBox = true
 YellowBox.ignoreWarnings(['Require cycle']);
 
@@ -31,6 +39,8 @@ export class Signup extends Component {
             email: '',
             password: '',
             isRecruiter: false,
+            firstname: '',
+            surname: '',
             //isRecruiterMain: false,
 
             };
@@ -110,10 +120,10 @@ export class Signup extends Component {
             }
         }
 
-        testDatabaseButton() {
-            console.log("Hi from the tdb")
-            this.props.navigation.navigate('rHomepage')
-        }
+        // testDatabaseButton() {
+        //     console.log("Hi from the tdb")
+        //     this.props.navigation.navigate('rHomepage')
+        // }
 
         sendUserEmailAuth() {
             console.log("Checking is currentuser exists via sendUseremailauth on signup")
@@ -124,48 +134,69 @@ export class Signup extends Component {
         }
     
     render() {
-        //console.log("Checking debugger -JS")
+        console.log("Checking sign-up screen width -JS2222222222")
+        console.log(ScreenWidth)
+
         return (
-            <View>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                    onChangeText = {email => this.setState({ email }) }
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                    onChangeText = {password => this.setState({ password }) }
-                />
+            <View style={styles.container}>
+                <View style={styles.subContainer}>
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Firstname'
+                        leftIcon={{ type: 'font-awesome', name: 'user', size:20, color:'white', marginRight:15 }}
+                        onChangeText = {firstname => this.setState({ firstname }) }
+                        inputStyle ={{margin: 10}} 
+                    />
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Firstname'
+                        leftIcon={{ type: 'font-awesome', name: 'user', size:20, color:'white', marginRight:15 }}
+                        onChangeText = {surname => this.setState({ surname }) }
+                        inputStyle ={{margin: 10}} 
+                    />
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Email'
+                        leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                        onChangeText = {email => this.setState({ email }) }
+                        inputStyle ={{margin: 10}} 
+                    />
+                    <Input
+                        style={styles.textInputStyle}
+                        placeholder='Password'
+                        leftIcon={{ type: 'font-awesome', name: 'lock', size:20, color:'white', marginRight:15 }}
+                        onChangeText = {password => this.setState({ password }) }
+                        inputStyle ={{margin: 10}} 
+                    />
+                
+                    <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10}}>
+                        < CheckBox
+                            title= "Tick if Recruiter"
+                            checked = {this.state.checked}
+                            checkedIcon='dot-circle-o'
+                            uncheckedIcon='circle-o'
+                            onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
+                        />
+                    </View>
+                    <View style={{flex:0.4, width: ScreenWidth*0.6}}>
+                        <Button 
+                            title = "Sign-up"
+                            color = '#19273c'
+                            onPress = {() => {this.Signup(this.state.email, this.state.password)}}
+                            buttonStyle ={{backgroundColor: '#19273c'}}
+                        />
+                        <Text style={{margin: 20, textAlign: "center", fontSize: 20, color: 'white'}}>
+                            OR
+                        </Text>
+                        <Button 
+                            title = "Login"
+                            color = '#19273c'
+                            onPress = {() => this.props.navigation.navigate('LoginPage')}
+                            buttonStyle ={{backgroundColor: '#19273c'}}
+                        />
+                    </View>
 
-                <Button 
-                    title = "Sign-up"
-                    color = '#FF5733'
-                    onPress = {() => {this.Signup(this.state.email, this.state.password)}}
-                    style ={{margin: 10}}
-                />
-
-                <Button 
-                    title = "Test Button"
-                    color = '#FF8733'
-                    onPress = {() => this.testDatabaseButton()}
-                    style ={{margin: 10}}
-                />
-
-
-                < CheckBox
-                    title= "Tick if Recruiter"
-                    checked = {this.state.checked}
-                    checkedIcon='dot-circle-o'
-                    uncheckedIcon='circle-o'
-                    onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
-                />
-
-                <Button 
-                    title = "Login"
-                    color = '#FF8733'
-                    onPress = {() => this.props.navigation.navigate('LoginPage')}
-                    style ={{margin: 10}}
-                />
-
+                </View>
             </View>
         )
     }
@@ -176,8 +207,31 @@ export default Signup
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
-      // alignItems: "center",
-      justifyContent: "center"
+      //width: ScreenWidth*0.8,
+      //flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      
+    },
+
+    subContainer: {
+        flex: 0.9,
+        width: ScreenWidth*0.8,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        
+      },
+  
+
+    textInputStyle: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        //margin: 20,
+        
+        
+
+
     }
   });
