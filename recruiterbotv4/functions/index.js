@@ -42,15 +42,12 @@ exports.addSingleRecipientToList = functions.firestore.document(`users/{userList
                 const msg = {
                     to: email,
                     from: 'noreply@recruiterbot-f3b6d.firebase.com',
-                    subject:  'New role available: ' + doc.get('title'),
-                    // text: `Hey ${toName}. You have a new follower!!! `,
-                    // html: `<strong>Hey ${toName}. You have a new follower!!!</strong>`,
-        
-                    // custom templates
                     templateId: 'd-c5d6b851e1df4901acc1600e6ed184c8',
-                    substitutionWrappers: ['{{', '}}'],
-                    substitutions: {
-                      //name: user.displayName
+                    //substitutionWrappers: ['{{', '}}'],
+                    dynamic_template_data: {
+                        subject:  'New role available: ' + doc.get('title'),
+                        //remember to change from email to name here!!
+                      name: email
                       // and other custom properties here
                     }
                 };
