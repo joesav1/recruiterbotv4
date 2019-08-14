@@ -14,7 +14,10 @@ exports.addSingleRecipientToList = functions.firestore.document(`users/{userList
                                           .onCreate(async (snap, context) => {
 
     const userList = context.params.userList;
+    console.log('Checking userList ' + userList)
+    
     const campaign = context.params.campaign;
+    console.log('Checking campaign: ' + campaign)
     let recipient_id;
     let list_id;
 
@@ -22,7 +25,11 @@ exports.addSingleRecipientToList = functions.firestore.document(`users/{userList
     try {
         // const doc = await admin.firestore().collection('sendgrid').doc('lists').get();
         const doc = await admin.firestore().doc(`users/${userList}/campaigns/${campaign}`).get();
+        console.log("Checking doc:" + doc)
         if(doc.exists){
+            const getFullDoc = doc.data()
+            console.log('FIREBASE CLOUD FUNCTION:' + getFullDoc);
+            //Note for the morning doc.id not doc.get('id')
             console.log('FIREBASE CLOUD FUNCTION: List ' + doc.get('title') + ' already exists: ', doc.get('id'));
             list_id = doc.get('id');
         }
@@ -34,9 +41,3 @@ exports.addSingleRecipientToList = functions.firestore.document(`users/{userList
 
 
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });

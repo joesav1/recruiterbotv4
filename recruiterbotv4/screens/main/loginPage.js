@@ -49,7 +49,9 @@ export class LoginPage extends Component {
                         // console.log("Checking res.user.uid")
                         // console.log(res.user.uid)
                         console.log("End of res.user check - js")
-                        if(res.user.emailVerified == false) {
+                        
+                        //NOTE! REMEMBER TO CHANGE THIS TO FALSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        if(res.user.emailVerified == true) {
                             console.log("Made it inside the res.user.emailVerified loop")
                             this.setModalVisible(true)
                         } else {
