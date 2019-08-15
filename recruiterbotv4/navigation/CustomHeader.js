@@ -40,12 +40,19 @@ export class CustomHeader extends Component {
 
       logout = () => {
           this._menu.hide();
-          firebase.auth().signOut().catch(function(error) {
-              console.log("An error occured")
-          })
-            console.log("Signout succesful")
-            this.props.navigation.navigate('LoginPage')
-
+        //   firebase.auth().signOut().catch(function(error) {
+        //       console.log("An error occured")
+        //   })
+        //     console.log("Signout succesful")
+        //     this.props.navigation.navigate('LoginPage')
+        firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+          }, function(error) {
+            console.error('Sign Out Error', error);
+          }).then(
+              console.log("~~~~~~~~~~~~~~signout successful~~~~~~~~~~~"),
+              this.props.navigation.navigate('LoginPage')
+          )
       }
 
     
@@ -60,13 +67,13 @@ export class CustomHeader extends Component {
         if(this.userDetailsHeader == null) {
             return (
                 <View style = {styles.container3}>
-                    <Text style = {{flex: 2, color: 'white'}} > Header test 1 </Text>
+                    <Text style = {{flex: 2, color: 'white'}} > IBM Recruit </Text>
                 </View>
             )
         }
         return (
             <View style = {styles.container}>
-                <Text style ={{flex:2, color:"white"}} > Header test 1 </Text>
+                <Text style ={{flex:2, color:"white"}} > IBM Recruit </Text>
                 <View style = {styles.icon}>
                     <Menu style={styles.menu}
                         ref={this.setMenuRef}
@@ -102,6 +109,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#19273c',
         // borderColor: '#d6d7da',
         // shadowColor: '#000000',
+        shadowOffset:{  width: 10,  height: 10,  },
+        shadowColor: 'black',
+        shadowOpacity: 1.0,
     },
 
     container3: {

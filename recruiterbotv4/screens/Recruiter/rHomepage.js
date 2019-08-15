@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Button, FlatList} from 'react-native';
+import { Text, View, TextInput, StyleSheet, FlatList, Dimensions} from 'react-native';
+import { Icon, Button } from 'react-native-elements';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import Campaign from './campaign';
+
+
+
+const ScreenWidth = Dimensions.get('window').width
+
+
 export class rHomepage extends Component {
     constructor(props) {
         super(props);
@@ -87,15 +94,21 @@ export class rHomepage extends Component {
         // console.log("end of second param check")
 
         return (
-              <View>
-                <Text style={{fontSize: 35, fontWeight: "bold"}}> Campaigns</Text>
-                <Text> {this.params} </Text>
-                <Button 
-                title = "Create Campaign"
-                color = '#FF5733'
-                onPress = {() => this.props.navigation.navigate('createCampaign', {testUID: this.state.params})}
-                style ={{margin: 10}}
-                />
+              <View style={{flexDirection:"column"}}>
+                <View style={{flexDirection:"row", alignItems:"center", margin:10}}>
+                  <Text style={{fontSize: 35, fontWeight: "bold", color:"white"}}> Campaigns</Text>
+                  <Text> {this.params} </Text>
+                  <Icon
+                        reverse
+                        raised
+                        reverseColor = '#79a6f6'
+                        name="plus"
+                        type="font-awesome"
+                        size={16}
+                        color="white"
+                        onPress = {() => this.props.navigation.navigate('createCampaign', {testUID: this.state.params})}
+                  />
+                </View>
                 <FlatList
                   data={this.state.campaigns}
                   renderItem={({item}) => <Campaign 
