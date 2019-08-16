@@ -41,6 +41,7 @@ export class Signup extends Component {
             isRecruiter: false,
             firstname: '',
             surname: '',
+            company:'',
             //isRecruiterMain: false,
 
             };
@@ -60,7 +61,8 @@ export class Signup extends Component {
                             firstname: this.state.firstname,
                             surname: this.state.surname,
                             uid: user.user.uid,
-                            isRecruiter: this.state.isRecruiter
+                            isRecruiter: this.state.isRecruiter,
+                            company: this.state.company
                         });
                             console.log("USER ADDED is working -js")
                             console.log(user.user.uid)
@@ -107,6 +109,24 @@ export class Signup extends Component {
                 console.log(error.toString(error))
     
             };
+        }
+
+        companyName() {
+            if(this.state.checked) {
+                return(
+                    <Input
+                    style={styles.textInputStyle}
+                    placeholder='Company Name'
+                    leftIcon={{ type: 'font-awesome', name: 'briefcase', size:20, color:'white', marginRight:10 }}
+                    onChangeText = {company => this.setState({ company }) }
+                    inputStyle ={{margin: 10, color: 'white'}} 
+                    //errorMessage = 'That email already exists in the system'
+                />
+                )
+
+            } else {
+                return null
+            }
         }
     
 
@@ -172,14 +192,16 @@ export class Signup extends Component {
                         //errorMessage = 'Password must be at least 6 characters long'
                     />
                 
-                    <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10}}>
+                    <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10, marginBottom:25}}>
                         < CheckBox
-                            title= "Tick if Recruiter"
+                            title= "Press if Recruiter"
                             checked = {this.state.checked}
                             checkedIcon='dot-circle-o'
                             uncheckedIcon='circle-o'
                             onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
                         />
+                        <View>{this.companyName()}</View>
+
                     </View>
                     <View style={{flex:0.4, width: ScreenWidth*0.6}}>
                         <Button 
