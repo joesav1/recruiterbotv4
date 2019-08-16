@@ -20,6 +20,7 @@ export class rHomepage extends Component {
         // console.log(testingUser)
         // console.log("rhonmepage! ENd of test")
         this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('campaigns')
+        //.orderBy('created') add this to end of line
 
         this.state = {
           loading: true,

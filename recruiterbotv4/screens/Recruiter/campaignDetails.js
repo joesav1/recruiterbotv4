@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Button, FlatList, ScrollView} from 'react-native';
+import { Text, View, TextInput, StyleSheet, FlatList, ScrollView, Dimensions} from 'react-native';
+import { Icon, Button } from 'react-native-elements';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import RTask from './rTask';
+
+const ScreenWidth = Dimensions.get('window').width
+
+
 export class campaignDetails extends Component {
     constructor(props) {
         super(props);
@@ -198,16 +203,18 @@ export class campaignDetails extends Component {
         // console.log(this.state.candidatesTasks)
         // console.log("##############end of canddatetasks check###################")
         return (
-              <ScrollView>
-                <Text style={{fontSize: 20, fontWeight: "bold"}}> Role: {this.state.titleMain2}</Text>
-                
+              <View style={{flexDirection:"column"}}>
+                <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 10}}>
+                    <Text style={{fontSize: 25, fontWeight: "bold", color:"white"}}> Role: {this.state.titleMain2}</Text>
+                </View>
                 <FlatList  
-                    data = {this.state.candidatesTasks.sort((a,b)=> (a.hasOwnProperty('finalScore') ? -1: b.hasOwnProperty('finalScore') ? 1:0))}
-                    renderItem = {({item}) => <RTask 
-                    {...item}
-                    />}
+                        data = {this.state.candidatesTasks.sort((a,b)=> (a.hasOwnProperty('finalScore') ? -1: b.hasOwnProperty('finalScore') ? 1:0))}
+                        renderItem = {({item}) => <RTask 
+                        {...item}
+                        />}
                 />
-              </ScrollView>
+               
+              </View>
         )}
     }
 export default campaignDetails

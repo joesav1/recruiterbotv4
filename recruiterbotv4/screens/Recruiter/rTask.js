@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
+import { Text, View, Button, TouchableHighlight, Dimensions } from 'react-native'
 import firebase from 'firebase';
 import '@firebase/firestore';
 import { withNavigation } from 'react-navigation';
+
+
+
+const ScreenWidth = Dimensions.get('window').width
 
 export class RTask extends Component {
     constructor(props) {
         super(props);
     }
 
-
+    completedCheck() {
+        if(this.props.completed) {
+            this.props.navigation.navigate('rolesMain', {propsMain: this.props})
+        } else {
+            return null
+        }
+    }
 
 
     render() {
@@ -19,32 +29,27 @@ export class RTask extends Component {
         // console.log(this.props.completed)
 
         return (
-            <View style={{ flex: 3, height: 48, flexDirection: 'row', alignItems: "center", borderWidth: 0.25, borderColor: "#0B152C",}}>
-                <View style={{ flex: 1}}>
-                    <Text>{this.props.email}</Text>
-                </View>
-                <View style={{ flex: 1}}>
-                    <Text>Score: {this.props.finalScore}</Text>
-                </View>
-                <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
-                    {this.props.completed && (
-                            <Button 
-                            title = "Start"
-                            color = '#FF5733'
-                            onPress = {() => this.props.navigation.navigate('rolesMain', {propsMain: this.props})}
-                            style ={{flex: 1, margin: 10}}
-                            />
-                    )}
-                    {!this.props.completed && (
-                        <Text style={{fontWeight: "bold"}}>In Progress</Text>
-                    )}
+            <TouchableHighlight style={{borderRadius: 10, width:ScreenWidth, height: 90, marginBottom: 2}}  onPress = {() => this.completedCheck()}>
+                <View style={{flexDirection: 'row', backgroundColor: '#f7e7e2'}}>
+                        <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 90, width:ScreenWidth*0.5}}>
+                            <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17, margin: 4}}>{this.props.firstname} {this.props.surname}</Text>
+                            <Text style={{ color: '#1d3458', fontWeight: '400', fontSize:13, marginLeft: 4}}>{this.props.email}</Text>
+                        </View>
+
+                        <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 90, width:ScreenWidth*0.4}}>
+                            {this.props.completed && (
+                                    <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17, marginLeft: 20}}>Score: {this.props.finalScore}</Text>
+                            )}
+                            {!this.props.completed && (
+                                <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:13, marginLeft: 40}}>In Progress</Text>
+                            )}
+
+
+                        </View>
 
 
                 </View>
-
-
-
-            </View>
+            </TouchableHighlight>
         )
     }
 }

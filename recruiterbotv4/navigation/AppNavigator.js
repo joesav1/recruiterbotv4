@@ -39,11 +39,24 @@ const Rootstack = createStackNavigator({
       }
      },
 
-    createCampaign: { screen: createCampaign},
-    campaignDetails: { screen: campaignDetails},
+    createCampaign: { 
+      screen: createCampaign,
+              navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458'},
+        headerTintColor: 'white'
+      } 
+    },
+    
+    campaignDetails: { screen: campaignDetails,
+      navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458'},
+        headerTintColor: 'white'
+      } 
+    },
+
     Campaign: { screen: Campaign },
     cHomepage: { screen: cHomepage },
-    taskDetails: { screen: taskDetails },
+    taskDetails: { screen: taskDetails},
     cHoldingPage: { screen: cHoldingPage, },
 
     chatbotShell: {

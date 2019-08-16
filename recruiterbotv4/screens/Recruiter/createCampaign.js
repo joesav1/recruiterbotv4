@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, Button } from 'react-native'
+import { Text, View, Dimensions, StyleSheet} from 'react-native'
+import { Input, Button } from 'react-native-elements';
 import firebase from 'firebase';
 import '@firebase/firestore';
 
-
+const ScreenWidth = Dimensions.get('window').width
 export class createCampaign extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +49,7 @@ export class createCampaign extends Component {
     promptMessage() {
       if(this.state.placeholderCandidate) {
         return(
-          <Text>{this.state.placeholderCandidate} added!</Text>
+          <Text style={{margin: 3, fontSize: 12, color: 'white'}}>{this.state.placeholderCandidate} added!</Text>
         )} else {
           return (
             null
@@ -112,37 +113,80 @@ export class createCampaign extends Component {
 
     render() {
         return (
-            <View>
-                <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                  placeholder = {"Title"}
-                  onChangeText = {title => this.setState({ title })}
-                />
-                <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 10}}
-                  placeholder = {"Enter candidate email"}
-                  onChangeText = {candidates => this.setState({ candidates })}
-                  value = {this.state.candidates}
-                />
-                <View>{this.promptMessage()}</View>
-                <Button 
-                    title = "Add candidate"
-                    color = "#FFFF00"
-                    onPress = {() => {this.submitAndClear(this.state.candidates);}}
-                    style ={{margin: 10}}
-                />
-                <Button 
-                    title = "Submit"
-                    color = "#841584"
-                    onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.candidates)}}
-                    style ={{margin: 10}}
-                />
+            <View style={styles.container}>
+              <View style={styles.subContainer}>
+                  <Input
+                        style={styles.textInputStyle}
+                        placeholder='Title'
+                        leftIcon={{ type: 'font-awesome', name: 'pencil', size:20, color:'white', marginRight:15 }}
+                        onChangeText = {title => this.setState({ title }) }
+                        inputStyle ={{margin: 10, color: 'white'}} 
+                  />
+                  <Input
+                        style={styles.textInputStyle}
+                        placeholder='Add Candidate Email'
+                        leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                        onChangeText = {candidates => this.setState({ candidates }) }
+                        inputStyle ={{margin: 10, color: 'white'}} 
+                        value={this.state.candidates}
+                        //errorMessage = 'That email already exists in the system'
+                  />
+                  <View>{this.promptMessage()}</View>
+                  <View style={{flex:0.4, width: ScreenWidth*0.6, marginTop: 20,}}>
+                    <Button 
+                        title = "Add candidate"
+                        color = "#FFFF00"
+                        onPress = {() => {this.submitAndClear(this.state.candidates);}}
+                        //style ={{margin: 5}}
+                        buttonStyle ={{marginBottom:25, backgroundColor: '#2d74da'}}
+                    />
+                    <Button 
+                        title = "Submit"
+                        color = "#34bc6e"
+                        onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.candidates)}}
+                        //style ={{margin: 5}}
+                        buttonStyle ={{margin: 5, backgroundColor: '#34bc6e'}}
 
-                
+                        
+                    />
+                  </View>
+
+              </View>  
             </View>
         )
     }
 }
 
 export default createCampaign
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    //width: ScreenWidth*0.8,
+    //flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },
+
+  subContainer: {
+      flex: 0.9,
+      width: ScreenWidth*0.8,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      //marginBottom: 10,
+      
+    },
+
+
+  textInputStyle: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      //margin: 20,
+      
+  }
+});
 
