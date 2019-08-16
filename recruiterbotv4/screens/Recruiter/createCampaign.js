@@ -65,6 +65,7 @@ export class createCampaign extends Component {
         firebase.firestore().collection('users').doc(this.state.params).collection('campaigns').add({
           title: this.state.title,
           candidates: this.state.candidatesMain,
+          created: new Date().toDateString()
         })
         
     }
@@ -85,6 +86,7 @@ export class createCampaign extends Component {
                   completed: false,
                   title: title,
                   transcript: null,
+                  
 
                 });
 

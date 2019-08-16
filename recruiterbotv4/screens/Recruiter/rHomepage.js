@@ -35,7 +35,7 @@ export class rHomepage extends Component {
       onCollectionUpdate = (querySnapshot) => {
         const campaigns = [];
         querySnapshot.forEach((doc) => {
-          const {title, candidates} = doc.data();
+          const {title, candidates, created} = doc.data();
           const docID = doc.id
           const candidateCount = candidates.length
 
@@ -45,6 +45,7 @@ export class rHomepage extends Component {
             title,
             candidates,
             candidateCount,
+            created,
             docID
           });
         });
