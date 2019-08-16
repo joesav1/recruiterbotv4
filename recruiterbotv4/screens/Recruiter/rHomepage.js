@@ -95,7 +95,7 @@ export class rHomepage extends Component {
 
         return (
               <View style={{flexDirection:"column"}}>
-                <View style={{flexDirection:"row", alignItems:"center", margin:10}}>
+                <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
                   <Text style={{fontSize: 35, fontWeight: "bold", color:"white"}}> Campaigns</Text>
                   <Text> {this.params} </Text>
                   <Icon

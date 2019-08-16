@@ -61,9 +61,9 @@ export class CustomHeader extends Component {
         if(this.userDetailsHeader == null) {
             this.logout
         }
-        console.log("HEADER checking if userDetailsHeader exists")
-        console.log(this.userDetailsHeader)
-        console.log("End of HEADER check on userdetailsheader")
+        // console.log("HEADER checking if userDetailsHeader exists")
+        // console.log(this.userDetailsHeader)
+        // console.log("End of HEADER check on userdetailsheader")
         if(this.userDetailsHeader == null) {
             return (
                 <View style = {styles.container3}>
