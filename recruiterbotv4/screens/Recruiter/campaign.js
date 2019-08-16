@@ -21,7 +21,7 @@ export class Campaign extends Component {
                             <Text style={{textAlign:"center", color: 'white', fontWeight: '600', fontSize:17}}>{this.props.title}</Text>
                         </View>
                         <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 110, width:ScreenWidth*0.75, backgroundColor: '#e1ebf7'}}>
-                            <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17}}>Candidates:</Text>
+                            <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17}}>Candidates: {this.props.candidateCount}</Text>
                             <Text style={{ color: '#1d3458', fontWeight: '450', fontSize:13}}>Date Created:</Text>
 
                         </View>
