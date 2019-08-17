@@ -42,15 +42,16 @@ const Rootstack = createStackNavigator({
     createCampaign: { 
       screen: createCampaign,
               navigationOptions: {
-        headerStyle: {backgroundColor:'#1d3458'},
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent'},
         headerTintColor: 'white'
       } 
     },
-    
+
     campaignDetails: { screen: campaignDetails,
       navigationOptions: {
-        headerStyle: {backgroundColor:'#1d3458'},
-        headerTintColor: 'white'
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent'},
+        headerTintColor: 'white',
+        
       } 
     },
 

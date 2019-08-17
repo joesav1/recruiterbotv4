@@ -130,10 +130,13 @@ export class Signup extends Component {
         }
     
 
-        setRecruiter() {
+        async setRecruiter() {
             try {
                 console.log("checking if initialized setrecruiter -js")
-                this.state.isRecruiter = true
+                recruiterSwitch = !this.state.isRecruiter
+                console.log("Checking recruiter switch")
+                console.log(recruiterSwitch)
+                await this.setState({isRecruiter: recruiterSwitch})
                 console.log(this.state.isRecruiter)
                 console.log("Checking if true for setrecruiter")
             } catch(error) {
@@ -155,7 +158,9 @@ export class Signup extends Component {
         }
     
     render() {
-
+        console.log("checking initial this.state.isrecruiter")
+        console.log(this.state.isRecruiter)
+        console.log("End of at loading check")
 
         return (
             <View style={styles.container}>
