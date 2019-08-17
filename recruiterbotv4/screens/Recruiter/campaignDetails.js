@@ -191,7 +191,7 @@ export class campaignDetails extends Component {
         if(this.state.loading) {
             return (
                 <View>
-                    <Text>LOADING...</Text>
+                    <Text style={{fontSize: 25, fontWeight: "bold", color:"white", margin: 5}}>LOADING...</Text>
                 </View>
             )
         }
@@ -204,7 +204,7 @@ export class campaignDetails extends Component {
         // console.log("##############end of canddatetasks check###################")
         return (
               <View style={{flexDirection:"column"}}>
-                <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 10}}>
+                <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
                     <Text style={{fontSize: 25, fontWeight: "bold", color:"white"}}> Role: {this.state.titleMain2}</Text>
                 </View>
                 <FlatList  
