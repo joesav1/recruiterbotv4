@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button, FlatList} from 'react-native';
+import { Text, View, TextInput, StyleSheet, Button, FlatList, Dimensions} from 'react-native';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import Task from './task';
+
+
+const ScreenWidth = Dimensions.get('window').width
 
 export class cHomepage extends Component {
     constructor(props) {
@@ -84,17 +87,17 @@ export class cHomepage extends Component {
         // console.log(this.state.params)
         // console.log("end of first param check")
         return (
-            <View>
-
-                <Text style={{fontSize: 35, fontWeight: "bold"}}> Tasks</Text>
- 
+            <View style={{flexDirection:"column"}}>
+                <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
+                    <Text style={{fontSize: 35, fontWeight: "bold", color:"white"}}> Tasks</Text>
+                </View>
                 <FlatList
-                  data={this.state.tasks}
-                  renderItem={({item}) => <Task 
-                  {...item}
-                  />}
+                data={this.state.tasks}
+                renderItem={({item}) => <Task 
+                {...item}
+                />}
                 />
-
+            
             </View>
         )
     }

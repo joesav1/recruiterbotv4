@@ -58,9 +58,14 @@ const Rootstack = createStackNavigator({
     },
 
     Campaign: { screen: Campaign },
-    cHomepage: { screen: cHomepage },
+    cHomepage: { screen: cHomepage,
+      navigationOptions: {
+        header: <CustomHeader/>
+      }
+    },
+    
     taskDetails: { screen: taskDetails},
-    cHoldingPage: { screen: cHoldingPage, },
+    cHoldingPage: { screen: cHoldingPage },
 
     chatbotShell: {
         screen: chatbotShell,
