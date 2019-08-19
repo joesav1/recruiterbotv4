@@ -16,11 +16,10 @@ export class rHomepage extends Component {
         
         //Dont delete this one
         var testingUser = firebase.auth().currentUser
-        // console.log("rhomepage! CHecking if testing user exists 1")
-        // console.log(testingUser)
-        // console.log("rhonmepage! ENd of test")
+
         this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('campaigns')
         //.orderBy('created') add this to end of line
+
 
         this.state = {
           loading: true,
@@ -29,6 +28,7 @@ export class rHomepage extends Component {
           candidates: null,
           params: props.navigation.state.params.testUID,
           campaigns: [],
+          recruiterID: firebase.auth().currentUser.uid
         };
       }
 
@@ -39,6 +39,7 @@ export class rHomepage extends Component {
           const {title, candidates, created} = doc.data();
           const docID = doc.id
           const candidateCount = candidates.length
+          const recruiterIDMain = this.state.recruiterID
 
           campaigns.push({
             key: doc.uid,
@@ -47,6 +48,7 @@ export class rHomepage extends Component {
             candidates,
             candidateCount,
             created,
+            recruiterIDMain,
             docID
           });
         });
