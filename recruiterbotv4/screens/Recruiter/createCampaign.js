@@ -29,33 +29,13 @@ export class createCampaign extends Component {
       try {
         let docCompany = await firebase.firestore().collection('users').doc(this.state.params).get();
         let docCompanyMain = docCompany.data();
-          // let docCompanyMain = docCompany.company 
-          console.log("CHecking docCompanyMain~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-          //console.log(docCompany)
-          console.log(docCompanyMain)
         let docCompanyMain2 = docCompanyMain.company
 
-        console.log(docCompanyMain2)
-          console.log("End of doc commapymMain check~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         await this.setState({ companyName: docCompanyMain2}) 
-        console.log("COMPANY NAME CHECKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
         await console.log(this.state.companyName)
-  
-        //const docCompanyMain = docCompany.get('company')
-  
         } catch {
-          console.log('No company attributed to this user@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+          console.log('No company attributed to this user')
         }
-        // firebase.auth().onAuthStateChanged((user) => {
-        //   if (user) {
-        //     console.log("Checking for a user ccampaings")
-        //     console.log(user.user)
-        //     console.log("End of user check ccampaigns-js")
-        //     this.setState({ loading: false, authenticated: true });
-        //   } else {
-        //     this.setState({ loading: false, authenticated: false });
-        //   }
-        // });
     }
 
     submitAndClear = (candidate) => {
@@ -81,10 +61,6 @@ export class createCampaign extends Component {
     }
 
     campaignButton = (title, candidates) => {
-        // console.log("Checking what the states currently hold, createCampaign.js")
-        // console.log(this.state.title)
-        // console.log(this.state.candidates)
-        // console.log("End of campaignButton states check, createCampaign.js")
         firebase.firestore().collection('users').doc(this.state.params).collection('campaigns').add({
           title: this.state.title,
           candidates: this.state.candidatesMain,
@@ -105,7 +81,8 @@ export class createCampaign extends Component {
                   completed: false,
                   title: title,
                   transcript: null,
-                  company: companyName
+                  company: companyName,
+                  created: new Date().toDateString()
                   
                 });
 

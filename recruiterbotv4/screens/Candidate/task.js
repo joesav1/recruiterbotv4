@@ -27,6 +27,7 @@ export class Task extends Component {
                         <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 90, width:ScreenWidth*0.50}}>
                             <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17, margin: 4}}>{this.props.title}</Text>
                             <Text style={{ color: '#1d3458', fontWeight: '400', fontSize:13, marginLeft: 4}}>Company: {this.props.company}</Text>
+                            <Text style={{ color: '#1d3458', fontWeight: '400', fontSize:13, marginLeft: 4}}>Received: {this.props.created}</Text>
                         </View>
 
                         <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 90, width:ScreenWidth*0.30}}>
