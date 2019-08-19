@@ -36,12 +36,16 @@ export class campaignDetails extends Component {
         const candidatesTasks = [];
         querySnapshot.forEach((doc) => {
           const {completed, title, transcript} = doc.data();
+          //const docIDtask = doc.id
+          //console.log("Checking docIDtask")
+          //console.log(docIDtask)
 
 
           candidatesTasks.push({
             key: doc.uid,
             doc,
             completed,
+            //docIDtask
           });
         });
 
@@ -62,46 +66,21 @@ export class campaignDetails extends Component {
         for(i=0;i<this.state.candidatesMain2.length; i++) {
             const docStuff = await firebase.firestore().collection('users').where("email","==",this.state.candidatesMain2[i].toLocaleLowerCase()).get();
             for (const member of docStuff.docs) {
- 
-                
-
                 tokens.push(member.data());
                 const docStuff2 = await firebase.firestore().collection('users').doc(member.id).collection('tasks').where("title","==",this.state.titleMain2).get();
                 for (const member2 of docStuff2.docs) {
                     tokens2.push(member2.data());
                 }
             }
-
-        
         }
-
 
         let tokens3 = []
 
         tokens.forEach((itm,i) => {
             tokens3.push(Object.assign({}, itm, tokens2[i]));
         });
-
-        // console.log("CHECKING token3 to see if we get anything here!!!!!!!!!!!!!!!!")
-        // console.log(tokens3)
-        // console.log("END OF tokens 3 check!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
         var tokens4 = await this.generateScore(tokens3)
-
-        // console.log("~~~~~~~~~~checking tokens4~~~~~~~~~~")
-        // console.log(tokens4)
-        // console.log("end of tokens4 chjeck")
-
-
-
-
-
         await this.setState({ candidatesTasks: tokens4})
-
-        // console.log("~~~~~~~~~~~~checking this.state.candidates task~~~~~~~~~~")
-        // console.log(this.state.candidatesTasks)
-        // console.log("~~~~~~~~~~~~end of this.state.candudatestask check~~~~~~~~~~~~~~~")
-
 
       }
 
@@ -199,9 +178,11 @@ export class campaignDetails extends Component {
         // console.log(this.state.titleMain2)
         // console.log("checking what candidateMain 2 gives")
         // console.log(this.state.candidatesMain2)
-        // console.log("########################checking candidates tasks 2 ##########################")
-        // console.log(this.state.candidatesTasks)
-        // console.log("##############end of canddatetasks check###################")
+        console.log("########################checking candidates tasks 2 ##########################")
+        console.log(this.state.candidatesTasks)
+        console.log("##############end of canddatetasks check###################")
+        console.log("Checking docIDmain2")
+        console.log(this.state.docIDMain2)
         return (
               <View style={{flexDirection:"column"}}>
                 <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>

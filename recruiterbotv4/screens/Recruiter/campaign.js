@@ -29,9 +29,8 @@ export class Campaign extends Component {
                         reverseColor = '#79a6f6'
                         name="trash"
                         type="font-awesome"
-                        size={16}
+                        size={21}
                         color="white"
-                        //onPress = {() => this.props.navigation.navigate('createCampaign', {testUID: this.state.params})}
                     />
                   </View>
               ),
