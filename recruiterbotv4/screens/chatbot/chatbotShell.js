@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, WebView, Text} from 'react-native';
+import { View, StyleSheet, WebView, Text, KeyboardAvoidingView, Dimensions} from 'react-native';
 import { MessageRequest } from './chatbot'
 import WatsonIcon from './WatsonIcon'
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -7,9 +7,8 @@ import CountDown from 'react-native-countdown-component';
 import firebase from 'firebase';
 import '@firebase/firestore';
 
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-})
+const ScreenWidth = Dimensions.get('window').width
+const ScreenHeight = Dimensions.get('window').height
 export class chatbotShell extends Component {
   constructor (props) {
     super (props);
@@ -55,48 +54,52 @@ export class chatbotShell extends Component {
     // console.log("End of docidmain check")
 
     return (
-      <View
-        style={styles.container}
-        accessible
-        accessibilityLabel='main'
-      >
-        <CountDown style={{marginTop: 80}}
-            until={40}
-            size = {20}
-            timeToShow={['M','S']}
-            onFinish={() => {this.endOfTimer()}}
-        />
+      
+          <View
+            style={styles.container}
+            accessible
+            accessibilityLabel='main'
+          >
+            <CountDown style={{marginTop: 80}}
+                until={40}
+                size = {20}
+                timeToShow={['M','S']}
+                onFinish={() => {this.endOfTimer()}}
+            />
 
-        <GiftedChat 
-          placeholder="Send your message"
-          //renderCustomView={this.renderCustomView}
-          messages={this.state.messages}
-          onSend={(messages) => this.onSend(messages)}
-          renderAvatar={this.renderAvatar}
-          multiline={false}
-          user={{
-            _id: '1',
-          }}
-        />
-      </View>
+            <GiftedChat 
+              placeholder="Send your message"
+              messages={this.state.messages}
+              onSend={(messages) => this.onSend(messages)}
+              renderAvatar={this.renderAvatar}
+              multiline={false}
+              user={{
+                _id: '1',
+              }}
+            />
+            <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={0}/>
+
+          
+        </View>
+    
     
 
     );
   }
 
   //do i need this?
-  renderCustomView = (props) => {
-    console.log(props.currentMessage.text)
-      return (
-        <View>   
+  // renderCustomView = (props) => {
+  //   console.log(props.currentMessage.text)
+  //     return (
+  //       <View>   
 
 
-          <Text>Welcome to your interview for the role, role.
-          The interview will consist of questionNumber questions. Each question will last 4 minutes. Please do not attempt to copy and paste your answer as this will be flagged. 
-          Treat this as a real interview as the Recruiter will be able to watch your responses back.  </Text>
-        </View>
-      );
-    }
+  //         <Text>Welcome to your interview for the role, role.
+  //         The interview will consist of questionNumber questions. Each question will last 4 minutes. Please do not attempt to copy and paste your answer as this will be flagged. 
+  //         Treat this as a real interview as the Recruiter will be able to watch your responses back.  </Text>
+  //       </View>
+  //     );
+  //   }
 
 
   onSend = (message = []) => {
@@ -155,4 +158,18 @@ export class chatbotShell extends Component {
 }
 
 export default chatbotShell
+
+styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  countDownContainer: {
+    marginTop:60
+
+  },
+  textContainer: {
+    height: ScreenHeight*0.8,
+    width: ScreenWidth
+  }
+})
 
