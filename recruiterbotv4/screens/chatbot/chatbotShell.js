@@ -68,11 +68,12 @@ export class chatbotShell extends Component {
             />
 
             <GiftedChat 
-              placeholder="Send your message"
+              placeholder="Type your response"
+              
               messages={this.state.messages}
               onSend={(messages) => this.onSend(messages)}
               renderAvatar={this.renderAvatar}
-              multiline={false}
+              multiline={true}
               user={{
                 _id: '1',
               }}

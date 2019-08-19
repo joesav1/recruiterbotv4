@@ -45,7 +45,7 @@ export class cHoldingPage extends Component {
                     <Button 
                         title = "Start"
                         onPress ={()=>this.startChatbot()}       
-                        buttonStyle ={{margin: 10, backgroundColor:'#f7e7e2', color: '#19273c'}}
+                        buttonStyle ={{margin: 10, backgroundColor:'#f7e7e2'}}
                         titleStyle = {{color:"#19273c", fontSize:20}}       
                     />
                 </View>
