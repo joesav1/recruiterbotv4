@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, Button, ActivityIndicator, StyleSheet } from 'react-native'
+import { Text, View, ActivityIndicator, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements';
 import { personalityRequest } from './personality';
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -162,19 +163,20 @@ export class chatbotHoldingPage extends Component {
         // console.log("end of finalText check in the render")
         if(this.state.loading) {
             return (
-                <View style={[styles.container, styles.horizontal]}>
-                 <ActivityIndicator size="large" color="#0000ff" />
+                <View style={styles.container}>
+                 <ActivityIndicator size="large" color="white" />
+                 <Text style={{margin: 5, textAlign: "center", fontSize: 20, color: 'white'}}> Please wait, we are uploading your interview to the system</Text>
                 </View>
             )
         }
         if(!this.state.loading)
         return (
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 <Button
                     title = "Continue"
-                    color = "#841584"
                     onPress ={()=>this.props.navigation.navigate('cHomepage')}       
-                    style={{margin: 10}}         
+                    buttonStyle ={{margin: 10, backgroundColor:'#f7e7e2'}}
+                    titleStyle = {{color:"#19273c", fontSize:20}}              
                 />
             </View>
             
@@ -187,7 +189,9 @@ export default chatbotHoldingPage
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      alignItems: "center",
+      padding: 20,
     },
     horizontal: {
       flexDirection: 'row',
