@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, Button, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Dimensions } from 'react-native'
+import { Button } from 'react-native-elements';
 import firebase from 'firebase';
 import '@firebase/firestore';
+
+
+const ScreenWidth = Dimensions.get('window').width
 
 export class cHoldingPage extends Component {
     constructor(props) {
@@ -29,20 +33,22 @@ export class cHoldingPage extends Component {
         console.log("end of check on this.state.params, cHoldingPage")
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 20}}>
+                <Text style={{fontSize: 35, fontWeight: "bold", color:"white", marginBottom: 10}}>
                     Role: {this.state.titleMain}
                 </Text>
                 <Text
-                    style={{flex: 1, alignItems: 'center', fontSize: 20,borderWidth: 0.5, borderColor: '#d6d8da',}}>
-                    {`You will have 20 minutes to answer all the questions.\nPlease do not exit the app or attempt to refresh the page.\nYour interview will begin once your press START`}
+                    style={{fontSize: 20, fontWeight: "400", color:"white"}}>
+                    {`You will have 30 minutes to answer all the questions. Please do not exit the app or attempt to refresh the page.\n\nYour interview will begin once your press the 'Start' button`}
                     
                 </Text>
-                <Button
-                    title = "START"
-                    color = "#841584"
-                    onPress ={()=>this.startChatbot()}       
-                    style={{margin: 10}}         
-                />
+                <View style={{flex:0.4, width: ScreenWidth*0.6, margin: 30}}>
+                    <Button 
+                        title = "Start"
+                        onPress ={()=>this.startChatbot()}       
+                        buttonStyle ={{margin: 10, backgroundColor:'#f7e7e2', color: '#19273c'}}
+                        titleStyle = {{color:"#19273c", fontSize:20}}       
+                    />
+                </View>
                 
             </View>
         )
@@ -53,13 +59,10 @@ export default cHoldingPage
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        borderWidth: 0.5,
-        borderColor: '#d6d7da',
-        
+        alignItems: 'center',  
+        padding: ScreenWidth*0.05      
     }
 })

@@ -65,7 +65,14 @@ const Rootstack = createStackNavigator({
     },
     
     taskDetails: { screen: taskDetails},
-    cHoldingPage: { screen: cHoldingPage },
+
+    cHoldingPage: { screen: cHoldingPage,
+      navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent', elevation: 0,
+        shadowOpacity: 0},
+        headerTintColor: 'white'
+      }  
+    },
 
     chatbotShell: {
         screen: chatbotShell,
