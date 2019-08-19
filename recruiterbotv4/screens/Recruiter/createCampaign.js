@@ -17,23 +17,45 @@ export class createCampaign extends Component {
             title: '',
             candidates: null,
             params: props.navigation.state.params.testUID,
+            companyName: '', 
             candidatesMain: [],
             candidatesTemp: [],
             placeholderCandidate: null,
         };
     }
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            console.log("Checking for a user ccampaings")
-            console.log(user.user)
-            console.log("End of user check ccampaigns-js")
-            this.setState({ loading: false, authenticated: true });
-          } else {
-            this.setState({ loading: false, authenticated: false });
-          }
-        });
+    async componentDidMount() {
+
+      try {
+        let docCompany = await firebase.firestore().collection('users').doc(this.state.params).get();
+        let docCompanyMain = docCompany.data();
+          // let docCompanyMain = docCompany.company 
+          console.log("CHecking docCompanyMain~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+          //console.log(docCompany)
+          console.log(docCompanyMain)
+        let docCompanyMain2 = docCompanyMain.company
+
+        console.log(docCompanyMain2)
+          console.log("End of doc commapymMain check~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        await this.setState({ companyName: docCompanyMain2}) 
+        console.log("COMPANY NAME CHECKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
+        await console.log(this.state.companyName)
+  
+        //const docCompanyMain = docCompany.get('company')
+  
+        } catch {
+          console.log('No company attributed to this user@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        }
+        // firebase.auth().onAuthStateChanged((user) => {
+        //   if (user) {
+        //     console.log("Checking for a user ccampaings")
+        //     console.log(user.user)
+        //     console.log("End of user check ccampaigns-js")
+        //     this.setState({ loading: false, authenticated: true });
+        //   } else {
+        //     this.setState({ loading: false, authenticated: false });
+        //   }
+        // });
     }
 
     submitAndClear = (candidate) => {
@@ -71,11 +93,7 @@ export class createCampaign extends Component {
         
     }
 
-    taskCreation = (title, candidates) => {
-      // console.log("Checking what the states currently hold, taskCreation, createCampaign.js")
-      // console.log(this.state.title)
-      // console.log(this.state.candidates)
-      // console.log("End of campaignButton states check, taskCreation, createCampaign.js")
+    taskCreation = (title, companyName, candidates) => {
       var i = 0
       for(i=0;i<this.state.candidatesMain.length; i++) {
           firebase.firestore().collection('users').where("email","==",this.state.candidatesMain[i].toLocaleLowerCase())
@@ -87,8 +105,8 @@ export class createCampaign extends Component {
                   completed: false,
                   title: title,
                   transcript: null,
+                  company: companyName
                   
-
                 });
 
 
@@ -143,7 +161,7 @@ export class createCampaign extends Component {
                     <Button 
                         title = "Submit"
                         color = "#34bc6e"
-                        onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.candidates)}}
+                        onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.companyName, this.state.candidates)}}
                         //style ={{margin: 5}}
                         buttonStyle ={{margin: 5, backgroundColor: '#34bc6e'}}
 
