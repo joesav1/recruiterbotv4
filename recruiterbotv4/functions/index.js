@@ -45,7 +45,7 @@ exports.addSingleRecipientToList = functions.firestore.document(`users/{userList
                     templateId: 'd-c5d6b851e1df4901acc1600e6ed184c8',
                     //substitutionWrappers: ['{{', '}}'],
                     dynamic_template_data: {
-                        subject:  'New role available: ' + doc.get('title'),
+                        subject:  'New role available from ' + doc.get('company') + ': ' + doc.get('title'),
                         //remember to change from email to name here!!
                       name: email
                       // and other custom properties here

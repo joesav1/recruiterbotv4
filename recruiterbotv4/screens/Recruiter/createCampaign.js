@@ -60,11 +60,13 @@ export class createCampaign extends Component {
 
     }
 
-    campaignButton = (title, candidates) => {
+    campaignButton = (title, companyName, candidates) => {
         firebase.firestore().collection('users').doc(this.state.params).collection('campaigns').add({
           title: this.state.title,
           candidates: this.state.candidatesMain,
-          created: new Date().toDateString()
+          created: new Date().toDateString(),
+          company: companyName
+
         })
         
     }
@@ -138,7 +140,7 @@ export class createCampaign extends Component {
                     <Button 
                         title = "Submit"
                         color = "#34bc6e"
-                        onPress = {() => {this.campaignButton(this.state.title, this.state.candidates); this.taskCreation(this.state.title, this.state.companyName, this.state.candidates)}}
+                        onPress = {() => {this.campaignButton(this.state.title, this.state.companyName, this.state.candidates); this.taskCreation(this.state.title, this.state.companyName, this.state.candidates)}}
                         //style ={{margin: 5}}
                         buttonStyle ={{margin: 5, backgroundColor: '#34bc6e'}}
 
