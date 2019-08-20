@@ -49,7 +49,7 @@ export class Campaign extends Component {
 
         return (
             <View>
-                <Swipeout right={swipeoutBtns}>
+                <Swipeout autoClose={true} right={swipeoutBtns}>
                         <TouchableHighlight style={{borderRadius: 10, width:ScreenWidth, height: 110, marginBottom: 2}}  onPress = {() => this.props.navigation.navigate('campaignDetails', {title: this.props.title, candidates: this.props.candidates})}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={{padding:7, justifyContent:"center", alignItems:"center", height: 110, width:ScreenWidth*0.25, backgroundColor:'#1f57a4'}}>

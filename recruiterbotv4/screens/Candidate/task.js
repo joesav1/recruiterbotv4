@@ -61,7 +61,7 @@ export class Task extends Component {
         
         return (
             <View>  
-                <Swipeout right={swipeoutBtns}>
+                <Swipeout autoClose={true} right={swipeoutBtns}>
                     <TouchableHighlight style={{borderRadius: 10, width:ScreenWidth, height: 90, marginBottom: 2}}  onPress = {() => this.completedCheck()}>
                         <View style={{flexDirection: 'row', backgroundColor: '#f7e7e2'}}>
                                 <View style={{padding:7, flexDirection:"column", justifyContent:"center", height: 90, width:ScreenWidth*0.50}}>
