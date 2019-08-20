@@ -85,7 +85,7 @@ export class Signup extends Component {
                                 
                             }).then(firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password))
                             .then(firebase.auth().currentUser.sendEmailVerification())
-                            .then(this.props.navigation.navigate('LoginPage'))
+                            .then(this.props.navigation.navigate('onboarding'))
 
                             console.log("Checking is currentuser exists via sendUseremailauth on signup 222222222222222222222")
                             console.log(firebase.auth().currentUser)

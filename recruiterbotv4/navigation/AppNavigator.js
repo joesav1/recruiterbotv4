@@ -17,6 +17,7 @@ import chatbotHoldingPage from '../screens/chatbot/chatbotHoldingPage';
 import CustomHeader from './CustomHeader';
 import userSettings from '../screens/main/userSettings';
 import moreCandidates from '../screens/Recruiter/moreCandidates';
+import onboarding from '../screens/main/onboarding';
 
 
 
@@ -33,6 +34,14 @@ const Rootstack = createStackNavigator({
         header: <CustomHeader/>
       }
     },
+
+    onboarding: { screen: onboarding,
+      navigationOptions: {
+        header: null
+      } 
+  },
+
+
     
     rHomepage: { screen: rHomepage,
       navigationOptions: {
