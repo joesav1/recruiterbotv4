@@ -59,7 +59,7 @@ export class campaignDetails extends Component {
 
             
       async testButtonTwo() {
-          console.log("test butto ntwo pressed")
+          console.log("test button two pressed")
         var i = 0
         let tokens = []
         let tokens2 = []

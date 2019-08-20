@@ -88,20 +88,6 @@ export class chatbotShell extends Component {
     );
   }
 
-  //do i need this?
-  // renderCustomView = (props) => {
-  //   console.log(props.currentMessage.text)
-  //     return (
-  //       <View>   
-
-
-  //         <Text>Welcome to your interview for the role, role.
-  //         The interview will consist of questionNumber questions. Each question will last 4 minutes. Please do not attempt to copy and paste your answer as this will be flagged. 
-  //         Treat this as a real interview as the Recruiter will be able to watch your responses back.  </Text>
-  //       </View>
-  //     );
-  //   }
-
 
   onSend = (message = []) => {
     this.setState((previousState) => ({
