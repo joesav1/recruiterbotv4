@@ -92,7 +92,13 @@ const Rootstack = createStackNavigator({
       } 
     },
 
-    rolesMain: { screen: rolesMain },
+    rolesMain: { screen: rolesMain,
+      navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent', elevation: 0,
+        shadowOpacity: 0},
+        headerTintColor: 'white'
+      } 
+    },
 
     chatbotHoldingPage: { screen: chatbotHoldingPage,
       navigationOptions: {

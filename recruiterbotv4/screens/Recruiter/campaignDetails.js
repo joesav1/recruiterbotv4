@@ -194,7 +194,7 @@ export class campaignDetails extends Component {
         return (
               <View style={{flexDirection:"column"}}>
                 <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
-                    <Text style={{fontSize: 18, fontWeight: "bold", color:"white"}}> Role: {this.state.titleMain2}</Text>
+                    <Text style={{fontSize: 20, fontWeight: "bold", color:"white", marginRight:7}}> Role: {this.state.titleMain2}</Text>
                     <Icon
                         reverse
                         raised
