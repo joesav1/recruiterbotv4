@@ -78,6 +78,7 @@ export class rHomepage extends Component {
       }
     
       render() {
+
         // console.log("third check that params gives something, rhomepage-js")
         // console.log(this.state.params)
         // console.log("end of third param check")
@@ -98,6 +99,7 @@ export class rHomepage extends Component {
         // console.log("second check that params gives something, rhomepage-js")
         // console.log(this.params)
         // console.log("end of second param check")
+        
 
         return (
               <View style={{flexDirection:"column"}}>

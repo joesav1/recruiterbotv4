@@ -36,6 +36,10 @@ export class Campaign extends Component {
               ),
               backgroundColor: 'red',
               onPress: () => {
+
+                    console.log("==========checking criteria===========")
+                    console.log(this.props.docID)
+
                   console.log("delete pressed ")
                   console.log(this.props.recruiterIDMain)
                   firebase.firestore().collection('users').doc(this.props.recruiterIDMain).collection('campaigns').doc(this.props.docID).delete().then(function() {
@@ -50,7 +54,7 @@ export class Campaign extends Component {
         return (
             <View>
                 <Swipeout autoClose={true} right={swipeoutBtns}>
-                        <TouchableHighlight style={{borderRadius: 10, width:ScreenWidth, height: 110, marginBottom: 2}}  onPress = {() => this.props.navigation.navigate('campaignDetails', {title: this.props.title, candidates: this.props.candidates})}>
+                        <TouchableHighlight style={{borderRadius: 10, width:ScreenWidth, height: 110, marginBottom: 2}}  onPress = {() => this.props.navigation.navigate('campaignDetails', {title: this.props.title, candidates: this.props.candidates, docID: this.props.docID})}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={{padding:7, justifyContent:"center", alignItems:"center", height: 110, width:ScreenWidth*0.25, backgroundColor:'#1f57a4'}}>
                                     <Text style={{textAlign:"center", color: 'white', fontWeight: '600', fontSize:17}}>{this.props.title}</Text>

@@ -153,6 +153,14 @@ export class campaignDetails extends Component {
       }
 
 
+      addMoreCandidates() {
+        console.log("Checking doc IDMain2 ~#############################")
+        console.log(this.state.docIDMain2)
+        this.props.navigation.navigate('moreCandidates', {docIDRecruiter: this.state.docIDMain2})
+
+      }
+
+
 
 
     
@@ -186,7 +194,18 @@ export class campaignDetails extends Component {
         return (
               <View style={{flexDirection:"column"}}>
                 <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
-                    <Text style={{fontSize: 25, fontWeight: "bold", color:"white"}}> Role: {this.state.titleMain2}</Text>
+                    <Text style={{fontSize: 18, fontWeight: "bold", color:"white"}}> Role: {this.state.titleMain2}</Text>
+                    <Icon
+                        reverse
+                        raised
+                        reverseColor = '#79a6f6'
+                        name="plus"
+                        type="font-awesome"
+                        size={16}
+                        color="white"
+                        onPress = {() => this.addMoreCandidates()}
+                  />
+
                 </View>
                 <FlatList  
                         data = {this.state.candidatesTasks.sort((a,b)=> (a.hasOwnProperty('finalScore') ? -1: b.hasOwnProperty('finalScore') ? 1:0))}

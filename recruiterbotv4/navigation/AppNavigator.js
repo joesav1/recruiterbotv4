@@ -16,6 +16,7 @@ import rolesMain from '../screens/Recruiter/roles/rolesMain';
 import chatbotHoldingPage from '../screens/chatbot/chatbotHoldingPage';
 import CustomHeader from './CustomHeader';
 import userSettings from '../screens/main/userSettings';
+import moreCandidates from '../screens/Recruiter/moreCandidates';
 
 
 
@@ -46,6 +47,16 @@ const Rootstack = createStackNavigator({
         shadowOpacity: 0},
         headerTintColor: 'white'
       } 
+    },
+
+    moreCandidates: {
+      screen: moreCandidates,
+              navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent', elevation: 0,
+        shadowOpacity: 0},
+        headerTintColor: 'white'
+      } 
+
     },
 
     campaignDetails: { screen: campaignDetails,
