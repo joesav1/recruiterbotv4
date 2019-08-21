@@ -11,28 +11,30 @@ export class onboarding extends Component {
         super(props)
 
         this.state= {
-            finished: false,
+            finished: true,
         }
 
     }
 
     Done() {
-        <Button
-          title={'Done'}
-          type="clear"
-        //   buttonStyle={{
-        //     backgroundColor: backgroundColor(isLight),
-        //   }}
-          containerViewStyle={{
-            marginVertical: 10,
-            width: 70,
-            //backgroundColor: backgroundColor(isLight),
-          }}
-          textStyle={{ color: '#1D3458' }}
-          //{...props}
-          onPress = {()=> this.setState({finished:true})}
-        />
-        }
+        return (
+            <Button
+            title={'Done'}
+            type="clear"
+            //   buttonStyle={{
+            //     backgroundColor: backgroundColor(isLight),
+            //   }}
+            containerViewStyle={{
+                marginVertical: 10,
+                width: 70,
+                //backgroundColor: backgroundColor(isLight),
+            }}
+            textStyle={{ color: '#1D3458' }}
+            //{...props}
+            onPress = {()=> this.checkFinished()}
+            />
+        )
+    }
 
     checkFinished() {
         if(this.state.finished=true) {
@@ -47,40 +49,40 @@ export class onboarding extends Component {
             //<OnboardingMain/>
             <Onboarding
             //DoneButtonComponent={this.Done}
-            //onDone={this.checkFinished()}
+            onDone={() => this.checkFinished()}
             //DotComponent={Square}
             //NextButtonComponent={Next}
             //SkipButtonComponent={Skip
-            titleStyles={{ color: '1D3458' }} // set default color for the title
+            titleStyles={{ color: '#ffffff' }} // set default color for the title
             
             pages={[
               {
-                backgroundColor: '#ffffff',
+                backgroundColor: '#1D3458',
                 image: <Image source={require('../images/RecruiterPageOne.jpg')} />,
                 title: 'Welcome to IBM Recruit',
                 subtitle: ' ',
                 //titleStyles: { color: '1D3458' }, // overwrite default color
               },
               {
-                backgroundColor: '#ffffff',
+                backgroundColor: '#1D3458',
                 image: <Image source={require('../images/createCampaign.jpg')} />,
                 title: 'Create Campaigns',
                 subtitle: ' ',
               },
               {
-                backgroundColor: '#ffffff',
+                backgroundColor: '#1D3458',
                 image: <Image source={require('../images/campaignDetails.jpg')} />,
                 title: 'View users interview scores',
                 subtitle: " ",
               },
               {
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#1D3458',
                   image: <Image source={require('../images/DeepDive.jpg')} />,
                   title: 'See more about an individual user',
                   subtitle: " ",
                 },
               {
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#1D3458',
                   image: <Image source={require('../images/swipedelete.jpg')} />,
                   title: 'Delete with a simple swipe',
                   subtitle: " ",
