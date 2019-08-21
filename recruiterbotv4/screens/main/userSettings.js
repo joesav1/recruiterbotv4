@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
-import { Icon } from "react-native-elements";
+import { Text, View, StyleSheet, TouchableHighlight, ScrollView, Dimensions } from 'react-native';
+import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
+import { Icon, Input, Button } from "react-native-elements";
+
 import firebase from 'firebase';
 import '@firebase/firestore';
 import { Content } from 'native-base';
 
+
+const ScreenWidth = Dimensions.get('window').width
+const ScreenHeight = Dimensions.get('window').height
 
 export class userSettings extends Component {
     constructor(props) {
@@ -12,8 +17,14 @@ export class userSettings extends Component {
         this.userDetailsSettings = firebase.auth().currentUser
         this.state = {
             recruiterSettings: false,
+            companyTitle : '',
+            firstname:'',
+            surname:'',
+            password: ''
+            
         }
         this.ref = firebase.firestore().collection('users')
+        this.currentUserDetails = firebase.auth().currentUser
 
     }
 
@@ -26,44 +37,180 @@ export class userSettings extends Component {
         })
     }
 
+    changeCompanyTitle() {
+        try {
+            this.ref.doc(this.currentUserDetails.uid).update({
+                company: this.state.companyTitle
+            })
+        } catch {
+            console.log("cant update")
+        }
+    }
+
+    changeFirstname() {
+            try {
+            this.ref.doc(this.currentUserDetails.uid).update({
+                firstname: this.state.firstname
+            })
+        } catch {
+            console.log("cant update")
+        }
+    }
+
+    changeSurname() {
+        try {
+        this.ref.doc(this.currentUserDetails.uid).update({
+            surname: this.state.surname
+        })
+        } catch {
+            console.log("cant update")
+        }
+    }
+
+    changePassword() {
+        try {
+            this.userDetailsSettings.updatePassword(this.state.password).then(function() {
+                console.log("Password updated")
+            }).catch(function(error) {
+                // An error happened.
+              });
+        } catch {
+            console.log("cant update")
+        }
+    }
+
+
+
+    
+
 
 
     render() {
-        if(this.state.recruiterSettings) {
+
             return(
-                <View style={styles.container}>
-                    <TouchableHighlight
-                        style = {styles.option}
-                        onPress = {() => console.log("Pressed")}
-                        >
-                        <Text>Change Company Title</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style = {styles.option}
-                        onPress = {() => console.log("Pressed2")}
-                        >
-                        <Text>Change Personal Details</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style = {styles.option}
-                        onPress = {() => console.log("Pressed3")}
-                        >
-                        <Text>Reset Password</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style = {styles.option}
-                        onPress = {() => console.log("Pressed4")}
-                        >
-                        <Text>About</Text>
-                    </TouchableHighlight>
-                </View>
+                    <ScrollView>
+                        <View style={styles.container}>
+                            {this.state.recruiterSettings && (
+                                <Collapse style={{ borderColor:"#1d3458", borderWidth:1}}>
+                                    <CollapseHeader>
+                                        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", width: ScreenWidth, height: ScreenHeight*0.2, backgroundColor:'#f7e7e2'}}>
+                                            <Text style={{fontSize: 20, fontWeight: "bold", color:"#1d3458"}}>Change Company Title</Text>
+                                        </View>
+                                    </CollapseHeader>
+                                    <CollapseBody style={{flexDirection:"column", alignItems:"center", justifyContent:"center", width: ScreenWidth, backgroundColor:'#f7e7e2'}}>
+                                        <Input
+                                            style={styles.textInputStyle}
+                                            placeholder='New Company Name'
+                                            //leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                                            onChangeText = {companyTitle => this.setState({ companyTitle }) }
+                                            inputStyle ={{margin: 10, color: '#1d3458'}} 
+                                            //value={this.state.companyTitle}
+                                            //errorMessage = 'That email already exists in the system'
+                                        />
+                                        <Button 
+                                            title = "Submit"
+                                            color = "#34bc6e"
+                                            onPress = {() => {this.changeCompanyTitle()}}
+                                            //style ={{margin: 5}}
+                                            buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}}
+
+                                            
+                                        />
+
+                                    </CollapseBody>
+                                </Collapse>
+
+                            )}
+                                <Collapse style={{ borderColor:"#1d3458", borderWidth:1}}>
+                                    <CollapseHeader>
+                                        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", width: ScreenWidth, height: ScreenHeight*0.2, backgroundColor:'#f7e7e2'}}>
+                                            <Text style={{fontSize: 20, fontWeight: "bold", color:"#1d3458"}}>Change Personal Details</Text>
+                                        </View>
+                                    </CollapseHeader>
+                                    <CollapseBody style={{flexDirection:"column", alignItems:"center", justifyContent:"center", width: ScreenWidth, backgroundColor:'#f7e7e2'}}>
+                                        <Input
+                                            style={styles.textInputStyle}
+                                            placeholder='New Firstname'
+                                            //leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                                            onChangeText = {firstname => this.setState({ firstname }) }
+                                            inputStyle ={{margin: 10, color: '#1d3458'}} 
+                                            //value={this.state.firstname}
+                                            //errorMessage = 'That email already exists in the system'
+                                        />
+                                        <Button 
+                                            title = "Submit"
+                                            color = "#34bc6e"
+                                            onPress = {() => {this.changeFirstname()}}
+                                            //style ={{margin: 5}}
+                                            buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}} 
+                                        />
+                                        <Input
+                                            style={styles.textInputStyle}
+                                            placeholder='New Surname'
+                                            //leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                                            onChangeText = {surname => this.setState({ surname }) }
+                                            inputStyle ={{margin: 10, color: '#1d3458'}} 
+                                            //value={this.state.can}
+                                            //errorMessage = 'That email already exists in the system'
+                                        />
+                                        <Button 
+                                            title = "Submit"
+                                            color = "#34bc6e"
+                                            onPress = {() => {this.changeSurname()}}
+                                            //style ={{margin: 5}}
+                                            buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}} 
+                                        />
+                                    </CollapseBody>
+                                </Collapse>
+
+
+
+                                <Collapse style={{ borderColor:"#1d3458", borderWidth:1}}>
+                                    <CollapseHeader>
+                                        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", width: ScreenWidth, height: ScreenHeight*0.2, backgroundColor:'#f7e7e2'}}>
+                                            <Text style={{fontSize: 20, fontWeight: "bold", color:"#1d3458"}}>Change Password</Text>
+                                        </View>
+                                    </CollapseHeader>
+                                    <CollapseBody style={{flexDirection:"column", alignItems:"center", justifyContent:"center", width: ScreenWidth, backgroundColor:'#f7e7e2'}}>
+                                        <Input
+                                            style={styles.textInputStyle}
+                                            placeholder='New Password'
+                                            //leftIcon={{ type: 'font-awesome', name: 'envelope', size:20, color:'white', marginRight:10 }}
+                                            onChangeText = {password => this.setState({ password }) }
+                                            inputStyle ={{margin: 10, color: '#1d3458'}} 
+                                            //value={this.state.companyTitle}
+                                            secureTextEntry={true}
+                                            //errorMessage = 'That email already exists in the system'
+                                        />
+                                        <Button 
+                                            title = "Submit"
+                                            color = "#34bc6e"
+                                            onPress = {() => {this.changePassword()}}
+                                            //style ={{margin: 5}}
+                                            buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}}
+                                        />
+
+                                    </CollapseBody>
+                                </Collapse>
+
+
+
+
+                                <Collapse style={{ borderColor:"#1d3458", borderWidth:1}}>
+                                    <CollapseHeader>
+                                        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", width: ScreenWidth, height: ScreenHeight*0.2, backgroundColor:'#f7e7e2'}}>
+                                            <Text style={{fontSize: 20, fontWeight: "bold", color:"#1d3458"}}>About</Text>
+                                        </View>
+                                    </CollapseHeader>
+                                    <CollapseBody style={{flexDirection:"column", alignItems:"center", justifyContent:"center", width: ScreenWidth, backgroundColor:'#f7e7e2'}}>
+                                        <Text style={{fontSize: 17, fontWeight: "500", color:"#1d3458"}}>{'Not sure what to include here \n hi :)'}</Text>
+                                    </CollapseBody>
+                                </Collapse>
+
+                        </View>
+                    </ScrollView>
             )
-        }
-        return (
-            <View>
-                <Text> Test2</Text>
-            </View>
-        )
+
     }
 }
 
@@ -79,5 +226,14 @@ styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#c9c6c5"
+    },
+    textInputStyle: {
+        //height: 40,
+        borderColor: 'white',
+        borderWidth: 1,
+        marginBottom: 10,
+        width: ScreenWidth*0.8
+        
     }
+
 })

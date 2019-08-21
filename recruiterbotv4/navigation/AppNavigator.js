@@ -115,14 +115,23 @@ const Rootstack = createStackNavigator({
       } 
     },
 
-    userSettings: { screen: userSettings },
-    CustomHeader: { screen: CustomHeader }
-    },{
+    userSettings: { screen: userSettings,
+      navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent', elevation: 0,
+        shadowOpacity: 0},
+        headerTintColor: 'white'
+      } 
+    },
 
+    CustomHeader: { screen: CustomHeader }
+    },
+    
+    {
     cardStyle: {
       backgroundColor: '#1d3458'
       }
-    }    
+    }
+        
   );
 
 const AppNavigator = createAppContainer(Rootstack);

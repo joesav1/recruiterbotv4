@@ -83,7 +83,7 @@ export class CustomHeader extends Component {
                     >
                         <MenuItem onPress={this.settingsPage}>Settings</MenuItem>
                         <MenuItem style={styles.logout} onPress={this.logout}>logout</MenuItem>
-                        <MenuItem style={styles.closeButton} onPress={this.hideMenu} disabled>
+                        <MenuItem style={styles.closeButton} onPress={this.hideMenu}>
                             Close
                         </MenuItem>
                         <MenuDivider />
@@ -138,10 +138,10 @@ const styles = StyleSheet.create({
         borderColor: '#d6d7da',
     },
     logout: {
-        backgroundColor: "#d11208",
+        //backgroundColor: "#d11208",
     },
     closeButton: {
-        backgroundColor: '#3474eb'
+        //backgroundColor: '#3474eb'
 
     }
 })
