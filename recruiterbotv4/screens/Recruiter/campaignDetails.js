@@ -93,16 +93,16 @@ export class campaignDetails extends Component {
 
         for(const subData of tokensMain) {
           if(subData.traits){
-            console.log("####checking subdata.traits###")
-            console.log(subData.traits)
+            // console.log("####checking subdata.traits###")
+            // console.log(subData.traits)
             var tempArrayNumbers = []
-            console.log("@@@checking temparraynumbers@@@")
-            console.log(tempArrayNumbers)
-            console.log("end of temparraynumbers check")
+            // console.log("@@@checking temparraynumbers@@@")
+            // console.log(tempArrayNumbers)
+            // console.log("end of temparraynumbers check")
             for(const traitData of subData.traits) {
-                  console.log("~~~~~~~checking traitData~~~~~~~")
-                  console.log(traitData)
-                  console.log("~~~end of traitdata~~~")
+                  // console.log("~~~~~~~checking traitData~~~~~~~")
+                  // console.log(traitData)
+                  // console.log("~~~end of traitdata~~~")
                   tempArrayNumbers.push(traitData.traitDatapercentile)
             
             }
@@ -144,9 +144,9 @@ export class campaignDetails extends Component {
           }
           tokensNew.push(subData)
         }
-        console.log("MADE it inside generateScore [END]")
-        console.log("CHECKING tokensNew")
-        console.log(tokensNew)
+        // console.log("MADE it inside generateScore [END]")
+        // console.log("CHECKING tokensNew")
+        // console.log(tokensNew)
         
         return tokensNew
 
@@ -186,11 +186,11 @@ export class campaignDetails extends Component {
         // console.log(this.state.titleMain2)
         // console.log("checking what candidateMain 2 gives")
         // console.log(this.state.candidatesMain2)
-        console.log("########################checking candidates tasks 2 ##########################")
-        console.log(this.state.candidatesTasks)
-        console.log("##############end of canddatetasks check###################")
-        console.log("Checking docIDmain2")
-        console.log(this.state.docIDMain2)
+        // console.log("########################checking candidates tasks 2 ##########################")
+        // console.log(this.state.candidatesTasks)
+        // console.log("##############end of canddatetasks check###################")
+        // console.log("Checking docIDmain2")
+        // console.log(this.state.docIDMain2)
         return (
               <View style={{flexDirection:"column"}}>
                 <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>
