@@ -58,32 +58,32 @@ export class onboarding extends Component {
             pages={[
               {
                 backgroundColor: '#1D3458',
-                image: <Image source={require('../images/RecruiterPageOne.jpg')} />,
+                image: <Image source={require('../images/RecruiterPageOne.png')} />,
                 title: 'Welcome to IBM Recruit',
                 subtitle: ' ',
                 //titleStyles: { color: '1D3458' }, // overwrite default color
               },
               {
                 backgroundColor: '#1D3458',
-                image: <Image source={require('../images/createCampaign.jpg')} />,
+                image: <Image source={require('../images/createCampaign.png')} />,
                 title: 'Create Campaigns',
                 subtitle: ' ',
               },
               {
                 backgroundColor: '#1D3458',
-                image: <Image source={require('../images/campaignDetails.jpg')} />,
+                image: <Image source={require('../images/campaignDetails.png')} />,
                 title: 'View users interview scores',
                 subtitle: " ",
               },
               {
                   backgroundColor: '#1D3458',
-                  image: <Image source={require('../images/DeepDive.jpg')} />,
+                  image: <Image source={require('../images/DeepDive.png')} />,
                   title: 'See more about an individual user',
                   subtitle: " ",
                 },
               {
                   backgroundColor: '#1D3458',
-                  image: <Image source={require('../images/swipedelete.jpg')} />,
+                  image: <Image source={require('../images/swipedelete.png')} />,
                   title: 'Delete with a simple swipe',
                   subtitle: " ",
                   //onDone: this.props.navigation.navigate('LoginPage')
