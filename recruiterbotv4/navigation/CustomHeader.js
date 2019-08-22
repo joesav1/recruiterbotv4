@@ -63,14 +63,13 @@ export class CustomHeader extends Component {
     render() {
         if(this.userDetailsHeader == null) {
             this.logout
-        }
-        if(this.userDetailsHeader == null) {
             return (
-                <View style = {styles.container3}>
-                    <Text style = {{flex: 2, color: 'white'}} > IBM Recruit </Text>
+                <View style = {styles.container}>
+                    <Image source={require('../screens/images/IBMRecruitLogo.png')} />
                 </View>
             )
-        }
+        } else {
+
         return (
             <View style = {styles.container}>
                 <Image source={require('../screens/images/IBMRecruitLogo.png')} />
@@ -91,8 +90,9 @@ export class CustomHeader extends Component {
                     </Menu>
                 </View>
             </View>
-        )
-    }
+            )
+        }
+    }   
 }
 
 

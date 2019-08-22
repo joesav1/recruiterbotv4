@@ -177,6 +177,15 @@ export class LoginPage extends Component {
                             onPress = {() => this.Login(this.state.email, this.state.password)}
                             buttonStyle ={{margin: 10, backgroundColor:'#19273c'}}
                         />
+                        <Text style={{margin: 20, textAlign: "center", fontSize: 20, color: 'white'}}>
+                            OR
+                        </Text>
+                        <Button 
+                            title = "Sign-up"
+                            color = '#19273c'
+                            onPress = {() => this.props.navigation.navigate('Signup')}
+                            buttonStyle ={{backgroundColor: '#19273c'}}
+                        />
                         
                 </View>
             </View>

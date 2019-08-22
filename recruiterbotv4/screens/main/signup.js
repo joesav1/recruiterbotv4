@@ -266,7 +266,7 @@ export class Signup extends Component {
                         <View>{this.companyName()}</View>
 
                     </View>
-                    <View style={{flex:0.4, width: ScreenWidth*0.6}}>
+                    <View style={{flex:0.4, width: ScreenWidth*0.6,marginTop:15}}>
                         <Button 
                             title = "Sign-up"
                             color = '#19273c'

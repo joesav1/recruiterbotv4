@@ -31,8 +31,8 @@ export class cHoldingPage extends Component {
                     Role: {this.state.titleMain}
                 </Text>
                 <Text
-                    style={{fontSize: 20, fontWeight: "400", color:"white"}}>
-                    {`You will have 30 minutes to answer all the questions. Please do not exit the app or attempt to refresh the page.\n\nYour interview will begin once your press the 'Start' button`}
+                    style={{fontSize: 20, fontWeight: "400", color:"white", textAlign:"center"}}>
+                    {`You will have 30 minutes to answer 5 questions. Please do not exit the app or attempt to refresh the page.\n\nYour interview will begin once your press the 'Start' button`}
                     
                 </Text>
                 <View style={{flex:0.4, width: ScreenWidth*0.6, margin: 30}}>
