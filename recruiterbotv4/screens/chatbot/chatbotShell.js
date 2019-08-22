@@ -102,7 +102,7 @@ export class chatbotShell extends Component {
     this.setState({
       context: response.context,
     })
-    let mainText = ['Welcome to your interview', 'This will be line 2', 'this will be line 3',"\n\n"]
+    let mainText = ['Welcome to your interview', "\n", 'If you would like to return to the previous page you may do so now, please do not attempt to return during the interview',"\n"]
     let message = {
       _id: Math.round(Math.random() * 1000000).toString(),
       text: mainText.join("\n") + response.output.text.join(' '),
