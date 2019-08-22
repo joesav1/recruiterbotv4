@@ -12,6 +12,7 @@ import AppNavigator from './../../navigation/AppNavigator';
 
 
 const ScreenWidth = Dimensions.get('window').width
+const ScreenHeight = Dimensions.get('window').height
 
 export class LoginPage extends Component {
     constructor(props) {
@@ -71,7 +72,7 @@ export class LoginPage extends Component {
                         console.log("End of res.user check - js")
                         
                         //NOTE! REMEMBER TO CHANGE THIS TO FALSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        if(res.user.emailVerified == true) {
+                        if(res.user.emailVerified == false) {
                             console.log("Made it inside the res.user.emailVerified loop")
                             this.setModalVisible(true)
                         } else {
@@ -135,18 +136,19 @@ export class LoginPage extends Component {
                                     onRequestClose={() => {
                                         Alert.alert('Modal has been closed.');
                                     }}>
-                                    <View style={styles.container2}>
-                                        <View >
-                                        <Text>Please verify your email</Text>
+                                        <View style={styles.modalContainer}>
+                                            <View >
+                                            <Text style={{margin: 20, textAlign: "center", fontSize: 20, color: 'white'}}>Please verify your email</Text>
 
-                                        <Button
-                                            title = "Close"
-                                            onPress={() => {
-                                            this.setModalVisible(!this.state.modalVisible);
-                                            }}/>
-                                            
+                                            <Button
+                                                buttonStyle ={{backgroundColor: '#f7e7e2', width: ScreenWidth*0.6}}
+                                                title = "Close"
+                                                onPress={() => {
+                                                this.setModalVisible(!this.state.modalVisible);
+                                                }}/>
+                                                
+                                            </View>
                                         </View>
-                                    </View>
                                     </Modal>
                 </View>
                 <View style={styles.subContainer}>
@@ -210,6 +212,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     modalContainer: {
-
+        width: ScreenWidth,
+        height: ScreenHeight,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#19273c"
     }
   });
