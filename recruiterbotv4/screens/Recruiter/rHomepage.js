@@ -17,7 +17,7 @@ export class rHomepage extends Component {
         //Dont delete this one
         var testingUser = firebase.auth().currentUser
 
-        this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('campaigns')
+        this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('campaigns').orderBy('created')
         //.orderBy('created') add this to end of line
 
 

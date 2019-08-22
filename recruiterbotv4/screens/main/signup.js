@@ -42,12 +42,53 @@ export class Signup extends Component {
             firstname: '',
             surname: '',
             company:'',
+            signupTrigger: false,
             //isRecruiterMain: false,
 
             };
         }
+
+        promptMessagePassword() {
+            if((this.state.password.length<6) && (this.state.signupTrigger == true)) {
+                return(
+                  <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Passwords must be 6 characters of longer</Text>
+                )} else {
+                  return (
+                    null
+                  )
+              }
+        
+            }
+
+        promptMessageOther() {
+            if((this.state.signupTrigger == true) && ((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.isRecruiter==true)) ||(this.state.email.length<1))) {
+                    return(
+                      <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Fields cannot be empty!</Text>
+                    )} else {
+                      return (
+                        null
+                      )
+                  }
+            
+                }
+        
     
         Signup = (email,password) => {
+            this.setState({signupTrigger: true})
+            if(this.state.password.length<6) {
+                this.promptMessagePassword()
+                return null
+            }
+
+            if((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.isRecruiter==true)) ||(this.state.email.length<1)) {
+                this.promptMessageOther()
+                return null
+            }
+
+
+
+            
+
             try {
 
                 //this.isRecruiterMain = false
@@ -105,8 +146,8 @@ export class Signup extends Component {
 
 
                 
-                } catch(error) {
-                console.log(error.toString(error))
+                } catch {
+                console.log("couldnt login")
     
             };
         }
@@ -158,6 +199,9 @@ export class Signup extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.subContainer}>
+
+                    <View>{this.promptMessageOther()}</View>
+
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Firstname'
@@ -189,6 +233,8 @@ export class Signup extends Component {
                         secureTextEntry={true}
                         //errorMessage = 'Password must be at least 6 characters long'
                     />
+                    <View>{this.promptMessagePassword()}</View>
+
                 
                     <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10, marginBottom:25}}>
                         < CheckBox
