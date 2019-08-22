@@ -44,6 +44,9 @@
       "messagingSenderId": "844724266967",
       "appId": "1:844724266967:web:aaa04b2f01bfd050"
       }
+    },
+    "android" : {
+      "package":"com.joesavidge.ibmrecruit"
     }
   }
 }
