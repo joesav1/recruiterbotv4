@@ -150,7 +150,7 @@ export class LoginPage extends Component {
                                     </Modal>
                 </View>
                 <View style={styles.subContainer}>
-                    <View>{this.promptMessagePassword()}</View>
+                    
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Email'
@@ -169,6 +169,7 @@ export class LoginPage extends Component {
                         //errorMessage = 'Password must be at least 6 characters long'
                     />
                 </View>
+                <View>{this.promptMessagePassword()}</View>
                 <View style={{flex:0.4, width: ScreenWidth*0.6, margin: 30}}>
                         <Button 
                             title = "Login"

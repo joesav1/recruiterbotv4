@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Dimensions, PixelRatio} from 'react-native'
+import { Text, View, TextInput, StyleSheet, Dimensions, PixelRatio, Image} from 'react-native'
 import { YellowBox } from 'react-native';
 
 
@@ -215,6 +215,8 @@ export class Signup extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.subContainer}>
+
+                    <Image source={require('../images/IBMRecruitLogo.png')} style={{marginBottom:20}} />
 
                     <View>{this.promptMessageOther()}</View>
 

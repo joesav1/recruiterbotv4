@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Modal, TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet, Modal, TouchableHighlight, Image, Dimensions } from 'react-native';
 import Menu, {MenuItem, MenuDivider} from 'react-native-material-menu';
 
 import firebase from 'firebase';
@@ -7,6 +7,10 @@ import '@firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { Button , Icon } from 'react-native-elements';
+
+const ScreenWidth = Dimensions.get('window').width
+const ScreenHeight = Dimensions.get('window').height
+
 export class CustomHeader extends Component {
     constructor(props) {
         super(props);
@@ -69,7 +73,7 @@ export class CustomHeader extends Component {
         }
         return (
             <View style = {styles.container}>
-                <Text style ={{flex:2, color:"white"}} > IBM Recruit </Text>
+                <Image source={require('../screens/images/IBMRecruitLogo.png')} />
                 <View style = {styles.icon}>
                     <Menu style={styles.menu}
                         ref={this.setMenuRef}
@@ -98,8 +102,8 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: 'center',
-        paddingTop: 38,
-        paddingLeft: 10,
+        paddingTop: 35,
+        paddingLeft: 15,
         paddingBottom: 15,
         borderWidth: 0.5,
         backgroundColor: '#19273c',
@@ -108,6 +112,8 @@ const styles = StyleSheet.create({
         shadowOffset:{  width: 10,  height: 10,  },
         shadowColor: 'black',
         shadowOpacity: 1.0,
+        //height: ScreenHeight*0.1,
+        width: ScreenWidth
     },
 
     container3: {
