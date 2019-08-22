@@ -25,10 +25,23 @@ export class LoginPage extends Component {
             email: '',
             password: '',
             modalVisible: false,
+            loginTrigger: false,
             //isRecruiter: false,
 
             };
         }
+
+        promptMessagePassword() {
+            if(this.state.loginTrigger == true) {
+                return(
+                  <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Email or Password is incorrect</Text>
+                )} else {
+                  return (
+                    null
+                  )
+              }
+        
+            }
         
 
 
@@ -43,7 +56,12 @@ export class LoginPage extends Component {
 
                 firebase
                     .auth()
-                    .signInWithEmailAndPassword(email, password)
+                    .signInWithEmailAndPassword(email, password).catch(error => {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        this.setState({loginTrigger: true})
+                        console.log(error);})
                     .then(res => {
                         // console.log(res.user.email)
                         console.log("checking what res gives")
@@ -85,7 +103,9 @@ export class LoginPage extends Component {
                     }
 
     
-                });
+                }).catch(error => {
+                    // Handle Errors here.
+                    console.log(error);});
 
 
 
@@ -130,6 +150,7 @@ export class LoginPage extends Component {
                                     </Modal>
                 </View>
                 <View style={styles.subContainer}>
+                    <View>{this.promptMessagePassword()}</View>
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Email'
