@@ -43,6 +43,7 @@ export class Signup extends Component {
             surname: '',
             company:'',
             signupTrigger: false,
+            emailTrigger: false,
             //isRecruiterMain: false,
 
             };
@@ -51,7 +52,7 @@ export class Signup extends Component {
         promptMessagePassword() {
             if((this.state.password.length<6) && (this.state.signupTrigger == true)) {
                 return(
-                  <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Passwords must be 6 characters of longer</Text>
+                  <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Passwords must be 6 characters or longer</Text>
                 )} else {
                   return (
                     null
@@ -71,6 +72,17 @@ export class Signup extends Component {
                   }
             
                 }
+
+
+        promptMessageEmail() {
+            if(this.state.emailTrigger==true) {
+                    return(
+                        <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Email or Password badly formatted</Text>
+                    ) 
+            } else {
+                return null
+            }
+        }
         
     
         Signup = (email,password) => {
@@ -94,7 +106,9 @@ export class Signup extends Component {
                 //this.isRecruiterMain = false
                 firebase 
                     .auth()
-                    .createUserWithEmailAndPassword(email,password)
+                    .createUserWithEmailAndPassword(email,password).catch(error => {
+                        this.setState({emailTrigger:true})
+                        console.log(error);})
                     .then(user => {
                         console.log("user created -js")
                         this.ref.doc(user.user.uid).set({
@@ -141,7 +155,9 @@ export class Signup extends Component {
 
                            
                         
-                    })
+                    }).catch(error => {
+                        // Handle Errors here.
+                        console.log(error);});
 
 
 
@@ -233,6 +249,7 @@ export class Signup extends Component {
                         secureTextEntry={true}
                         //errorMessage = 'Password must be at least 6 characters long'
                     />
+                    <View>{this.promptMessageEmail()}</View>
                     <View>{this.promptMessagePassword()}</View>
 
                 
