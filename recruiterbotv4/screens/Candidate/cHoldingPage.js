@@ -25,12 +25,6 @@ export class cHoldingPage extends Component {
     }
 
     render() {
-        console.log("Checking if params gives me anything related - choldingpage")
-        console.log(this.state.titleMain)
-        console.log("end of this.state.title check")
-        
-        console.log(this.state.docIDMain)
-        console.log("end of check on this.state.params, cHoldingPage")
         return (
             <View style={styles.container}>
                 <Text style={{fontSize: 35, fontWeight: "bold", color:"white", marginBottom: 10}}>

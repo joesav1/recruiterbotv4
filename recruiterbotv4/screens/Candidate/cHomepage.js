@@ -13,10 +13,6 @@ export class cHomepage extends Component {
 
         //Dont get rid of this one
         let testingUser = firebase.auth().currentUser
-        // console.log("chomepage! CHecking if testing user exists 1")
-        // console.log(testingUser)
-        // console.log("chonmepage! ENd of test")
-
         this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
 
         this.state ={
@@ -57,9 +53,6 @@ export class cHomepage extends Component {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              console.log("Checking for a user - chomepage")
-              console.log(user.user)
-              console.log("End of user check chomepage-js")
               this.setState({ loading: false, authenticated: true });
             } else {
               this.setState({ loading: false, authenticated: false });
@@ -76,7 +69,7 @@ export class cHomepage extends Component {
     render() {
 
         if(this.state.loading) {
-            console.log("nobody is logged in cHomepage -js")
+
             return null;
         }
 
@@ -85,9 +78,7 @@ export class cHomepage extends Component {
         }
 
 
-        // console.log("first check that params gives something, cHomepage-js")
-        // console.log(this.state.params)
-        // console.log("end of first param check")
+
         return (
             <View style={{flexDirection:"column"}}>
                 <View style={{flexDirection:"row", alignItems:"center", margin:10, marginBottom: 20}}>

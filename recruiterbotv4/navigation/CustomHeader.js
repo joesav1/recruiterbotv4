@@ -33,7 +33,6 @@ export class CustomHeader extends Component {
 
       settingsPage = () => {
           this._menu.hide();
-          console.log("The menu has been hidden");
           this.props.navigation.navigate('userSettings');
           
       }
@@ -61,9 +60,6 @@ export class CustomHeader extends Component {
         if(this.userDetailsHeader == null) {
             this.logout
         }
-        // console.log("HEADER checking if userDetailsHeader exists")
-        // console.log(this.userDetailsHeader)
-        // console.log("End of HEADER check on userdetailsheader")
         if(this.userDetailsHeader == null) {
             return (
                 <View style = {styles.container3}>
