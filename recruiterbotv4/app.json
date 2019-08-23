@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "recruiterbotv4",
-    "slug": "recruiterbotv4",
+    "name": "IBMRecruit",
+    "slug": "IBMRecruit",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
