@@ -91,12 +91,10 @@ export class Signup extends Component {
             if(this.state.password.length<6) {
                 this.promptMessagePassword()
                 return null
-            }
-
-            if((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.checked==true)) ||(this.state.email.length<1)) {
+            } else if((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.checked==true)) ||(this.state.email.length<1)) {
                 this.promptMessageOther()
                 return null
-            }
+            } else {
 
 
 
@@ -129,27 +127,27 @@ export class Signup extends Component {
                             }).catch(error => {
                                 console.log(error);
                             }).then(firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password))
-                            .then(firebase.auth().currentUser.sendEmailVerification())
+                            .then(firebase.auth().currentUser.sendEmailVerification()).then(firebase.auth().signOut().catch(error => {
+                                console.log(error);
+                            }))
                             .then(res => {
                                 console.log("Entering the pre-onboarding function")
                                 if(this.state.checked==true) {
-                                    ("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
+                                    console.log("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
+                                    console.log(this.state.checked)
+                                    // firebase.auth().signOut().catch(error => {
+                                    //     console.log(error);
+                                    // })
 
-                                this.props.navigation.navigate('onboarding')}
+                                    this.props.navigation.navigate('onboarding')}
                                 else {
                                     console.log("~~~~~~~~~~~~checking if ever reach singup loginpage navigation~~~~~~~~~~")
                                     console.log(this.state.checked)
+                                    // firebase.auth().signOut().catch(error => {
+                                    //     console.log(error);
+                                    // })
                                     this.props.navigation.navigate('LoginPage') }
                             });
-
-
-                            console.log("Checking is currentuser exists via sendUseremailauth on signup 222222222222222222222")
-                            console.log(firebase.auth().currentUser)
-                            console.log("end of check for user 2222222 ")
-
-                            console.log("checking what recruiter check gives 2 -js")
-                            console.log(this.isRecruiterMain)
-                            console.log("End of recruiterCheck test 2 -js")
 
 
 
@@ -166,7 +164,8 @@ export class Signup extends Component {
                 } catch {
                 console.log("couldnt login")
     
-            };
+             };
+          }
         }
 
         companyName() {
