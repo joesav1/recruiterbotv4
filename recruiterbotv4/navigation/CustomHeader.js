@@ -15,10 +15,15 @@ export class CustomHeader extends Component {
     constructor(props) {
         super(props);
 
-        this.userDetailsHeader = firebase.auth().currentUser
+        //this.userDetailsHeader = firebase.auth().currentUser
         this.state = {
             isLoggedin: false,
+            userDetails: null,
         }
+    }
+
+    async componentDidMount() {
+        await this.setState({userDetails:firebase.auth().currentUser})
     }
 
     _menu = null
@@ -36,32 +41,55 @@ export class CustomHeader extends Component {
       };
 
       settingsPage = () => {
-          this._menu.hide();
-          this.props.navigation.navigate('userSettings');
+          try {
+            this._menu.hide();
+            this.props.navigation.navigate('userSettings')
+          } catch {
+            console.log("Problem with settings")
+          }
           
       }
 
-      logout = () => {
+      logout = async() => {
+        try {
           this._menu.hide();
+          //this.setState({isLoggedin: false})
         //   firebase.auth().signOut().catch(function(error) {
         //       console.log("An error occured")
         //   })
         //     console.log("Signout succesful")
         //     this.props.navigation.navigate('LoginPage')
-        firebase.auth().signOut().then(function() {
-            console.log('Signed Out');
-          }, function(error) {
-            console.error('Sign Out Error', error);
-          }).then(
-              console.log("~~~~~~~~~~~~~~signout successful~~~~~~~~~~~"),
-              this.props.navigation.navigate('LoginPage')
-          )
+        const logoutFunction = await firebase.auth().signOut().catch(error => {
+            console.log(error);
+        })
+        
+        await this.setState({userDetails: firebase.auth().currentUser})
+
+        console.log("Checking current user in the header AFTER logout")
+        await console.log(this.state.currentUser)
+
+        const LPNav = await this.props.navigation.navigate('LoginPage')
+    } catch {
+        console.log("Cant logout")
+    }
+
+        
+        
+        
+        // .then(function() {
+        //     console.log('Signed Out');
+        //   }, function(error) {
+        //     console.error('Sign Out Error', error);
+        //   }).then(
+        //       console.log("~~~~~~~~~~~~~~signout successful~~~~~~~~~~~"),
+        //       this.props.navigation.navigate('LoginPage')
+        //   )
       }
 
     
 
     render() {
-        if(this.userDetailsHeader == null) {
+        if((this.state.userDetails == null)||(typeof(this.state.userDetails)=='undefined')) {
             this.logout
             return (
                 <View style = {styles.container}>

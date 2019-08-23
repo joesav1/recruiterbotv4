@@ -44,6 +44,7 @@ export class Signup extends Component {
             company:'',
             signupTrigger: false,
             emailTrigger: false,
+            checked: false
             //isRecruiterMain: false,
 
             };
@@ -62,7 +63,7 @@ export class Signup extends Component {
             }
 
         promptMessageOther() {
-            if((this.state.signupTrigger == true) && ((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.isRecruiter==true)) ||(this.state.email.length<1))) {
+            if((this.state.signupTrigger == true) && ((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.checked==true)) ||(this.state.email.length<1))) {
                     return(
                       <Text style={{margin: 3, fontSize: 12, color: 'white'}}>Fields cannot be empty!</Text>
                     )} else {
@@ -92,7 +93,7 @@ export class Signup extends Component {
                 return null
             }
 
-            if((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.isRecruiter==true)) ||(this.state.email.length<1)) {
+            if((this.state.firstname.length<1) || (this.state.surname.length<1) || ((this.state.company.length<1) && (this.state.checked==true)) ||(this.state.email.length<1)) {
                 this.promptMessageOther()
                 return null
             }
@@ -124,23 +125,23 @@ export class Signup extends Component {
 
                             //remember here to use doc and not function(doc)
                             firebase.firestore().collection('users').doc(user.user.uid).get().then(doc => {
-                                // console.log("checking what doc gives -js")
-                                // console.log(doc.data())
-                                // console.log("End of doc check -js")
-                                const getFullDoc = doc.data()
-                                const isRecruiterMainMain = getFullDoc.isRecruiter
-                                // console.log("checking what recruiter check gives -js")
-                                // console.log(this.isRecruiterMain)
-                                // console.log("End of recruiterCheck test -js")
-                                if(isRecruiterMainMain) {
-                                    this.testDatabaseButton()
-                                } else {
-                                    console.log("Recruiter is not ticked")
-                                }
-                                
+                                const getFullDoc = doc.data()                                
+                            }).catch(error => {
+                                console.log(error);
                             }).then(firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password))
                             .then(firebase.auth().currentUser.sendEmailVerification())
-                            .then(this.props.navigation.navigate('onboarding'))
+                            .then(res => {
+                                console.log("Entering the pre-onboarding function")
+                                if(this.state.checked==true) {
+                                    ("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
+
+                                this.props.navigation.navigate('onboarding')}
+                                else {
+                                    console.log("~~~~~~~~~~~~checking if ever reach singup loginpage navigation~~~~~~~~~~")
+                                    console.log(this.state.checked)
+                                    this.props.navigation.navigate('LoginPage') }
+                            });
+
 
                             console.log("Checking is currentuser exists via sendUseremailauth on signup 222222222222222222222")
                             console.log(firebase.auth().currentUser)
@@ -189,8 +190,13 @@ export class Signup extends Component {
 
         async setRecruiter() {
             try {
-                recruiterSwitch = !this.state.isRecruiter
-                await this.setState({isRecruiter: recruiterSwitch})
+                if(this.state.checked == true) {
+                    await this.setState({isRecruiter: true})
+                } else if(this.state.checked == false) {
+                    await this.setState({isRecruiter: false})   
+                }
+                
+                
             } catch(error) {
                 console.log("Setrecruiter isnt initialised -js")
             }
