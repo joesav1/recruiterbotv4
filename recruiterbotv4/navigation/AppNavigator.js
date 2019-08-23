@@ -18,6 +18,8 @@ import CustomHeader from './CustomHeader';
 import userSettings from '../screens/main/userSettings';
 import moreCandidates from '../screens/Recruiter/moreCandidates';
 import onboarding from '../screens/main/onboarding';
+import adminHomepage from '../screens/main/adminPortal/adminHomepage';
+
 
 
 
@@ -40,6 +42,12 @@ const Rootstack = createStackNavigator({
         header: null
       } 
   },
+
+    adminHomepage: { screen: adminHomepage,
+      navigationOptions: {
+        header: null
+      } 
+    },
 
 
     

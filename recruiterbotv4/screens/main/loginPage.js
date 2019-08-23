@@ -65,8 +65,8 @@ export class LoginPage extends Component {
                         console.log(error);})
                     .then(res => {
                         // console.log(res.user.email)
-                        console.log("checking what res gives")
-                        console.log(res)
+                        // console.log("checking what res gives")
+                        // console.log(res)
                         // console.log("Checking res.user.uid")
                         // console.log(res.user.uid)
                         console.log("End of res.user check - js")
@@ -83,6 +83,7 @@ export class LoginPage extends Component {
                             // console.log("End of doc check -js")
                             const getFullDoc = doc.data()
                             const isRecruiterMainMain = getFullDoc.isRecruiter
+                            const isAdmin = getFullDoc.isAdmin
                             // console.log("checking what recruiter check gives -js")
                             // console.log(this.isRecruiterMain)
                             // console.log("End of recruiterCheck test -js")
@@ -95,6 +96,8 @@ export class LoginPage extends Component {
                                 // console.log("End of res.user.uid check -js")
                                 this.props.navigation.navigate('rHomepage', {testUID: res.user.uid})
                                 }
+                            }else if(isAdmin){
+                                this.props.navigation.navigate('adminHomepage');
                             } else {
                                 // console.log("Recruiter is not ticked, so navogating to cHomepage!")
                                 this.props.navigation.navigate('cHomepage', {testUID: res.user.uid})
