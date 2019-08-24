@@ -40,9 +40,6 @@ export class createCampaign extends Component {
 
     submitAndClear = (candidate) => {
       this.state.candidatesMain.push(candidate)
-      console.log("checking the add candidate button actually adds a candidate")
-      console.log(this.state.candidatesMain)
-      console.log("end of candidatesMian check")
       this.setState({placeholderCandidate: this.state.candidates})
       this.setState({candidates: null})
       
@@ -78,7 +75,6 @@ export class createCampaign extends Component {
             .get()
             .then(function(querySnapshot) {
               querySnapshot.forEach(function(doc) {
-                console.log(doc.id, '=>', doc.data())
                 firebase.firestore().collection('users').doc(doc.id).collection('tasks').add({
                   completed: false,
                   title: title,

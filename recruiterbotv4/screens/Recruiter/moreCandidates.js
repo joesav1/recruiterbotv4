@@ -44,8 +44,6 @@ export class moreCandidates extends Component {
   
 
     render() {
-        console.log("======checking docIDrecruiter2============")
-        console.log(this.state.docIDRecruiter2)
         return (
             <View style={styles.container}>
               <View style={styles.subContainer}>

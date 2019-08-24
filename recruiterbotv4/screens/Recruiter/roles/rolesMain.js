@@ -32,8 +32,6 @@ export class rolesMain extends Component {
     // </View>
 
     render() {
-        console.log("==========checking mainProps=============")
-        console.log(this.state.mainProps)
         return (
             <ScrollView>
                 <View style={{flexDirection:"column", paddingTop:15}}>

@@ -20,10 +20,6 @@ personalityRequest = (input) => {
         .then((response) => response.json())
         .then((responseJson) => {
       
-        //   console.log("Checking reponseJson personality.js")
-        //   console.log(responseJson)
- 
-        //   console.log("END OF RESPONSE JSON CHECK personality.js")
           return responseJson;
         })
         .catch((error) => {

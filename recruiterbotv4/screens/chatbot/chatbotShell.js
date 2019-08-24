@@ -15,9 +15,6 @@ export class chatbotShell extends Component {
 
     //Dont get rid of this one
     let testingUser = firebase.auth().currentUser
-    console.log("chtbotshell! CHecking if testing user exists 1")
-    console.log(testingUser)
-    console.log("chatbotshell! ENd of test")
 
     this.ref = firebase.firestore().collection('users').doc(testingUser.uid).collection('tasks')
 
@@ -49,9 +46,6 @@ export class chatbotShell extends Component {
   }
 
   render() {
-    // console.log("CHecking if docIDMAIN works, chatbotshell.js")
-    // console.log(this.state.docIDMAIN)
-    // console.log("End of docidmain check")
 
     return (
       

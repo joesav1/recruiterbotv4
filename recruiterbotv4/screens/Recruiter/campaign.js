@@ -37,11 +37,7 @@ export class Campaign extends Component {
               backgroundColor: 'red',
               onPress: () => {
 
-                    console.log("==========checking criteria===========")
-                    console.log(this.props.docID)
 
-                  console.log("delete pressed ")
-                  console.log(this.props.recruiterIDMain)
                   firebase.firestore().collection('users').doc(this.props.recruiterIDMain).collection('campaigns').doc(this.props.docID).delete().then(function() {
                     console.log("Document successfully deleted!");
                 }).catch(function(error) {
