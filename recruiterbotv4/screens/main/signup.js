@@ -128,42 +128,40 @@ export class Signup extends Component {
                             console.log("USER ADDED is working -js")
                             console.log(user.user.uid)
 
-                            //remember here to use doc and not function(doc)
-                            firebase.firestore().collection('users').doc(user.user.uid).get().then(doc => {
-                                const getFullDoc = doc.data()                                
-                            }).catch(error => {
-                                console.log(error);
-                            }).then(firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password))
-                            .then(firebase.auth().currentUser.sendEmailVerification()).then(firebase.auth().signOut().catch(error => {
-                                console.log(error);
-                            }))
-                            .then(res => {
-                                console.log("Entering the pre-onboarding function")
-                                if(this.state.isRecruiter==true) {
-                                    console.log("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
-                                    console.log(this.state.checked)
-                                    // firebase.auth().signOut().catch(error => {
-                                    //     console.log(error);
-                                    // })
+                            console.log("3333333333333333333333333333333333333333333333333333333333333")
+                            console.log(firebase.auth().currentUser)
+                            console.log("333333333333333333333333333333333333333333333333333333333333333333")
+                            firebase.auth().currentUser.sendEmailVerification()
 
-                                    this.props.navigation.navigate('onboarding')}
-                                else {
-                                    console.log("~~~~~~~~~~~~checking if ever reach singup loginpage navigation~~~~~~~~~~")
-                                    console.log(this.state.checked)
-                                    // firebase.auth().signOut().catch(error => {
-                                    //     console.log(error);
-                                    // })
-                                    this.props.navigation.navigate('LoginPage') }
-                            });
-
-
-
-
-                           
+                            this.ref.doc(user.user.uid).collection('tasks').add({
+                                completed: false,
+                                title: 'Example Task',
+                                transcript: null,
+                                company: 'Example Company',
+                                created: new Date().toDateString()
+                            })                        
                         
                     }).catch(error => {
                         // Handle Errors here.
-                        console.log(error);});
+                        console.log(error);})
+                    .then(res => {
+                            console.log("Entering the pre-onboarding function")
+                            if(this.state.isRecruiter==true) {
+                                console.log("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
+                                console.log(this.state.checked)
+                                // firebase.auth().signOut().catch(error => {
+                                //     console.log(error);
+                                // })
+
+                                this.props.navigation.navigate('onboarding')}
+                            else if(this.state.isRecruiter==false) {
+                                console.log("~~~~~~~~~~~~checking if ever reach singup loginpage navigation~~~~~~~~~~")
+                                console.log(this.state.checked)
+                                // firebase.auth().signOut().catch(error => {
+                                //     console.log(error);
+                                // })
+                                this.props.navigation.navigate('LoginPage') }
+                    });
 
 
 
