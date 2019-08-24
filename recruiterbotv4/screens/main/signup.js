@@ -49,9 +49,6 @@ export class Signup extends Component {
 
             };
 
-            console.log("*********************main page************************")
-            console.log(this.state.isRecruiter)
-            console.log("******************************************************")
         }
 
         promptMessagePassword() {
@@ -113,10 +110,6 @@ export class Signup extends Component {
                         this.setState({emailTrigger:true})
                         console.log(error);})
                     .then(user => {
-                        console.log("user created -js")
-                        console.log("yyyyyyyyyyyyyyyyyyyyyyyyyCHECKING RECRUITERyyyyyyyyyyyyyyyyyyyyyyyyyy")
-                        console.log(this.state.isRecruiter)
-                        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                         this.ref.doc(user.user.uid).set({
                             email: user.user.email,
                             firstname: this.state.firstname,
@@ -125,12 +118,6 @@ export class Signup extends Component {
                             isRecruiter: this.state.isRecruiter,
                             company: this.state.company
                         });
-                            console.log("USER ADDED is working -js")
-                            console.log(user.user.uid)
-
-                            console.log("3333333333333333333333333333333333333333333333333333333333333")
-                            console.log(firebase.auth().currentUser)
-                            console.log("333333333333333333333333333333333333333333333333333333333333333333")
                             firebase.auth().currentUser.sendEmailVerification()
 
                             this.ref.doc(user.user.uid).collection('tasks').add({
@@ -142,21 +129,15 @@ export class Signup extends Component {
                             })                        
                         
                     }).catch(error => {
-                        // Handle Errors here.
                         console.log(error);})
                     .then(res => {
-                            console.log("Entering the pre-onboarding function")
                             if(this.state.isRecruiter==true) {
-                                console.log("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
-                                console.log(this.state.checked)
                                 // firebase.auth().signOut().catch(error => {
                                 //     console.log(error);
                                 // })
 
                                 this.props.navigation.navigate('onboarding')}
                             else if(this.state.isRecruiter==false) {
-                                console.log("~~~~~~~~~~~~checking if ever reach singup loginpage navigation~~~~~~~~~~")
-                                console.log(this.state.checked)
                                 // firebase.auth().signOut().catch(error => {
                                 //     console.log(error);
                                 // })
@@ -196,9 +177,6 @@ export class Signup extends Component {
 
             try {
                 await this.setState({checked: !this.state.checked})
-                console.log("%%%%%%%%")
-                console.log(this.state.checked)
-                console.log("%%%%%%%%%%%%")
                 if(this.state.checked == true) {
                     await this.setState({isRecruiter: true})
                 } else if(this.state.checked == false) {
@@ -211,10 +189,6 @@ export class Signup extends Component {
             }
         }
 
-        // testDatabaseButton() {
-        //     console.log("Hi from the tdb")
-        //     this.props.navigation.navigate('rHomepage')
-        // }
 
         sendUserEmailAuth() {
             console.log("Checking is currentuser exists via sendUseremailauth on signup")

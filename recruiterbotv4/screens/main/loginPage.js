@@ -19,9 +19,6 @@ export class LoginPage extends Component {
         super(props);
 
         this.userDetails = firebase.auth().currentUser
-        // console.log("Checking userDetails")
-        // console.log(this.userDetails)
-        // console.log("end of userDetails check -js")
         this.state = {
             email: '',
             password: '',
@@ -64,42 +61,25 @@ export class LoginPage extends Component {
                         this.setState({loginTrigger: true})
                         console.log(error);})
                     .then(res => {
-                        // console.log(res.user.email)
-                        // console.log("checking what res gives")
-                        // console.log(res)
-                        // console.log("Checking res.user.uid")
-                        // console.log(res.user.uid)
-                        console.log("End of res.user check - js")
                         
                         //NOTE! REMEMBER TO CHANGE THIS TO FALSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         if(res.user.emailVerified == false) {
-                            console.log("Made it inside the res.user.emailVerified loop")
                             this.setModalVisible(true)
                         } else {
 
                         firebase.firestore().collection('users').doc(res.user.uid).get().then(doc => {
-                            // console.log("checking what doc gives -js")
-                            // console.log(doc.data())
-                            // console.log("End of doc check -js")
                             const getFullDoc = doc.data()
                             const isRecruiterMainMain = getFullDoc.isRecruiter
                             const isAdmin = getFullDoc.isAdmin
-                            // console.log("checking what recruiter check gives -js")
-                            // console.log(this.isRecruiterMain)
-                            // console.log("End of recruiterCheck test -js")
                             if(isRecruiterMainMain) {
                                 if(res.additionalUserInfo.isNewUser==true){
                                     this.props.navigation.navigate('onboarding')
                                 } else {
-                                // console.log("About to navigate to rHomepage checking is res.user.uid exisits still")
-                                // console.log(res.user.uid)
-                                // console.log("End of res.user.uid check -js")
                                 this.props.navigation.navigate('rHomepage', {testUID: res.user.uid})
                                 }
                             }else if(isAdmin){
                                 this.props.navigation.navigate('adminHomepage');
                             } else {
-                                // console.log("Recruiter is not ticked, so navogating to cHomepage!")
                                 this.props.navigation.navigate('cHomepage', {testUID: res.user.uid})
                             }
                         })
@@ -108,15 +88,11 @@ export class LoginPage extends Component {
 
     
                 }).catch(error => {
-                    // Handle Errors here.
                     console.log(error);});
 
 
 
                     var testingUser = firebase.auth().currentUser
-                    // console.log("CHecking if testing user exists 1")
-                    // console.log(testingUser)
-                    // console.log("ENd of test")
 
             } catch(error) {
                 console.log("Couldnt login")
@@ -128,7 +104,6 @@ export class LoginPage extends Component {
 
     
     render() {
-        //console.log("Checking debugger -JS")
         return (
             <View style={styles.container}>
                 <View style={{marginTop: 22}}>
