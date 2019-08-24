@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Dimensions, Modal} from 'react-native'
+import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Dimensions, Modal, Image} from 'react-native'
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -155,7 +155,7 @@ export class LoginPage extends Component {
                                     </Modal>
                 </View>
                 <View style={styles.subContainer}>
-                    
+                    <Image source={require('../images/IBMRecruitLogo.png')} style={{marginBottom:10, marginTop:25}} />
                     <Input
                         style={styles.textInputStyle}
                         placeholder='Email'

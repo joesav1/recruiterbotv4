@@ -33,8 +33,8 @@ const Rootstack = createStackNavigator({
     },
     LoginPage: { screen: LoginPage,
       navigationOptions: {
-        header: <CustomHeader/>
-      }
+        header: null
+      } 
     },
 
     onboarding: { screen: onboarding,

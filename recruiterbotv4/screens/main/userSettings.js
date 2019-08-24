@@ -20,7 +20,11 @@ export class userSettings extends Component {
             companyTitle : '',
             firstname:'',
             surname:'',
-            password: ''
+            password: '',
+            firstnameSwitch: false,
+            surnameSwitch:false,
+            companyTitleSwitch:false,
+            passwordSwitch:false,
             
         }
         this.ref = firebase.firestore().collection('users')
@@ -79,6 +83,55 @@ export class userSettings extends Component {
         }
     }
 
+    promptMessageTitle() {
+        if(this.state.companyTitleSwitch==true) {
+          return(
+            <Text style={{margin: 3, fontSize: 12, color: 'black'}}>Company Title Changed!</Text>
+          )} else {
+            return (
+              null
+            )
+        }
+  
+      }
+
+      promptMessageFirstname() {
+        if(this.state.firstnameSwitch==true) {
+          return(
+            <Text style={{margin: 3, fontSize: 12, color: 'black'}}>Firstname Changed!</Text>
+          )} else {
+            return (
+              null
+            )
+        }
+  
+      }
+
+      promptMessageSurname() {
+        if(this.state.surnameSwitch==true) {
+          return(
+            <Text style={{margin: 3, fontSize: 12, color: 'black'}}>Surname Changed!</Text>
+          )} else {
+            return (
+              null
+            )
+        }
+  
+      }
+
+      promptMessagePassword() {
+        if(this.state.passwordSwitch==true) {
+          return(
+            <Text style={{margin: 3, fontSize: 12, color: 'black'}}>Password Changed!</Text>
+          )} else {
+            return (
+              null
+            )
+        }
+  
+      }
+
+
 
 
     
@@ -107,15 +160,17 @@ export class userSettings extends Component {
                                             //value={this.state.companyTitle}
                                             //errorMessage = 'That email already exists in the system'
                                         />
+                                        <View>{this.promptMessageTitle()}</View>
                                         <Button 
                                             title = "Submit"
                                             color = "#34bc6e"
-                                            onPress = {() => {this.changeCompanyTitle()}}
+                                            onPress = {() => {this.setState({companyTitleSwitch: true}); this.changeCompanyTitle(); this.promptMessageTitle()}}
                                             //style ={{margin: 5}}
                                             buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}}
 
                                             
                                         />
+                                        
 
                                     </CollapseBody>
                                 </Collapse>
@@ -137,10 +192,11 @@ export class userSettings extends Component {
                                             //value={this.state.firstname}
                                             //errorMessage = 'That email already exists in the system'
                                         />
+                                        <View>{this.promptMessageFirstname()}</View>
                                         <Button 
                                             title = "Submit"
                                             color = "#34bc6e"
-                                            onPress = {() => {this.changeFirstname()}}
+                                            onPress = {() => {this.setState({firstnameSwitch: true}); this.changeFirstname(); this.promptMessageFirstname()}}
                                             //style ={{margin: 5}}
                                             buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}} 
                                         />
@@ -153,10 +209,11 @@ export class userSettings extends Component {
                                             //value={this.state.can}
                                             //errorMessage = 'That email already exists in the system'
                                         />
+                                        <View>{this.promptMessageSurname()}</View>
                                         <Button 
                                             title = "Submit"
                                             color = "#34bc6e"
-                                            onPress = {() => {this.changeSurname()}}
+                                            onPress = {() => {this.setState({surnameSwitch: true}); this.changeSurname(); this.promptMessageSurname()}}
                                             //style ={{margin: 5}}
                                             buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}} 
                                         />
@@ -182,10 +239,11 @@ export class userSettings extends Component {
                                             secureTextEntry={true}
                                             //errorMessage = 'That email already exists in the system'
                                         />
+                                        <View>{this.promptMessagePassword()}</View>
                                         <Button 
                                             title = "Submit"
                                             color = "#34bc6e"
-                                            onPress = {() => {this.changePassword()}}
+                                            onPress = {() => {this.setState({passwordSwitch: true}); this.changePassword(); this.promptMessagePassword()}}
                                             //style ={{margin: 5}}
                                             buttonStyle ={{margin: 10, backgroundColor: '#34bc6e', width: ScreenWidth*0.4, marginBottom:20}}
                                         />

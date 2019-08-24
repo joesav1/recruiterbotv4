@@ -48,6 +48,10 @@ export class Signup extends Component {
             //isRecruiterMain: false,
 
             };
+
+            console.log("*********************main page************************")
+            console.log(this.state.isRecruiter)
+            console.log("******************************************************")
         }
 
         promptMessagePassword() {
@@ -110,6 +114,9 @@ export class Signup extends Component {
                         console.log(error);})
                     .then(user => {
                         console.log("user created -js")
+                        console.log("yyyyyyyyyyyyyyyyyyyyyyyyyCHECKING RECRUITERyyyyyyyyyyyyyyyyyyyyyyyyyy")
+                        console.log(this.state.isRecruiter)
+                        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                         this.ref.doc(user.user.uid).set({
                             email: user.user.email,
                             firstname: this.state.firstname,
@@ -132,7 +139,7 @@ export class Signup extends Component {
                             }))
                             .then(res => {
                                 console.log("Entering the pre-onboarding function")
-                                if(this.state.checked==true) {
+                                if(this.state.isRecruiter==true) {
                                     console.log("~~~~~~~~~~~~entered this.stat.checked=true branch~~~~~~~~~~")
                                     console.log(this.state.checked)
                                     // firebase.auth().signOut().catch(error => {
@@ -188,7 +195,12 @@ export class Signup extends Component {
     
 
         async setRecruiter() {
+
             try {
+                await this.setState({checked: !this.state.checked})
+                console.log("%%%%%%%%")
+                console.log(this.state.checked)
+                console.log("%%%%%%%%%%%%")
                 if(this.state.checked == true) {
                     await this.setState({isRecruiter: true})
                 } else if(this.state.checked == false) {
@@ -221,7 +233,7 @@ export class Signup extends Component {
             <View style={styles.container}>
                 <View style={styles.subContainer}>
 
-                    <Image source={require('../images/IBMRecruitLogo.png')} style={{marginBottom:20}} />
+                    <Image source={require('../images/IBMRecruitLogo.png')} style={{marginBottom:10, marginTop:25}} />
 
                     <View>{this.promptMessageOther()}</View>
 
@@ -260,36 +272,37 @@ export class Signup extends Component {
                     <View>{this.promptMessagePassword()}</View>
 
                 
-                    <View style={{flex: 0.25, width: ScreenWidth*0.8, margin: 10, marginBottom:25}}>
+                    <View style={{flex: 0.2, width: ScreenWidth*0.8, margin: 10, marginBottom:25}}>
                         < CheckBox
                             title= "Press if Recruiter"
                             checked = {this.state.checked}
                             checkedIcon='dot-circle-o'
                             uncheckedIcon='circle-o'
-                            onPress = {() => {this.setRecruiter(); this.setState({checked: !this.state.checked})}}
+                            onPress = {() => {this.setRecruiter()}}
                         />
-                        <View>{this.companyName()}</View>
+                        <View style={{marginBottom: 10}}>{this.companyName()}</View>
 
                     </View>
-                    <View style={{flex:0.4, width: ScreenWidth*0.6,marginTop:15}}>
+                </View>
+                <View style={styles.subContainer2}>
                         <Button 
                             title = "Sign-up"
                             color = '#19273c'
                             onPress = {() => {this.Signup(this.state.email, this.state.password)}}
-                            buttonStyle ={{backgroundColor: '#19273c'}}
+                            buttonStyle ={{backgroundColor: '#19273c', width: ScreenWidth*0.6}}
                         />
-                        <Text style={{margin: 20, textAlign: "center", fontSize: 20, color: 'white'}}>
+                        <Text style={{margin: 10, textAlign: "center", fontSize: 20, color: 'white'}}>
                             OR
                         </Text>
                         <Button 
                             title = "Login"
                             color = '#19273c'
                             onPress = {() => this.props.navigation.navigate('LoginPage')}
-                            buttonStyle ={{backgroundColor: '#19273c'}}
+                            buttonStyle ={{backgroundColor: '#19273c', width: ScreenWidth*0.6}}
                         />
-                    </View>
-
                 </View>
+
+                
             </View>
         )
     }
@@ -308,13 +321,24 @@ const styles = StyleSheet.create({
     },
 
     subContainer: {
-        flex: 0.9,
+        flex: 0.7,
         width: ScreenWidth*0.8,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 20,
+        
+      },
+
+    subContainer2: {
+        flex: 0.25,
+        width: ScreenWidth*0.6,
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         
       },
+  
   
 
     textInputStyle: {
