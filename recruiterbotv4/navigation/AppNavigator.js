@@ -19,6 +19,7 @@ import userSettings from '../screens/main/userSettings';
 import moreCandidates from '../screens/Recruiter/moreCandidates';
 import onboarding from '../screens/main/onboarding';
 import adminHomepage from '../screens/main/adminPortal/adminHomepage';
+import forgotPassword from '../screens/main/forgotPassword';
 
 
 
@@ -49,6 +50,13 @@ const Rootstack = createStackNavigator({
       } 
     },
 
+    forgotPassword: { screen: forgotPassword,
+      navigationOptions: {
+        headerStyle: {backgroundColor:'#1d3458', shadowColor: 'transparent', elevation: 0,
+        shadowOpacity: 0},
+        headerTintColor: 'white'
+      } 
+    },
 
     
     rHomepage: { screen: rHomepage,

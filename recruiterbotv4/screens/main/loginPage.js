@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, StyleSheet, Button, TouchableHighlight, Dimensions, Modal, Image} from 'react-native'
+import { Text, View, TextInput, StyleSheet, TouchableHighlight, Dimensions, Modal, Image} from 'react-native'
+import { Button } from 'react-native-elements';
 //import { Container, Item, Form, Input, Button, Label } from "native-base";
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -166,7 +167,14 @@ export class LoginPage extends Component {
                             onPress = {() => this.props.navigation.navigate('Signup')}
                             buttonStyle ={{backgroundColor: '#19273c'}}
                         />
-                        
+                </View>
+                <View style={{width: ScreenWidth*0.6, margin: 20}}>
+                        <Button 
+                            title = "Forgot Password?"
+                            color = '#79a6f6'
+                            type = "clear"
+                            onPress = {() => this.props.navigation.navigate('forgotPassword')}
+                        />                        
                 </View>
             </View>
         )
