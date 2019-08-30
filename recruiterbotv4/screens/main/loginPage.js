@@ -120,7 +120,7 @@ export class LoginPage extends Component {
                                             <Text style={{margin: 20, textAlign: "center", fontSize: 20, color: 'white'}}>Please verify your email</Text>
 
                                             <Button
-                                                buttonStyle ={{backgroundColor: '#f7e7e2', width: ScreenWidth*0.6}}
+                                                buttonStyle ={{backgroundColor: '#79a6f6', width: ScreenWidth*0.6}}
                                                 title = "Close"
                                                 onPress={() => {
                                                 this.setModalVisible(!this.state.modalVisible);

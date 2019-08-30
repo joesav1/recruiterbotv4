@@ -80,7 +80,8 @@ export class createCampaign extends Component {
                   title: title,
                   transcript: null,
                   company: companyName,
-                  created: new Date().toDateString()
+                  created: new Date().toDateString(),
+                  problem: false
                   
                 });
 

@@ -237,8 +237,11 @@ export class RTask extends Component {
                                         {this.props.completed && (
                                                 <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:17, marginLeft: 20}}>Score: {this.props.finalScore}</Text>
                                         )}
-                                        {!this.props.completed && (
+                                        {(!this.props.completed && !this.props.problem) && (
                                             <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:13, marginLeft: 20}}>In Progress</Text>
+                                        )}
+                                        {(this.props.problem) && (
+                                        <Text style={{ color: '#1d3458', fontWeight: '600', fontSize:13, marginLeft: 20}}>Problem Reported</Text>
                                         )}
 
 

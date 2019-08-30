@@ -27,7 +27,7 @@ export class cHomepage extends Component {
     onCollectionUpdate = (querySnapshot) => {
         const tasks = [];
         querySnapshot.forEach((doc) => {
-            const {title, completed, company, created} = doc.data();
+            const {title, completed, company, created, problem} = doc.data();
             const docID = doc.id
             
             
@@ -40,7 +40,8 @@ export class cHomepage extends Component {
                 completed,
                 company,
                 created,
-                docID
+                docID,
+                problem
             });
         });
 

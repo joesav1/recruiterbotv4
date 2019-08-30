@@ -125,7 +125,8 @@ export class Signup extends Component {
                                 title: 'Example Task',
                                 transcript: null,
                                 company: 'Example Company',
-                                created: new Date().toDateString()
+                                created: new Date().toDateString(),
+                                problem: false,
                             })                        
                         
                     }).catch(error => {
