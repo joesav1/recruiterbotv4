@@ -55,7 +55,7 @@ export class chatbotShell extends Component {
             accessibilityLabel='main'
           >
             <CountDown style={{marginTop: 80}}
-                until={40}
+                until={100}
                 size = {20}
                 timeToShow={['M','S']}
                 onFinish={() => {this.endOfTimer()}}

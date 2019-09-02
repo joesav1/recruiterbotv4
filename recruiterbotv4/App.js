@@ -5,6 +5,9 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import Reactotron from "reactotron-react-native"
+
+
 import AppNavigator from './navigation/AppNavigator';
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
@@ -14,6 +17,11 @@ firebase.initializeApp(ApiKeys.FirebaseConfig)
 
 
 //firebase.initializeApp(ApiKeys.FirebaseConfig)
+
+
+//import("./ReactotronConfig")
+
+Reactotron.configure({ host: "192.168.86.23"}).useReactNative()
 
 
 export default class App extends React.Component {
@@ -30,6 +38,11 @@ export default class App extends React.Component {
    * (logged out) or an Object (logged in)
    */
   componentDidMount() {
+
+
+    Reactotron.connect()
+    
+
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
       // console.log("intial user data")
       // console.log(user)
