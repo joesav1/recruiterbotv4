@@ -2,7 +2,7 @@ import React from 'react';
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
 import renderer from 'react-test-renderer';
 import { MockFirebase } from 'firebase-mock';
-import {  } from '../screens/main/signup';
+import { Signup } from '../screens/main/signup';
 
 import App from '../App';
 
@@ -32,5 +32,9 @@ jest.mock('expo', () => ({
       store.dispatch(signInWithEmailAndPassword(user.email, user.password)).then(() => {
         expect(checkService).toHaveBeenCalled();
       });
+    });
+
+    it('should navigate to rHomepage', () => {
+        expect(Signup.props.navigation.navigate).toHaveBeenCalledWith('rHomepage');
     });
   });

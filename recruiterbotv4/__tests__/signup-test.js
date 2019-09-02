@@ -23,10 +23,13 @@ jest.mock('expo', () => ({
     it('signup firebase check', () => {
       const user = {
         email: 'logintest@doc-mail.net',
-        password: '123456'
+        password: '123456',
+        isRecruiter: true
       };
       store.dispatch(createUserWithEmailAndPassword(user.email, user.password)).then(() => {
         expect(checkService).toHaveBeenCalled();
+        expect(user.isRecruiter).toBe(true);
+
       });
     });
   });

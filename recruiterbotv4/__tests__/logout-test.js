@@ -27,4 +27,8 @@ jest.mock('expo', () => ({
         expect(checkService).toHaveBeenCalled()
         expect(MockFirebase.currentUser).toBe('')
     });
+
+    it('should navigate to LoginPage', () => {
+        expect(CustomHeader.props.navigation.navigate).toHaveBeenCalledWith('LoginPage');
+    });
   });
